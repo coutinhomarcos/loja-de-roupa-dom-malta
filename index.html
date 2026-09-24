@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DOM MALTA | Loja de Roupas</title>
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/secoes.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho cabecalho-inicio">
+
+        <div class="container cabecalho-conteudo">
+
+            <a href="index.html" class="logo-menu">
+                <strong>DOM MALTA</strong>
+                <span>Elegância que impõe respeito</span>
+            </a>
+
+            <nav class="menu">
+                <a href="index.html">Início</a>
+                <a href="pages/colecao.html">Coleção</a>
+                <a href="pages/sobre.html">Sobre nós</a>
+                <a href="pages/contato.html">Contato</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- INÍCIO -->
+    <section class="inicio">
+
+        <!-- Vídeo curto da DOM MALTA usado como fundo do cabeçalho principal -->
+        <video
+            id="videoCabecalho"
+            class="inicio-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            poster="images/dom-malta-promocional-hd.jpg"
+            aria-label="Vídeo de apresentação da DOM MALTA"
+        >
+            <source src="videos/video-cabecalho-dom-malta-horizontal.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos em HTML5.
+        </video>
+
+        <button
+            type="button"
+            id="botaoSomVideo"
+            class="botao-som-video"
+            aria-label="Ativar som do vídeo"
+        >
+            🔊 Ativar som
+        </button>
+
+        <div class="inicio-video-overlay"></div>
+
+        <div class="container inicio-conteudo">
+
+            <div class="inicio-texto">
+
+                <span class="pequeno-titulo">DOM MALTA</span>
+
+                <h1>
+                    Vista sua
+                    <span>personalidade.</span>
+                </h1>
+
+                <p>
+                    Bem-vindo à DOM MALTA, uma loja de roupas
+                    para quem valoriza elegância, qualidade e atitude.
+                </p>
+
+                <p>
+                    Conheça nossa coleção e acompanhe as novidades da loja.
+                </p>
+
+                <div class="botoes-inicio">
+
+                    <a href="pages/colecao.html" class="botao botao-dourado">
+                        Conheça a coleção
+                    </a>
+
+                    <a
+                        href="https://chat.whatsapp.com/HFbKQFnzVo51rlqutK48PI?mode=gi_t"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="botao botao-whatsapp"
+                    >
+                        <!-- Símbolo do WhatsApp em SVG -->
+                        <svg class="icone-whatsapp" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.05 24l6.3-1.65a11.88 11.88 0 0 0 5.7 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.23-6.16-3.43-8.42ZM12.06 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.64-.23-.37a9.87 9.87 0 0 1-1.51-5.28C2.17 6.43 6.6 2 12.06 2a9.82 9.82 0 0 1 7 2.9 9.91 9.91 0 0 1 2.91 7.01c0 5.46-4.44 9.89-9.91 9.89Zm5.43-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.23 1.35.2 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+                        </svg>
+                        Entrar no WhatsApp
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/dom_malta/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="botao botao-instagram"
+                    >
+                        <img src="images/instagram-icon.svg" alt="" class="icone-instagram">
+                        Instagram
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DESTAQUES -->
+    <section class="secao secao-escura">
+
+        <div class="container">
+
+            <div class="titulo-secao">
+                <span>DOM MALTA</span>
+                <h2>Nosso diferencial</h2>
+                <p>Estilo, qualidade e atendimento.</p>
+            </div>
+
+            <div class="cards cards-destaques">
+
+                <!-- QUALIDADE -->
+                <a class="card card-destaque card-com-imagem" href="pages/colecao.html#camisas">
+
+                    <div class="card-imagem">
+                        <img src="images/produtos/camisas-01.jpg" alt="Camisas da coleção DOM MALTA" loading="lazy">
+                    </div>
+
+                    <div class="card-conteudo">
+                        <div class="card-numero">01</div>
+
+                        <h3>Qualidade</h3>
+
+                        <p>
+                            Conheça nossas camisas e veja os detalhes da coleção.
+                        </p>
+
+                        <span class="card-link">Ver camisas →</span>
+                    </div>
+
+                </a>
+
+
+                <!-- ESTILO -->
+                <a class="card card-destaque card-com-imagem" href="pages/colecao.html#calcas">
+
+                    <div class="card-imagem">
+                        <img src="images/produtos/calcas-01.jpg" alt="Calças da coleção DOM MALTA" loading="lazy">
+                    </div>
+
+                    <div class="card-conteudo">
+                        <div class="card-numero">02</div>
+
+                        <h3>Estilo</h3>
+
+                        <p>
+                            Veja nossas calças e encontre peças para o seu estilo.
+                        </p>
+
+                        <span class="card-link">Ver calças →</span>
+                    </div>
+
+                </a>
+
+
+                <!-- ATENDIMENTO -->
+                <div class="card card-destaque card-atendimento">
+
+                    <div class="card-imagem logo-atendimento">
+                        <img
+                            src="images/logo-dom-malta-atendimento-hd.jpg"
+                            alt="Logo DOM MALTA"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="card-conteudo">
+                        <div class="card-numero">03</div>
+
+                        <h3>Atendimento</h3>
+
+                        <p>
+                            Fale com a DOM MALTA ou acompanhe nossas novidades.
+                        </p>
+
+                        <div class="atalhos-contato">
+
+                            <a
+                                href="https://chat.whatsapp.com/HFbKQFnzVo51rlqutK48PI?mode=gi_t"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="atalho-contato atalho-whatsapp"
+                                aria-label="Entrar no grupo do WhatsApp da DOM MALTA"
+                            >
+                                <img class="icone-atalho" src="images/whatsapp-icon.svg" alt="">
+                                <span>WhatsApp</span>
+                            </a>
+
+                            <a
+                                href="https://www.instagram.com/dom_malta/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="atalho-contato atalho-instagram"
+                                aria-label="Abrir o Instagram da DOM MALTA"
+                            >
+                                <img class="icone-atalho" src="images/instagram-icon.svg" alt="">
+                                <span>Instagram</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ALGUMAS PEÇAS
+    ========================== -->
+
+    <section class="secao secao-preta">
+
+        <div class="container">
+
+            <div class="titulo-secao">
+                <span>DOM MALTA</span>
+                <h2>Algumas de nossas peças</h2>
+                <p>Veja alguns modelos da coleção e acesse a galeria completa.</p>
+            </div>
+
+            <div class="galeria-destaques">
+
+                <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="images/produtos/camisas-01.jpg" alt="Camisa DOM MALTA" loading="lazy">
+                    </div>
+                    <div class="produto-info">
+                        <h3>Camisas</h3>
+                        <p>Confira os modelos disponíveis.</p>
+                    </div>
+                </article>
+
+                <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="images/produtos/camisas-02.jpg" alt="Camisa DOM MALTA" loading="lazy">
+                    </div>
+                    <div class="produto-info">
+                        <h3>Camisas</h3>
+                        <p>Estilo e personalidade.</p>
+                    </div>
+                </article>
+
+                <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="images/produtos/calcas-01.jpg" alt="Calça DOM MALTA" loading="lazy">
+                    </div>
+                    <div class="produto-info">
+                        <h3>Calças</h3>
+                        <p>Conforto para diferentes ocasiões.</p>
+                    </div>
+                </article>
+
+                <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="images/produtos/bermudas-01.jpg" alt="Bermuda DOM MALTA" loading="lazy">
+                    </div>
+                    <div class="produto-info">
+                        <h3>Bermudas</h3>
+                        <p>Opções para um visual casual.</p>
+                    </div>
+                </article>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 35px;">
+                <a href="pages/colecao.html" class="botao botao-dourado">Ver todas as fotos da coleção</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOBRE -->
+    <section class="secao secao-preta">
+
+        <div class="container sobre">
+
+            <div>
+                <span class="pequeno-titulo">SOBRE A DOM MALTA</span>
+
+                <h2>
+                    Elegância que
+                    <span>impõe respeito.</span>
+                </h2>
+
+                <p>
+                    A DOM MALTA busca oferecer roupas que
+                    representem personalidade, confiança e bom gosto.
+                </p>
+
+                <a href="pages/sobre.html" class="botao botao-dourado">
+                    Conheça a DOM MALTA
+                </a>
+            </div>
+
+            <div class="marca-destaque">
+                <img
+                    src="images/dom-malta-promocional-hd.jpg"
+                    alt="Apresentação da DOM MALTA"
+                >
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INSTAGRAM -->
+    <section class="secao secao-escura">
+
+        <div class="container contato">
+
+            <div>
+                <span class="pequeno-titulo">SIGA A DOM MALTA</span>
+
+                <h2>
+                    Acompanhe nossas
+                    <span>novidades.</span>
+                </h2>
+
+                <p>
+                    Escaneie o QR Code para acessar o Instagram da loja.
+                </p>
+
+                <p class="instagram">
+                    <a href="https://www.instagram.com/dom_malta/" target="_blank" rel="noopener noreferrer">@DOM_MALTA</a>
+                </p>
+
+                <a href="pages/contato.html" class="botao botao-dourado">
+                    Ver contatos
+                </a>
+            </div>
+
+            <div class="redes-destaque">
+
+                <a
+                    href="https://www.instagram.com/dom_malta/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rede-destaque rede-instagram"
+                    aria-label="Abrir o Instagram da DOM MALTA"
+                >
+                    <img src="images/qr-instagram.jpeg" alt="QR Code do Instagram da DOM MALTA">
+                    <span>Instagram</span>
+                </a>
+
+                <a
+                    href="https://chat.whatsapp.com/HFbKQFnzVo51rlqutK48PI?mode=gi_t"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="rede-destaque rede-whatsapp"
+                    aria-label="Entrar no grupo do WhatsApp da DOM MALTA"
+                >
+                    <img src="images/imagem whatsapp.png" alt="WhatsApp da DOM MALTA">
+                    <span>WhatsApp</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+
+        <div class="container rodape-principal">
+
+            <div>
+                <strong>DOM MALTA</strong>
+                <p>Elegância que impõe respeito.</p>
+            </div>
+
+            <div class="links-rodape">
+                <a href="index.html">Início</a>
+                <a href="pages/colecao.html">Coleção</a>
+                <a href="pages/sobre.html">Sobre nós</a>
+                <a href="pages/contato.html">Contato</a>
+            </div>
+
+        </div>
+
+        <div class="rodape-final">
+            <p>© 2026 DOM MALTA. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
+
+<script src="js/video.js"></script>
+
+</body>
+</html>

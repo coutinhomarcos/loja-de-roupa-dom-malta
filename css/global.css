@@ -1,0 +1,88 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #080808;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Regra unificada para imagens */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: auto;
+}
+
+/* Layout e Contêineres */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-imagem-dom-malta {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-imagem-dom-malta img {
+    width: 100%;
+    height: auto; /* Garante que a imagem mantenha a proporção real */
+}
+
+/* Botões */
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.botao-dourado {
+    background-color: #c8942f;
+    color: #111111;
+}
+
+.botao-dourado:hover {
+    background-color: #e1b45c;
+    transform: translateY(-2px);
+}
+
+.botao-whatsapp {
+    background-color: #176b35;
+    color: #ffffff;
+}
+
+.botao-whatsapp:hover {
+    background-color: #218c46;
+    transform: translateY(-2px);
+}
+
+.icone-whatsapp {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}

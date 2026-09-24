@@ -1,0 +1,375 @@
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 900px) {
+
+    .cabecalho-conteudo {
+        flex-direction: column;
+        padding: 18px 0;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    .inicio {
+        background-position: center center;
+    }
+
+    .inicio-conteudo {
+        justify-content: center;
+    }
+
+    .inicio-texto {
+        width: 100%;
+        text-align: center;
+    }
+
+    .inicio-texto p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .botoes-inicio {
+        justify-content: center;
+    }
+
+    .cards,
+    .produtos {
+        grid-template-columns: 1fr;
+    }
+
+    .galeria-produtos,
+    .galeria-destaques {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sobre,
+    .contato {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .sobre > div:first-child,
+    .contato > div:first-child {
+        text-align: center;
+    }
+
+    .rodape-principal {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 35px 0;
+    }
+
+    .links-rodape {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .inicio-texto h1 {
+        font-size: 43px;
+    }
+
+    .inicio-texto p {
+        font-size: 16px;
+    }
+
+    .botao {
+        width: 100%;
+    }
+
+    .botoes-inicio {
+        flex-direction: column;
+    }
+
+    .secao,
+    .pagina {
+        padding: 65px 0;
+    }
+
+    .titulo-secao h2,
+    .sobre h2,
+    .contato h2 {
+        font-size: 34px;
+    }
+
+    .qr-code img {
+        width: 270px;
+    }
+
+    .marca-destaque {
+        min-height: 270px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .inicio {
+        background-position: center center;
+    }
+
+    .inicio-conteudo {
+        padding-top: 120px;
+    }
+
+    .galeria-produtos,
+    .galeria-destaques {
+        grid-template-columns: 1fr;
+    }
+
+    .produto-imagem {
+        height: 390px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .modal-imagem {
+        padding: 15px;
+    }
+
+    .modal-conteudo img {
+        max-width: 96vw;
+        max-height: 82vh;
+        border-radius: 6px;
+    }
+
+    .fechar-modal {
+        top: 10px;
+        right: 10px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .card-imagem {
+        height: 300px;
+    }
+
+    .card-conteudo {
+        padding: 22px;
+    }
+
+    .atalhos-contato {
+        flex-direction: column;
+    }
+
+    .atalho-contato {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .inicio-video {
+        object-fit: contain;
+        object-position: center center;
+    }
+
+    .inicio-video-overlay {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.42) 45%, rgba(0, 0, 0, 0.78) 100%);
+    }
+
+    .logo-atendimento {
+        max-width: none;
+        width: 100%;
+        height: 250px;
+    }
+
+    .pagina-sobre {
+        min-height: calc(100vh - 130px);
+    }
+
+    .sobre-conteudo {
+        min-height: calc(100vh - 130px);
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+
+    .sobre-fundo {
+        background-position: center top;
+    }
+
+    .contato-fundo {
+        background-position: center top;
+    }
+
+    .sobre-filtro {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.86) 72%, rgba(0, 0, 0, 0.94) 100%);
+    }
+
+    .sobre-caixa {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .inicio-video {
+        object-fit: contain;
+        object-position: center center;
+    }
+
+    .logo-atendimento {
+        height: 230px;
+    }
+
+    .sobre-conteudo {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+    .sobre-caixa {
+        padding: 28px 22px;
+        border-radius: 14px;
+    }
+
+    .sobre-caixa h1 {
+        font-size: 37px;
+    }
+
+    .sobre-caixa p {
+        font-size: 15px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .botao-som-video {
+        right: 15px;
+        bottom: 15px;
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .botoes-inicio .botao {
+        width: 100%;
+    }
+
+    .marca-destaque,
+    .marca-destaque img {
+        min-height: 300px;
+    }
+
+    .contato-conteudo {
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+
+    .contato-conteudo > div:first-child {
+        padding: 25px 20px;
+    }
+
+    .contato-conteudo .qr-code {
+        padding: 18px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .contato-atalhos {
+        justify-content: center;
+    }
+
+    .contato-atalhos .atalho-contato {
+        width: auto;
+    }
+}
+
+
+/* =========================
+   AJUSTES FINAIS RESPONSIVOS
+========================= */
+@media (max-width: 900px) {
+    .cards-destaques {
+        grid-template-columns: 1fr;
+    }
+
+    .redes-destaque {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rede-destaque {
+        height: 280px;
+    }
+
+    .sobre-fundo,
+    .contato-fundo {
+        background-position: center top;
+    }
+}
+
+@media (max-width: 600px) {
+    .cards-destaques .card-imagem,
+    .logo-atendimento {
+        height: 240px;
+        flex-basis: 240px;
+    }
+
+    .redes-destaque {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .rede-destaque {
+        height: 270px;
+    }
+
+    .rede-whatsapp img {
+        padding: 30px;
+    }
+
+    .contato-atalhos {
+        justify-content: center;
+    }
+
+    .contato-atalhos .atalho-contato {
+        width: auto;
+        min-width: 120px;
+        justify-content: center;
+    }
+}
+
+
+/* ===== AJUSTES FINAIS MOBILE ===== */
+@media (max-width: 600px) {
+    .cards-destaques .card-destaque {
+        min-height: auto;
+    }
+
+    .cards-destaques .card-imagem {
+        height: 260px;
+        flex-basis: 260px;
+    }
+
+    .colecao-redes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .colecao-redes .botao-rede {
+        width: 100%;
+    }
+
+    .redes-destaque .rede-destaque {
+        height: 280px;
+    }
+}

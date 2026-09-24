@@ -1,0 +1,193 @@
+/* =========================
+   PÁGINA INICIAL
+========================= */
+
+.inicio {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #050505;
+    overflow: hidden;
+}
+
+.inicio-conteudo {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 90px;
+}
+
+.inicio-texto {
+    width: 55%;
+    padding: 70px 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
+}
+
+.inicio-texto .pequeno-titulo {
+    color: #e0ad4e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.inicio-texto h1 {
+    font-size: 64px;
+    line-height: 1.05;
+    margin: 18px 0 25px;
+}
+
+.inicio-texto h1 span {
+    color: #e0ad4e;
+    display: block;
+}
+
+.inicio-texto p {
+    max-width: 600px;
+    color: #f0f0f0;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.botoes-inicio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+
+/* =========================
+   VÍDEO DO CABEÇALHO PRINCIPAL
+========================= */
+
+.inicio-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    z-index: 0;
+    background-color: #050505;
+}
+
+.inicio-video-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.70) 0%, rgba(0, 0, 0, 0.42) 48%, rgba(0, 0, 0, 0.64) 100%);
+}
+
+.inicio-conteudo {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================
+   CONTROLE DE SOM DO VÍDEO
+========================= */
+
+.botao-som-video {
+    position: absolute;
+    right: 28px;
+    bottom: 28px;
+    z-index: 4;
+    border: 1px solid rgba(224, 173, 78, 0.8);
+    border-radius: 999px;
+    padding: 11px 16px;
+    background: rgba(0, 0, 0, 0.72);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: 0.2s ease;
+}
+
+.botao-som-video:hover {
+    background: #c8942f;
+    color: #111111;
+}
+
+.botao-instagram {
+    background: rgba(0, 0, 0, 0.72);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.botao-instagram:hover {
+    background: rgba(0, 0, 0, 0.88);
+    border-color: #DD2A7B;
+    transform: translateY(-2px);
+}
+
+.icone-instagram {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* =========================
+   VÍDEO RESPONSIVO
+========================= */
+
+.inicio-video {
+    object-fit: contain;
+    object-position: center center;
+    background: #050505;
+}
+
+@media (max-width: 900px) {
+    .inicio-video {
+        object-fit: contain;
+        object-position: center center;
+    }
+}
+
+@media (max-width: 600px) {
+    .inicio-video {
+        object-fit: contain;
+        object-position: center center;
+    }
+}
+
+
+/* =========================
+   VÍDEO HORIZONTAL RESPONSIVO
+========================= */
+.inicio {
+    min-height: min(100vh, 800px);
+    height: min(100vh, 800px);
+}
+
+.inicio-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    background: #050505;
+}
+
+@media (max-width: 900px) {
+    .inicio {
+        height: min(78vh, 680px);
+        min-height: 560px;
+    }
+
+    .inicio-video {
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 600px) {
+    .inicio {
+        height: 72vh;
+        min-height: 540px;
+    }
+
+    .inicio-video {
+        object-fit: contain;
+    }
+}

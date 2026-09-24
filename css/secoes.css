@@ -1,0 +1,995 @@
+
+/* =========================
+   SEÇÕES
+========================= */
+
+.secao {
+    padding: 90px 0;
+}
+
+.secao-escura {
+    background-color: #101010;
+}
+
+.secao-preta {
+    background-color: #080808;
+}
+
+.titulo-secao {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.titulo-secao span {
+    color: #e0ad4e;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.titulo-secao h2 {
+    font-size: 42px;
+    margin: 10px 0;
+}
+
+.titulo-secao p {
+    color: #999;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background-color: #151515;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.card-numero {
+    color: #e0ad4e;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #aaa;
+    line-height: 1.7;
+}
+
+
+
+/* =========================
+   DESTAQUES COM IMAGENS
+========================= */
+
+.cards-destaques {
+    align-items: stretch;
+}
+
+.card-destaque {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.card-destaque:hover {
+    transform: translateY(-5px);
+    border-color: #c8942f;
+}
+
+.card-com-imagem {
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-imagem {
+    width: 100%;
+    height: 250px;
+    background-color: #202020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.card-com-imagem:hover .card-imagem img {
+    transform: scale(1.04);
+}
+
+.card-conteudo {
+    padding: 25px;
+}
+
+.card-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #e0ad4e;
+    font-weight: bold;
+}
+
+.card-atendimento {
+    justify-content: center;
+}
+
+.atalhos-contato {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.atalho-contato {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 15px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.atalho-contato svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+
+.atalho-whatsapp:hover {
+    color: #25d366;
+    border-color: #25d366;
+}
+
+.atalho-instagram:hover {
+    color: #e0ad4e;
+    border-color: #e0ad4e;
+}
+
+.sobre {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 70px;
+    align-items: center;
+}
+
+.sobre h2 {
+    font-size: 45px;
+    line-height: 1.1;
+    margin: 12px 0 25px;
+}
+
+.sobre h2 span {
+    color: #e0ad4e;
+    display: block;
+}
+
+.sobre p {
+    color: #bbb;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.marca-destaque {
+    min-height: 330px;
+    border: 1px solid #c8942f;
+    border-radius: 15px;
+    background-color: #0c0c0c;
+    overflow: hidden;
+}
+
+.marca-destaque img {
+    width: 100%;
+    height: 100%;
+    min-height: 330px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.contato {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 70px;
+    align-items: center;
+}
+
+.contato h2 {
+    font-size: 45px;
+    line-height: 1.1;
+    margin: 12px 0 25px;
+}
+
+.contato h2 span {
+    color: #e0ad4e;
+    display: block;
+}
+
+.contato p {
+    color: #bbb;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.instagram {
+    color: #e0ad4e !important;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+}
+
+.qr-code img {
+    width: 320px;
+    border-radius: 12px;
+    background-color: white;
+    padding: 8px;
+}
+
+.rodape {
+    background-color: #050505;
+    border-top: 1px solid #292929;
+}
+
+.rodape-principal {
+    min-height: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.rodape strong {
+    color: #e0ad4e;
+    letter-spacing: 2px;
+}
+
+.rodape p {
+    color: #777;
+    font-size: 14px;
+}
+
+.links-rodape {
+    display: flex;
+    gap: 25px;
+}
+
+.links-rodape a {
+    color: #aaa;
+}
+
+.links-rodape a:hover {
+    color: #e0ad4e;
+}
+
+.rodape-final {
+    border-top: 1px solid #171717;
+    text-align: center;
+    padding: 18px;
+}
+
+
+/* =========================
+   PÁGINA CONTATO COM FOTO DE FUNDO
+========================= */
+
+.pagina-contato {
+    position: relative;
+    min-height: calc(100vh - 80px);
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.contato-fundo {
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/dom-malta-promocional-hd.jpg");
+    background-size: cover;
+    background-position: center 28%;
+    background-repeat: no-repeat;
+}
+
+.contato-filtro {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.65) 48%, rgba(0, 0, 0, 0.34) 100%);
+}
+
+.contato-conteudo {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    padding: 90px 0;
+}
+
+.contato-conteudo > div:first-child {
+    padding: 35px;
+    border: 1px solid rgba(224, 173, 78, 0.4);
+    border-radius: 18px;
+    background: rgba(5, 5, 5, 0.58);
+    backdrop-filter: blur(4px);
+}
+
+.contato-conteudo .qr-code {
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(5, 5, 5, 0.58);
+    backdrop-filter: blur(4px);
+}
+
+/* =========================
+   PÁGINAS INTERNAS
+========================= */
+
+.pagina {
+    min-height: calc(100vh - 80px);
+    padding: 80px 0;
+}
+
+.pagina h1 {
+    font-size: 48px;
+    color: #e0ad4e;
+    margin-bottom: 20px;
+}
+
+.pagina p {
+    color: #bbb;
+    line-height: 1.8;
+    max-width: 800px;
+}
+
+.produtos {
+    margin-top: 45px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.produto {
+    background-color: #151515;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.produto-imagem {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    background-color: #202020;
+}
+
+.produto-info {
+    padding: 20px;
+}
+
+.produto-info h2 {
+    margin-bottom: 5px;
+}
+
+.produto-info p {
+    font-size: 14px;
+}
+
+
+/* =========================
+   GALERIA DE PRODUTOS
+========================= */
+
+.categoria-produtos {
+    margin-top: 70px;
+    scroll-margin-top: 100px;
+}
+
+.categoria-produtos h2 {
+    color: #e0ad4e;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.categoria-produtos > p {
+    margin-bottom: 25px;
+}
+
+.galeria-produtos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.produto {
+    background-color: #151515;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+    border-color: #c8942f;
+}
+
+.produto-imagem {
+    height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    padding: 10px;
+}
+
+.produto-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.produto-info {
+    padding: 16px 18px 20px;
+}
+
+.produto-info h3 {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.produto-info p {
+    color: #999;
+    font-size: 14px;
+}
+
+.link-instagram {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.link-instagram:hover {
+    transform: scale(1.03);
+}
+
+
+.galeria-destaques {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.galeria-destaques .produto-imagem {
+    height: 300px;
+}
+
+
+/* =========================
+   IMAGEM AMPLIADA
+========================= */
+
+.produto-imagem {
+    width: 100%;
+    border: 0;
+    cursor: zoom-in;
+    font: inherit;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.produto-imagem:hover img {
+    transform: scale(1.03);
+}
+
+.produto-imagem img {
+    transition: transform 0.2s ease;
+}
+
+.modal-imagem {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.modal-imagem.ativo {
+    display: flex;
+}
+
+.modal-conteudo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.modal-conteudo img {
+    display: block;
+    max-width: 95vw;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #555;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.9);
+    color: #ffffff;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.fechar-modal:hover {
+    border-color: #e0ad4e;
+    color: #e0ad4e;
+}
+
+.texto-modal {
+    color: #cccccc !important;
+    text-align: center;
+    margin: 0 !important;
+    font-size: 13px;
+}
+
+body.modal-aberto {
+    overflow: hidden;
+}
+
+
+/* Ícones dos atalhos de contato */
+.atalho-contato .icone-atalho {
+    width: 24px;
+    height: 24px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.atalho-contato:hover .icone-atalho {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   LOGO NO ATENDIMENTO
+========================= */
+
+.logo-atendimento {
+    width: 100%;
+    max-width: none;
+    height: 300px;
+    margin: 18px 0 10px;
+    border: 1px solid #4a3514;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #050505;
+}
+
+.logo-atendimento img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.icone-atalho {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex: 0 0 24px;
+}
+
+/* =========================
+   PÁGINA SOBRE NÓS COM FOTO DE FUNDO
+========================= */
+
+.pagina-sobre {
+    position: relative;
+    min-height: calc(100vh - 80px);
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+}
+
+.sobre-fundo {
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/dom-malta-promocional-hd.jpg");
+    background-size: cover;
+    background-position: center 28%;
+    background-repeat: no-repeat;
+    transform: scale(1.01);
+}
+
+.sobre-filtro {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.64) 43%, rgba(0, 0, 0, 0.28) 100%);
+}
+
+.sobre-conteudo {
+    position: relative;
+    z-index: 2;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+}
+
+.sobre-caixa {
+    max-width: 620px;
+    padding: 55px;
+    border: 1px solid rgba(224, 173, 78, 0.45);
+    border-radius: 18px;
+    background: rgba(5, 5, 5, 0.72);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.sobre-caixa h1 {
+    font-size: 52px;
+    line-height: 1.05;
+    margin: 14px 0 25px;
+    color: #ffffff;
+}
+
+.sobre-caixa h1 span {
+    color: #e0ad4e;
+    display: block;
+}
+
+.sobre-caixa p {
+    color: #e2e2e2;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   ATALHOS DA PÁGINA CONTATO
+========================= */
+.contato-atalhos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.contato-atalhos .atalho-contato {
+    width: auto;
+    padding: 9px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.contato-atalhos .icone-atalho {
+    width: 20px;
+    height: 20px;
+}
+
+.contato-atalhos .atalho-instagram:hover {
+    color: #ffffff;
+    border-color: #DD2A7B;
+}
+
+
+/* =========================
+   AJUSTES FINAIS - DESTAQUES
+========================= */
+.cards-destaques {
+    align-items: stretch;
+}
+
+.cards-destaques .card-destaque {
+    min-width: 0;
+    height: 100%;
+}
+
+.cards-destaques .card-imagem {
+    height: 250px;
+    flex: 0 0 250px;
+}
+
+.cards-destaques .card-atendimento .card-imagem {
+    background: #050505;
+}
+
+.cards-destaques .card-atendimento .card-imagem img {
+    object-fit: contain;
+    padding: 8px;
+}
+
+.logo-atendimento {
+    width: 100%;
+    max-width: none;
+    height: 250px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.logo-atendimento img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Dois atalhos grandes e iguais na seção inferior */
+.redes-destaque {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.rede-destaque {
+    min-width: 0;
+    height: 320px;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #050505;
+    transition: transform .25s ease, border-color .25s ease;
+}
+
+.rede-destaque:hover {
+    transform: translateY(-4px);
+    border-color: #c8942f;
+}
+
+.rede-destaque img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 12px;
+}
+
+.rede-whatsapp img {
+    object-fit: contain;
+    padding: 35px;
+    background: #ffffff;
+}
+
+.rede-destaque span {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    text-align: center;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.78);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Fundo de Sobre/Contato usando a imagem HD ampliada */
+.sobre-fundo,
+.contato-fundo {
+    background-image: url("../images/dom-malta-promocional-4k.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    image-rendering: auto;
+}
+
+.sobre-fundo {
+    background-position: center 24%;
+}
+
+.contato-fundo {
+    background-position: center 24%;
+}
+
+/* Contato sem QR Code grande: os atalhos ficam compactos */
+.contato-conteudo {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+}
+
+.contato-conteudo > div:first-child {
+    max-width: 760px;
+}
+
+/* ===== AJUSTES FINAIS DOS ATALHOS E FUNDOS ===== */
+
+/* Mantém os ícones de WhatsApp e Instagram exatamente no mesmo tamanho */
+.atalho-contato .icone-atalho {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    max-width: 22px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Os três quadrantes da Home têm a mesma altura e os atalhos ficam alinhados */
+.cards-destaques .card-destaque {
+    height: 100%;
+    min-height: 540px;
+}
+
+.cards-destaques .card-imagem {
+    height: 270px;
+    flex: 0 0 270px;
+}
+
+.cards-destaques .card-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cards-destaques .card-link,
+.cards-destaques .atalhos-contato {
+    margin-top: auto;
+}
+
+/* Logo do atendimento ocupa toda a área da imagem */
+.logo-atendimento {
+    padding: 0;
+    background: #050505;
+}
+
+.logo-atendimento img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Fundos Sobre/Contato: usa a imagem HD sem filtros de nitidez ou blur */
+.sobre-fundo,
+.contato-fundo {
+    background-image: url("../images/dom-malta-promocional-4k.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    image-rendering: auto;
+    filter: none;
+    -webkit-filter: none;
+}
+
+/* Galeria de redes no final da Home */
+.redes-destaque {
+    align-items: stretch;
+}
+
+.redes-destaque .rede-destaque {
+    min-width: 0;
+    height: 360px;
+}
+
+.redes-destaque .rede-destaque img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.redes-destaque .rede-instagram img,
+.redes-destaque .rede-whatsapp img {
+    padding: 28px;
+}
+
+/* Área inferior da Coleção */
+.colecao-redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.colecao-redes .botao-rede {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 185px;
+    padding: 12px 18px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .2s ease;
+}
+
+.colecao-redes .botao-rede:hover {
+    transform: translateY(-2px);
+    border-color: #e0ad4e;
+}
+
+.colecao-redes .botao-rede img {
+    width: 21px;
+    height: 21px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Ícones/atalhos da Home: mesma área visual e sem cortes */
+.redes-destaque .rede-destaque {
+    height: 360px;
+}
+
+.redes-destaque .rede-destaque img {
+    width: 190px;
+    height: 190px;
+    max-width: 72%;
+    max-height: 72%;
+    padding: 0;
+    object-fit: contain;
+    object-position: center;
+    margin: auto;
+}
+
+/* Mantém os dois quadrantes visualmente iguais */
+.redes-destaque .rede-instagram,
+.redes-destaque .rede-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .redes-destaque .rede-destaque {
+        height: 280px;
+    }
+
+    .redes-destaque .rede-destaque img {
+        width: 150px;
+        height: 150px;
+        max-width: 65%;
+        max-height: 65%;
+    }
+}

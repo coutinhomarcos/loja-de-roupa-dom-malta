@@ -1,0 +1,65 @@
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+    width: 100%;
+    background-color: #090909;
+    border-bottom: 1px solid #292929;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.cabecalho-conteudo {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.logo-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-menu strong {
+    color: #e0ad4e;
+    font-size: 25px;
+    letter-spacing: 3px;
+}
+
+.logo-menu span {
+    color: #888;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.menu a {
+    color: #ddd;
+    font-size: 15px;
+}
+
+.menu a:hover {
+    color: #e0ad4e;
+}
+
+
+/* Cabeçalho sobre a imagem principal */
+.cabecalho-inicio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(5, 5, 5, 0.68);
+    backdrop-filter: blur(4px);
+}
