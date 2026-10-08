@@ -1,49 +1,32 @@
-document.addEventListener("DOMContentLoaded", function () {
-
+document.addEventListener("DOMContentLoaded", () => {
     const video = document.getElementById("videoCabecalho");
-    const botaoSom = document.getElementById("botaoSomVideo");
-
-    if (!video || !botaoSom) {
-        return;
+    const botao = document.getElementById("silenciarVideo");
+    if (!video || !botao) return;
+    let silenciadoPeloCliente = false, bloqueado = false;
+    function atualizar() {
+        botao.textContent = silenciadoPeloCliente ? "Reativar som" : "Silenciar m\u00fasica";
+        botao.setAttribute("aria-pressed", String(silenciadoPeloCliente));
     }
-
-    function atualizarBotaoSom() {
-        if (video.muted) {
-            botaoSom.textContent = "🔊 Ativar som";
-            botaoSom.setAttribute("aria-label", "Ativar som do vídeo");
-            botaoSom.classList.remove("som-ativo");
-        } else {
-            botaoSom.textContent = "🔇 Silenciar";
-            botaoSom.setAttribute("aria-label", "Silenciar o vídeo");
-            botaoSom.classList.add("som-ativo");
-        }
-    }
-
-    botaoSom.addEventListener("click", function () {
-
-        if (video.muted) {
-            // Ativa o áudio.
-            video.muted = false;
-            video.volume = 1;
-
-            video.play().then(function () {
-                atualizarBotaoSom();
-            }).catch(function () {
-                // Se o navegador bloquear a reprodução, mantemos o vídeo sem som.
-                video.muted = true;
-                atualizarBotaoSom();
-            });
-
-        } else {
-            // Desativa o áudio.
+    async function reproduzir() {
+        video.muted = silenciadoPeloCliente;
+        try { await video.play(); bloqueado = false; }
+        catch {
+            bloqueado = !silenciadoPeloCliente;
             video.muted = true;
-            atualizarBotaoSom();
+            try { await video.play(); } catch { /* Aguarda interacao do visitante. */ }
         }
+        atualizar();
+    }
+    botao.addEventListener("click", () => {
+        silenciadoPeloCliente = !silenciadoPeloCliente;
+        video.muted = silenciadoPeloCliente;
+        reproduzir();
     });
-
-    // Mantém o texto correto caso o estado do vídeo seja alterado pelo navegador.
-    video.addEventListener("volumechange", atualizarBotaoSom);
-
-    atualizarBotaoSom();
-
+    document.addEventListener("click", e => {
+        if (e.target.closest(".controle-musica")) return;
+        if (bloqueado && !silenciadoPeloCliente) reproduzir();
+    });
+    video.volume = 1;
+    atualizar();
+    reproduzir();
 });

@@ -1,5 +1,5 @@
 /* =========================
-   PÁGINA INICIAL
+   P GINA INICIAL
 ========================= */
 
 .inicio {
@@ -59,7 +59,7 @@
 
 
 /* =========================
-   VÍDEO DO CABEÇALHO PRINCIPAL
+   V DEO DO CABE ALHO PRINCIPAL
 ========================= */
 
 .inicio-video {
@@ -87,7 +87,7 @@
 
 
 /* =========================
-   CONTROLE DE SOM DO VÍDEO
+   CONTROLE DE SOM DO V DEO
 ========================= */
 
 .botao-som-video {
@@ -130,7 +130,7 @@
 }
 
 /* =========================
-   VÍDEO RESPONSIVO
+   V DEO RESPONSIVO
 ========================= */
 
 .inicio-video {
@@ -155,7 +155,7 @@
 
 
 /* =========================
-   VÍDEO HORIZONTAL RESPONSIVO
+   V DEO HORIZONTAL RESPONSIVO
 ========================= */
 .inicio {
     min-height: min(100vh, 800px);

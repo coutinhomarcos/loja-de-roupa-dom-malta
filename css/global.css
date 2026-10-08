@@ -1,5 +1,5 @@
 /* =========================
-   CONFIGURAÇÕES GERAIS
+   CONFIGURA  ES GERAIS
 ========================= */
 
 * {
@@ -31,7 +31,7 @@ img {
     image-rendering: auto;
 }
 
-/* Layout e Contêineres */
+/* Layout e Cont ineres */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -46,10 +46,10 @@ img {
 
 .container-imagem-dom-malta img {
     width: 100%;
-    height: auto; /* Garante que a imagem mantenha a proporção real */
+    height: auto; /* Garante que a imagem mantenha a propor  o real */
 }
 
-/* Botões */
+/* Bot es */
 .botao {
     display: inline-flex;
     align-items: center;

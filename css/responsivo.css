@@ -347,29 +347,3 @@
         justify-content: center;
     }
 }
-
-
-/* ===== AJUSTES FINAIS MOBILE ===== */
-@media (max-width: 600px) {
-    .cards-destaques .card-destaque {
-        min-height: auto;
-    }
-
-    .cards-destaques .card-imagem {
-        height: 260px;
-        flex-basis: 260px;
-    }
-
-    .colecao-redes {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .colecao-redes .botao-rede {
-        width: 100%;
-    }
-
-    .redes-destaque .rede-destaque {
-        height: 280px;
-    }
-}

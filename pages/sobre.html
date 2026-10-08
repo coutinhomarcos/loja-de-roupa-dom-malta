@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sobre nós | DOM MALTA</title>
+    <title>Sobre n&#243;s | DOM MALTA</title>
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -15,20 +15,20 @@
 
 <body>
 
-    <!-- CABEÇALHO -->
+    <!-- CABE ALHO -->
     <header class="cabecalho">
 
         <div class="container cabecalho-conteudo">
 
             <a href="../index.html" class="logo-menu">
                 <strong>DOM MALTA</strong>
-                <span>Elegância que impõe respeito</span>
+                <span>Eleg&#226;ncia que imp&#245;e respeito</span>
             </a>
 
             <nav class="menu">
-                <a href="../index.html">Início</a>
-                <a href="colecao.html">Coleção</a>
-                <a href="sobre.html">Sobre nós</a>
+                <a href="../index.html">In&#237;cio</a>
+                <a href="colecao.html">Cole&#231;&#227;o</a>
+                <a href="sobre.html">Sobre n&#243;s</a>
                 <a href="contato.html">Contato</a>
             </nav>
 
@@ -50,30 +50,59 @@
                 <span class="pequeno-titulo">SOBRE A DOM MALTA</span>
 
                 <h1>
-                    Elegância que
-                    <span>impõe respeito.</span>
+                    Eleg&#226;ncia que
+                    <span>imp&#245;e respeito.</span>
                 </h1>
 
                 <p>
-                    A DOM MALTA é uma loja de roupas voltada para quem valoriza
-                    elegância, qualidade, personalidade e atitude.
+                    A DOM MALTA &#233; uma loja de roupas voltada para quem valoriza
+                    eleg&#226;ncia, qualidade, personalidade e atitude.
                 </p>
 
                 <p>
-                    Nosso objetivo é oferecer peças que ajudem cada cliente a
-                    construir um estilo próprio e confiante.
+                    Nosso objetivo &#233; oferecer pe&#231;as que ajudem cada cliente a
+                    construir um estilo pr&#243;prio e confiante.
                 </p>
 
                 <a href="colecao.html" class="botao botao-dourado">
-                    Conheça nossa coleção
+                    Conhe&#231;a nossa cole&#231;&#227;o
                 </a>
 
             </div>
+
+            <aside class="marca-contato-panel" aria-label="Logo e redes sociais da DOM MALTA">
+    <img src="../images/logo-dom-malta-atendimento-hd.jpg" alt="DOM MALTA &#8212; Eleg&#226;ncia que imp&#245;e respeito" class="marca-contato-logo">
+    <div class="marca-contato-redes">
+        <a href="https://www.instagram.com/dom_malta/" target="_blank" rel="noopener noreferrer" class="atalho-contato atalho-instagram">
+            <img src="../images/instagram-icon.svg" alt="" class="icone-atalho">
+            <span>Instagram</span>
+        </a>
+        <a href="https://chat.whatsapp.com/HFbKQFnzVo51rlqutK48PI?mode=gi_t" target="_blank" rel="noopener noreferrer" class="atalho-contato atalho-whatsapp">
+            <img src="../images/whatsapp-icon.svg" alt="" class="icone-atalho">
+            <span>WhatsApp</span>
+        </a>
+    </div>
+</aside>
 
         </div>
 
     </main>
 
+
+
+
+
+<div class="controle-musica" aria-label="Controles de m&#250;sica">
+    <audio class="musica-pagina" data-pasta="../audio/playlist/" preload="metadata"></audio>
+    <p class="faixa-atual" aria-live="polite"></p>
+    <div class="botoes-musica">
+        <button class="botao-musica" data-acao="pausar" type="button">&#9654; Iniciar m&#250;sica</button>
+        <button class="botao-musica" data-acao="silenciar" type="button" aria-pressed="false">&#128263; Silenciar</button>
+        <button class="botao-musica" data-acao="proxima" type="button">&#9197; Pr&#243;xima m&#250;sica</button>
+    </div>
+</div>
+<script src="../js/playlist.js"></script>
+<script src="../js/musica.js"></script>
 </body>
 
 </html>

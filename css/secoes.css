@@ -1,6 +1,6 @@
 
 /* =========================
-   SEÇÕES
+   SE  ES
 ========================= */
 
 .secao {
@@ -293,7 +293,7 @@
 
 
 /* =========================
-   PÁGINA CONTATO COM FOTO DE FUNDO
+   P GINA CONTATO COM FOTO DE FUNDO
 ========================= */
 
 .pagina-contato {
@@ -343,7 +343,7 @@
 }
 
 /* =========================
-   PÁGINAS INTERNAS
+   P GINAS INTERNAS
 ========================= */
 
 .pagina {
@@ -578,7 +578,7 @@ body.modal-aberto {
 }
 
 
-/* Ícones dos atalhos de contato */
+/*  cones dos atalhos de contato */
 .atalho-contato .icone-atalho {
     width: 24px;
     height: 24px;
@@ -621,7 +621,7 @@ body.modal-aberto {
 }
 
 /* =========================
-   PÁGINA SOBRE NÓS COM FOTO DE FUNDO
+   P GINA SOBRE N S COM FOTO DE FUNDO
 ========================= */
 
 .pagina-sobre {
@@ -687,7 +687,7 @@ body.modal-aberto {
 
 
 /* =========================
-   ATALHOS DA PÁGINA CONTATO
+   ATALHOS DA P GINA CONTATO
 ========================= */
 .contato-atalhos {
     display: flex;
@@ -756,7 +756,7 @@ body.modal-aberto {
     object-fit: contain;
 }
 
-/* Dois atalhos grandes e iguais na seção inferior */
+/* Dois atalhos grandes e iguais na se  o inferior */
 .redes-destaque {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -837,159 +837,213 @@ body.modal-aberto {
     max-width: 760px;
 }
 
-/* ===== AJUSTES FINAIS DOS ATALHOS E FUNDOS ===== */
-
-/* Mantém os ícones de WhatsApp e Instagram exatamente no mesmo tamanho */
-.atalho-contato .icone-atalho {
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    max-width: 22px;
-    object-fit: contain;
-    display: block;
+/* ===== CORRE  O FINAL - REDES E LOGO DO ATENDIMENTO ===== */
+/* Aumenta as imagens dos atalhos sem cortar o QR Code ou o WhatsApp. */
+.redes-destaque .rede-destaque {
+    height: 390px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px;
 }
 
-/* Os três quadrantes da Home têm a mesma altura e os atalhos ficam alinhados */
-.cards-destaques .card-destaque {
-    height: 100%;
-    min-height: 540px;
-}
-
-.cards-destaques .card-imagem {
+.redes-destaque .rede-destaque img {
+    width: 270px;
     height: 270px;
+    max-width: 88%;
+    max-height: 270px;
+    padding: 0;
+    margin: 0 auto;
+    object-fit: contain;
+    object-position: center;
     flex: 0 0 270px;
 }
 
-.cards-destaques .card-conteudo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.redes-destaque .rede-destaque span {
+    position: static;
+    width: min(230px, 90%);
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 11px 14px;
+    flex: 0 0 auto;
 }
 
-.cards-destaques .card-link,
-.cards-destaques .atalhos-contato {
-    margin-top: auto;
-}
-
-/* Logo do atendimento ocupa toda a área da imagem */
-.logo-atendimento {
-    padding: 0;
+/* No terceiro quadrante, a arte precisa aparecer inteira, principalmente
+   a frase "Eleg ncia que imp e respeito". */
+.cards-destaques .card-atendimento .card-imagem.logo-atendimento {
     background: #050505;
-}
-
-.logo-atendimento img {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
-
-/* Fundos Sobre/Contato: usa a imagem HD sem filtros de nitidez ou blur */
-.sobre-fundo,
-.contato-fundo {
-    background-image: url("../images/dom-malta-promocional-4k.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    image-rendering: auto;
-    filter: none;
-    -webkit-filter: none;
-}
-
-/* Galeria de redes no final da Home */
-.redes-destaque {
-    align-items: stretch;
-}
-
-.redes-destaque .rede-destaque {
-    min-width: 0;
-    height: 360px;
-}
-
-.redes-destaque .rede-destaque img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
-.redes-destaque .rede-instagram img,
-.redes-destaque .rede-whatsapp img {
-    padding: 28px;
-}
-
-/* Área inferior da Coleção */
-.colecao-redes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 60px;
-}
-
-.colecao-redes .botao-rede {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    min-width: 185px;
-    padding: 12px 18px;
-    border: 1px solid #333;
-    border-radius: 8px;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: .2s ease;
-}
-
-.colecao-redes .botao-rede:hover {
-    transform: translateY(-2px);
-    border-color: #e0ad4e;
-}
-
-.colecao-redes .botao-rede img {
-    width: 21px;
-    height: 21px;
-    object-fit: contain;
-    display: block;
-}
-
-/* Ícones/atalhos da Home: mesma área visual e sem cortes */
-.redes-destaque .rede-destaque {
-    height: 360px;
-}
-
-.redes-destaque .rede-destaque img {
-    width: 190px;
-    height: 190px;
-    max-width: 72%;
-    max-height: 72%;
     padding: 0;
-    object-fit: contain;
-    object-position: center;
-    margin: auto;
+    overflow: hidden;
 }
 
-/* Mantém os dois quadrantes visualmente iguais */
-.redes-destaque .rede-instagram,
-.redes-destaque .rede-whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cards-destaques .card-atendimento .card-imagem.logo-atendimento img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0;
+    margin: 0;
+    object-fit: contain;
+    object-position: center;
+    display: block;
 }
 
 @media (max-width: 600px) {
     .redes-destaque .rede-destaque {
-        height: 280px;
+        height: 340px;
+        padding: 15px;
     }
 
     .redes-destaque .rede-destaque img {
-        width: 150px;
-        height: 150px;
-        max-width: 65%;
-        max-height: 65%;
+        width: 230px;
+        height: 230px;
+        max-height: 230px;
+        flex-basis: 230px;
+    }
+
+    .redes-destaque .rede-destaque span {
+        width: min(210px, 90%);
     }
 }
+
+
+/* AJUSTE DEFINITIVO DOS ATALHOS SOCIAIS DA P GINA INICIAL */
+.redes-destaque .rede-destaque {
+    box-sizing: border-box;
+    min-height: 390px;
+    height: 390px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.redes-destaque .rede-destaque img {
+    display: block;
+    flex: 0 0 auto;
+    width: 230px !important;
+    height: 230px !important;
+    max-width: 100% !important;
+    max-height: 230px !important;
+    margin: 0 auto;
+    padding: 0 !important;
+    background: transparent !important;
+    object-fit: contain !important;
+    object-position: center;
+}
+
+.redes-destaque .rede-instagram img {
+    width: 180px !important;
+    height: 250px !important;
+    max-height: 250px !important;
+}
+
+.redes-destaque .rede-destaque span {
+    position: static;
+    display: block;
+    flex: 0 0 auto;
+    width: min(230px, 100%);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*  cone vis vel junto ao texto do bot o de Instagram na Cole  o */
+.botao-instagram-colecao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.botao-instagram-colecao img {
+    display: block;
+    width: 23px;
+    height: 23px;
+    flex: 0 0 23px;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    .redes-destaque .rede-destaque {
+        height: 350px;
+        min-height: 350px;
+    }
+    .redes-destaque .rede-destaque img {
+        width: 200px !important;
+        height: 200px !important;
+        max-height: 200px !important;
+    }
+    .redes-destaque .rede-instagram img {
+        width: 145px !important;
+        height: 205px !important;
+        max-height: 205px !important;
+    }
+}
+
+
+/* Painel de marca e redes nas p ginas internas */
+.colecao-intro-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; align-items:center; gap:36px; margin-bottom:35px; }
+.colecao-intro-texto h1 { margin-bottom:12px; }
+.marca-contato-panel { width:100%; max-width:300px; padding:18px; border:1px solid #c8942f; border-radius:14px; background:#101010; display:flex; flex-direction:column; align-items:center; gap:16px; }
+.marca-contato-logo { width:100%; height:190px; object-fit:contain; background:#050505; border-radius:8px; }
+.marca-contato-redes { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; width:100%; }
+.marca-contato-redes .atalho-contato { justify-content:center; padding:10px 12px; }
+.colecao-redes { display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap; margin:55px auto 20px; }
+.colecao-redes .botao { display:inline-flex; align-items:center; gap:10px; }
+.icone-botao-rede { width:22px; height:22px; object-fit:contain; }
+.contato-marca { justify-self:center; }
+.controle-musica { position:fixed; right:18px; bottom:18px; z-index:10000; }
+.botao-musica { border:1px solid #c8942f; border-radius:30px; background:rgba(10,10,10,.92); color:#e0ad4e; padding:12px 17px; font-weight:bold; cursor:pointer; box-shadow:0 5px 18px rgba(0,0,0,.35); }
+.botao-musica:hover { background:#c8942f; color:#111; }
+@media (max-width:900px) { .colecao-intro-layout { grid-template-columns:1fr; } .colecao-intro-texto { text-align:center; } .colecao-intro-layout .marca-contato-panel { margin:0 auto; } .sobre-conteudo .marca-contato-panel { margin:28px auto 0; } .contato-marca { margin-top:10px; } }
+@media (max-width:600px) { .marca-contato-panel { max-width:100%; } .marca-contato-logo { height:160px; } .colecao-redes { flex-direction:column; align-items:stretch; } .colecao-redes .botao { justify-content:center; width:100%; } .controle-musica { right:10px; bottom:10px; } .botao-musica { padding:10px 13px; font-size:13px; } }
+
+
+/* Ajustes solicitados: espa amento da marca em Sobre n s e Contato sem logo lateral */
+.sobre-conteudo {
+    gap: 64px;
+    justify-content: space-between;
+}
+.sobre-conteudo .sobre-caixa {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.sobre-conteudo > .marca-contato-panel {
+    flex: 0 0 300px;
+    margin-left: 18px;
+}
+.contato-conteudo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (max-width: 900px) {
+    .sobre-conteudo { gap: 28px; flex-direction: column; }
+    .sobre-conteudo > .marca-contato-panel { flex-basis: auto; margin: 0 auto; }
+}
+
+/* Atalhos da cole  o e solicita  o de compra */
+.atalhos-produtos h1 { color:#e0ad4e; margin-bottom:20px; }
+.categorias-atalhos { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.categorias-atalhos a { display:block; border:1px solid #c8942f; border-radius:12px; overflow:hidden; background:#151515; text-align:center; color:#e0ad4e; }
+.categorias-atalhos img { display:block; width:100%; height:150px; object-fit:cover; }
+.categorias-atalhos span { display:block; padding:14px 5px; font-weight:bold; }
+.categorias-atalhos a:hover { background:#302615; }
+.categoria-produtos { scroll-margin-top:100px; }
+.botao-compra { margin-top:12px; font-size:14px; padding:10px 12px; }
+.pedido-compra { border:1px solid #c8942f; border-radius:12px; padding:24px; margin-bottom:30px; }
+.pedido-compra[hidden] { display:none; }
+.pedido-compra p { margin:12px 0; }
+.pedido-compra textarea { display:block; width:100%; margin:12px 0; padding:12px; background:#151515; color:#fff; border:1px solid #777; border-radius:8px; font:inherit; }
+@media(max-width:600px) { .categorias-atalhos { gap:8px; } .categorias-atalhos img { height:110px; } .pedido-compra { padding:16px; } }
+
+/* Lista de m sicas: controles lado a lado */
+.controle-musica { max-width:calc(100vw - 20px); padding:10px; border-radius:16px; background:rgba(10,10,10,.94); }
+.botoes-musica { display:flex; flex-wrap:wrap; gap:7px; }
+.faixa-atual { color:#e0ad4e; max-width:410px; font-size:12px; margin:0 0 8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.controle-musica .botao-musica { padding:10px 12px; font-size:12px; }
+body { padding-bottom:105px; }
+@media(max-width:480px) { .controle-musica { left:10px; right:10px; } .botoes-musica .botao-musica { flex:1; padding:9px 6px; } .faixa-atual { max-width:100%; } }
