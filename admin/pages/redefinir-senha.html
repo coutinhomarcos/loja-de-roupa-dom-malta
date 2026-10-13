@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Redefinir senha — DOM MALTA</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
+</head>
+
+<body>
+    <main class="login-page">
+        <section class="login-card">
+            <div class="brand">
+                <h1>DOM <span>MALTA</span></h1>
+                <h2>Redefinir senha</h2>
+                <p>Crie uma nova senha para acessar o estoque.</p>
+            </div>
+
+            <p id="mensagem" role="status" aria-live="polite">
+                Verificando o link de recuperação…
+            </p>
+
+            <form id="formRedefinir" hidden>
+                <label for="novaSenha">Nova senha</label>
+                <div class="input-box">
+                    <input
+                        id="novaSenha"
+                        type="password"
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Pelo menos 8 caracteres"
+                        required
+                    >
+                </div>
+
+                <label for="confirmarSenha">Confirmar nova senha</label>
+                <div class="input-box">
+                    <input
+                        id="confirmarSenha"
+                        type="password"
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Repita a nova senha"
+                        required
+                    >
+                </div>
+
+                <button
+                    id="salvarSenha"
+                    class="primary-button"
+                    type="submit"
+                >
+                    Salvar nova senha
+                </button>
+            </form>
+
+            <p class="create-account">
+                <a href="../index.html">Voltar ao login</a>
+            </p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../js/supabase-config.js"></script>
+    <script src="../js/redefinir-senha.js"></script>
+</body>
+</html>
