@@ -1,0 +1,338 @@
+/* ==================================================
+   LAYOUT
+================================================== */
+
+.cadastro-layout {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns: 260px 1fr;
+
+    background: var(--bg);
+}
+
+
+/* ==================================================
+   BARRA LATERAL
+================================================== */
+
+.sidebar {
+
+    padding: 28px 18px;
+
+    border-right: 1px solid var(--border);
+
+    background: var(--sidebar);
+}
+
+.sidebar-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 35px;
+}
+
+.brand-icon {
+
+    font-size: 34px;
+
+    color: var(--purple-light);
+}
+
+.sidebar-brand h2 {
+
+    font-size: 17px;
+}
+
+.sidebar-brand h2 span {
+
+    color: var(--purple-light);
+}
+
+.sidebar-brand p {
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ==================================================
+   MENU
+================================================== */
+
+.sidebar-menu {
+
+    display: grid;
+
+    gap: 8px;
+}
+
+.sidebar-menu a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.sidebar-menu a span {
+
+    width: 20px;
+
+    text-align: center;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+
+    color: #ffffff;
+
+    background: rgba(145, 76, 255, 0.20);
+}
+
+
+/* ==================================================
+   CONTEÚDO
+================================================== */
+
+.cadastro-content {
+
+    padding: 30px;
+}
+
+
+/* ==================================================
+   CABEÇALHO
+================================================== */
+
+.cadastro-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.cadastro-header h1 {
+
+    font-size: 30px;
+}
+
+.cadastro-header p {
+
+    margin-top: 6px;
+
+    color: var(--muted);
+}
+
+
+/* ==================================================
+   PAINEL
+================================================== */
+
+.cadastro-panel {
+
+    padding: 25px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    background: var(--panel);
+}
+
+
+/* ==================================================
+   FORMULÁRIO
+================================================== */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.form-group label {
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: var(--input-bg);
+
+    color: var(--text);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color: var(--purple);
+}
+
+
+/* ==================================================
+   BOTÕES
+================================================== */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
+}
+
+.primary-button {
+
+    padding: 13px 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        var(--blue)
+    );
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.secondary-button {
+
+    padding: 13px 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+
+    background: var(--panel2);
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+@media (max-width: 900px) {
+
+    .cadastro-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+
+        display: none;
+    }
+
+    .cadastro-content {
+
+        padding: 20px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .cadastro-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+
+        flex-direction: column;
+    }
+
+    .form-actions button {
+
+        width: 100%;
+    }
+
+}

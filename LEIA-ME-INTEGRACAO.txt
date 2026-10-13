@@ -1,0 +1,87 @@
+DOM MALTA — SITE E ESTOQUE NO SUPABASE
+
+1. CONFIGURAR O BANCO (antes de testar o sistema)
+As tabelas produtos, produto_variacoes, produto_custos e administradores,
+o usuário e as políticas de administrador já foram criados durante a conversa.
+Abra supabase/02_integracao.sql no VS Code. Copie TODO o conteúdo para uma
+NOVA consulta no SQL Editor do Supabase. Clique Run.
+Resultado esperado: Success. No rows returned.
+Execute este arquivo apenas uma vez. Se ocorrer erro, envie a mensagem;
+não apague as tabelas nem tente repetir partes do arquivo.
+Esse script cria clientes, transacoes, vendas e as funções do cadastro e venda.
+Libera apenas a leitura pública do catálogo e mantém custos/clientes privados.
+
+2. TESTAR LOCALMENTE
+Extraia o ZIP. Todo o trabalho fica dentro de DOM_MALTA.
+No VS Code: Arquivo > Abrir Pasta > escolha a pasta DOM_MALTA.
+Abra index.html com Open with Live Server: este é o site público.
+Para o estoque, acrescente /admin/ ao endereço, ou abra admin/index.html
+com Open with Live Server.
+Entre com o e-mail e a senha do usuário criado em Authentication > Users.
+O antigo login admin@loja.com / 123456 foi removido.
+Não precisa de Node, npm ou compilação para abrir o site.
+É preciso internet para carregar o Supabase e acessar o banco.
+
+3. PRIMEIRO PRODUTO
+Cadastre um código novo, como CAL001, nome, categoria Calças, custo e preço.
+Tamanhos: 38, 40, 42. Cores: Preto, Azul.
+Clique Gerar grade. Serão geradas 6 combinações.
+Preencha cada quantidade ou use Aplicar a todas e depois ajuste as linhas.
+Imagem opcional: JPG, PNG ou WebP de até 300 KB.
+Clique Cadastrar Produto. Produto + grade + despesa inicial são salvos juntos.
+Abra Produtos e Estoque; abra também a Coleção do site e recarregue.
+O produto aparecerá na seção de produtos disponíveis, com tamanho/cor/preço.
+As fotos originais do site foram preservadas no Mostruário DOM MALTA.
+Elas não foram transformadas automaticamente em estoque: faltam seus dados.
+
+4. ESTOQUE E VENDAS
+O botão editar muda uma variação; nome, categoria, preço e custo são comuns
+a todas as variações do mesmo produto. A quantidade é da variação escolhida.
+Ajuste de quantidade é uma correção de estoque; não registra nova compra
+nem uma nova despesa. Registre o lançamento financeiro separadamente.
+Ocultar/Exibir controla a visibilidade de TODO o produto no site.
+Não excluímos o histórico de produtos e vendas pelo painel.
+Na aba Vendas, selecione o tamanho/cor e a quantidade. Finalize somente
+quando o pagamento já tiver sido recebido fora do sistema.
+O banco recalcula o preço e baixa o estoque em uma transação, rejeitando
+quantidades acima do disponível. Repetir a mesma tentativa não duplica venda.
+Clientes, movimentações financeiras e vendas agora ficam no Supabase.
+Relatórios exportam CSV do banco. Tema claro/escuro fica neste navegador.
+Dados e preferências da loja nas Configurações ainda não têm persistência;
+a alteração de senha usa o Supabase. O reset geral foi desativado.
+Dados antigos do localStorage NÃO são importados nem apagados automaticamente.
+
+5. GITHUB E VERCEL
+Faça backup da pasta atual antes de copiar os arquivos.
+Dentro da pasta clonada do GitHub, copie o CONTEÚDO da pasta DOM_MALTA,
+não a pasta inteira. index.html deve ficar na raiz do repositório.
+Mantenha a pasta .git que já existe na pasta clonada. Não está neste ZIP.
+A pasta admin ficará ao lado de css, js, images e pages.
+Faça commit e Sincronizar Alterações no VS Code.
+Na Vercel, use a raiz do repositório, Framework Preset: Other,
+sem comando de build e sem subpasta de saída (site estático).
+A publicação ligada ao GitHub será atualizada com o push.
+Site: https://loja-de-roupa-dom-malta.vercel.app/
+Estoque: https://loja-de-roupa-dom-malta.vercel.app/admin/
+Não foi feito push nem publicação automática a partir desta entrega.
+
+6. COMPRAS NO SITE: PRÓXIMA ETAPA
+O botão Solicitar compra ainda leva ao contato, com produto/tamanho/cor/preço.
+A solicitação não reserva nem baixa estoque. Pagamento online NÃO foi ativado.
+Para Pix e cartão, ainda falta escolher/configurar um provedor (ex. Mercado
+Pago), criar pedidos/reservas, adicionar backend na Vercel e validar o retorno
+do pagamento por webhook. A baixa ocorrerá após confirmação do provedor;
+o clique no botão e o comprovante enviado pelo cliente não bastam.
+Dados completos de cartão não devem ser salvos neste banco.
+Chaves SECRETAS ficam nas variáveis do servidor, nunca no JS público/GitHub.
+Esta entrega usa somente a chave pública que você forneceu.
+
+7. SE ALGO FALHAR
+Erro de função/tabela inexistente: confira a execução de 02_integracao.sql.
+Permissão negada: confira seu usuário em administradores e as políticas
+criadas antes. Não desative RLS para fazer o sistema funcionar.
+Login inválido: use o e-mail e senha de Authentication > Users.
+Coleção sem estoque: cadastre um produto real e recarregue a página.
+O estoque público é consultado ao abrir/recarregar; não é atualização ao vivo.
+O áudio depende da política de reprodução do navegador. Os arquivos de
+vídeo, músicas e estilos do site enviados foram preservados.

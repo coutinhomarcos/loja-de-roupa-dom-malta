@@ -1047,3 +1047,9 @@ body.modal-aberto {
 .controle-musica .botao-musica { padding:10px 12px; font-size:12px; }
 body { padding-bottom:105px; }
 @media(max-width:480px) { .controle-musica { left:10px; right:10px; } .botoes-musica .botao-musica { flex:1; padding:9px 6px; } .faixa-atual { max-width:100%; } }
+
+/* Catálogo compartilhado com o estoque. */
+#avisoCatalogo { margin: 24px 0; }
+#catalogoBanco select { width: 100%; margin: 10px 0; padding: 10px; background: #fff; color: #222; border-radius: 6px; }
+#catalogoBanco [hidden] { display: none; }
+#catalogoBanco .produto-imagem img { aspect-ratio: 3 / 4; object-fit: contain; }

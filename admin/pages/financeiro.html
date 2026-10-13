@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro - Loja de Roupas</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <style>
+        /* Reset e Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333333;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar / Menu Lateral */
+        .sidebar {
+            width: 240px;
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar .logo h2 {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .menu ul li a {
+            display: block;
+            padding: 12px 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .menu ul li a:hover,
+        .menu ul li a.active {
+            background-color: #334155;
+            color: #ffffff;
+            border-left: 4px solid #38bdf8;
+        }
+
+        /* Main Content e Topbar */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            background-color: #ffffff;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .topbar h1 {
+            font-size: 1.4rem;
+            color: #0f172a;
+        }
+
+        .user-info {
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .content-body {
+            padding: 25px 30px;
+        }
+
+        /* Cards de Resumo */
+        .cards-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid #cbd5e0;
+        }
+
+        .card-summary.receita { border-left-color: #10b981; }
+        .card-summary.despesa { border-left-color: #ef4444; }
+        .card-summary.saldo { border-left-color: #3b82f6; }
+
+        .card-info span {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .card-info h3 {
+            font-size: 1.4rem;
+            color: #0f172a;
+            margin-top: 4px;
+        }
+
+        .card-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-summary.receita .card-icon { background-color: #d1fae5; color: #047857; }
+        .card-summary.despesa .card-icon { background-color: #fee2e2; color: #b91c1c; }
+        .card-summary.saldo .card-icon { background-color: #dbeafe; color: #1d4ed8; }
+
+        /* Grid Formulário e Tabela */
+        .financeiro-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        /* Formulários */
+        .form-group {
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background-color: #ffffff;
+            color: #1e293b;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Tabela */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        #tabela-financeiro {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        #tabela-financeiro th,
+        #tabela-financeiro td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #tabela-financeiro th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .empty-row td {
+            text-align: center;
+            color: #94a3b8;
+            padding: 20px !important;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Loja de Roupas</h2>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="../index.html">Dashboard</a></li>
+                    <li><a href="produtos.html">Produtos</a></li>
+                    <li><a href="estoque.html">Estoque</a></li>
+                    <li><a href="clientes.html">Clientes</a></li>
+                    <li><a href="vendas.html">Vendas</a></li>
+                    <li><a href="financeiro.html" class="active">Financeiro</a></li>
+                    <li><a href="relatorios.html">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+<p id="mensagemBanco" aria-live="polite"></p>
+            <header class="topbar">
+                <h1>Controle Financeiro</h1>
+                <div class="user-info">
+                    <span>Operador: Admin</span>
+                </div>
+            </header>
+
+            <section class="content-body">
+                <!-- Resumo -->
+                <div class="cards-summary">
+                    <div class="card card-summary receita">
+                        <div class="card-info">
+                            <span>Entradas / Receitas</span>
+                            <h3 id="total-receita">R$ 0,00</h3>
+                        </div>
+                        <div class="card-icon">↑</div>
+                    </div>
+
+                    <div class="card card-summary despesa">
+                        <div class="card-info">
+                            <span>Saídas / Despesas</span>
+                            <h3 id="total-despesa">R$ 0,00</h3>
+                        </div>
+                        <div class="card-icon">↓</div>
+                    </div>
+
+                    <div class="card card-summary saldo">
+                        <div class="card-info">
+                            <span>Saldo Atual</span>
+                            <h3 id="saldo-total" style="color: #dc2626;">R$ 0,00</h3>
+                        </div>
+                        <div class="card-icon">$</div>
+                    </div>
+
+                    <div class="card card-summary lucro">
+                        <div class="card-info">
+                            <span>Lucro Realizado</span>
+                            <h3 id="lucro-realizado">R$ 0,00</h3>
+                        </div>
+                        <div class="card-icon">📈</div>
+                    </div>
+
+                    <div class="card card-summary previsto">
+                        <div class="card-info">
+                            <span>Lucro Previsto do Estoque</span>
+                            <h3 id="lucro-previsto">R$ 0,00</h3>
+                        </div>
+                        <div class="card-icon">💰</div>
+                    </div>
+                </div>
+
+                <div class="financeiro-nota">
+                    <strong>Como funciona:</strong> compras de estoque entram automaticamente como despesas.
+                    As vendas entram como receitas e o lucro é calculado pela diferença entre o valor vendido e o custo dos produtos.
+                </div>
+
+                <!-- Formulário e Tabela -->
+                <div class="financeiro-grid">
+                    <div class="card">
+                        <h2>Novo Lançamento Manual</h2>
+                        <form id="form-financeiro">
+                            <div class="form-group">
+                                <label for="tipo-transacao">Tipo de Transação</label>
+                                <select id="tipo-transacao" required>
+                                    <option value="receita">Receita (Entrada)</option>
+                                    <option value="despesa">Despesa (Saída)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descricao-transacao">Descrição</label>
+                                <input type="text" id="descricao-transacao" placeholder="Ex: Pagamento Fornecedor" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="valor-transacao">Valor (R$)</label>
+                                    <input type="number" id="valor-transacao" step="0.01" min="0.01" placeholder="0,00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoria-transacao">Categoria</label>
+                                    <select id="categoria-transacao" required>
+                                        <option value="Vendas">Vendas</option>
+                                        <option value="Fornecedores">Fornecedores</option>
+                                        <option value="Operacional">Operacional</option>
+                                        <option value="Salários">Salários</option>
+                                        <option value="Outros">Outros</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="data-transacao">Data</label>
+                                <input type="date" id="data-transacao" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">+ Adicionar Transação</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h2>Extrato de Lançamentos</h2>
+                        <div class="table-responsive">
+                            <table id="tabela-financeiro">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Descrição</th>
+                                        <th>Categoria</th>
+                                        <th>Tipo</th>
+                                        <th>Valor</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/app.js"></script>
+    <script src="../js/financeiro.js"></script>
+    <script src="../js/js/theme.js"></script>
+    <button id="theme-toggle" class="theme-button">
+    ☀️ Modo Claro
+</button>
+</body>
+</html>

@@ -1,0 +1,292 @@
+/* =========================================================
+   DASHBOARD - ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.dashboard-layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background: #090d20;
+}
+
+
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
+
+.sidebar {
+    padding: 28px 18px;
+    border-right: 1px solid var(--border);
+    background: #0c1025;
+}
+
+
+/* Título da loja */
+
+.sidebar h2 {
+    font-size: 20px;
+}
+
+
+/* Destaque da palavra ROUPAS */
+
+.sidebar h2 span {
+    color: var(--purple-light);
+}
+
+
+/* Subtítulo */
+
+.sidebar > p {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin: 8px 0 28px;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO DO MENU
+   ========================================================= */
+
+.sidebar nav {
+    display: grid;
+    gap: 8px;
+}
+
+
+/* Links do menu */
+
+.sidebar a {
+    padding: 14px;
+    border-radius: 10px;
+    color: var(--muted);
+}
+
+
+/* Link ativo e efeito ao passar o mouse */
+
+.sidebar a.active,
+.sidebar a:hover {
+    color: #ffffff;
+    background: rgba(145, 76, 255, 0.2);
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.dashboard-content {
+    padding: 28px;
+}
+
+
+/* =========================================================
+   BARRA SUPERIOR
+   ========================================================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+
+/* Campo de busca */
+
+.topbar input {
+    width: min(400px, 60%);
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel2);
+    color: #ffffff;
+}
+
+
+/* Informações menores do usuário */
+
+.topbar small {
+    display: block;
+    color: var(--muted);
+}
+
+
+/* Descrição abaixo do título do Dashboard */
+
+.dashboard-content > p {
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   CARDS DE RESUMO
+   ========================================================= */
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 28px 0;
+}
+
+
+/* Cards de resumo e painéis */
+
+.summary-cards article,
+.panel {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--panel);
+}
+
+
+/* Título dentro dos cards */
+
+.summary-cards span {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* Valores dentro dos cards */
+
+.summary-cards strong {
+    display: block;
+    margin-top: 14px;
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   ÁREA INFERIOR DO DASHBOARD
+   ========================================================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr;
+    gap: 18px;
+}
+
+
+/* Títulos dos painéis */
+
+.panel h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+
+/* Linhas de informações dentro dos painéis */
+
+.panel p {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   ÁREA DO GRÁFICO
+   ========================================================= */
+
+.fake-chart {
+    min-height: 300px;
+
+    display: grid;
+    place-items: center;
+    align-content: center;
+
+    font-size: 80px;
+    color: var(--purple-light);
+
+    border-bottom: 2px solid var(--purple);
+}
+
+
+/* Texto abaixo do gráfico */
+
+.fake-chart span {
+    margin-top: 35px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   STATUS DO ESTOQUE
+   ========================================================= */
+
+.ok {
+    color: #55d88b;
+}
+
+
+.warning {
+    color: #f2bb52;
+}
+
+
+.danger {
+    color: #ff6b78;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    /* Remove o menu lateral */
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    .sidebar {
+        display: none;
+    }
+
+
+    /* Organiza os cards em duas colunas */
+    .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* Gráfico e painel ficam um abaixo do outro */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - CELULAR
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    /* Reduz o espaçamento do conteúdo */
+    .dashboard-content {
+        padding: 18px;
+    }
+
+
+    /* Cards ficam um abaixo do outro */
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* Ajusta o tamanho da busca */
+    .topbar input {
+        width: 60%;
+    }
+}

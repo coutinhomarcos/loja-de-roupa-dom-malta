@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Produtos - Loja de Roupas</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="../css/global.css">
+
+    <!-- CSS específico da tela de produtos -->
+    <link rel="stylesheet" href="../css/produtos.css">
+
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+
+<body>
+
+    <div class="produtos-layout">
+
+        <!-- ==========================================
+             BARRA LATERAL
+        =========================================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-icon">
+                    ♧
+                </div>
+
+                <div>
+                    <h2>
+                        LOJA DE <span>ROUPAS</span>
+                    </h2>
+
+                    <p>
+                        SISTEMA DE GESTÃO
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- MENU -->
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="produtos.html" class="active">
+                    <span>▦</span>
+                    Produtos
+                </a>
+
+                <a href="estoque.html">
+                    <span>▣</span>
+                    Estoque
+                </a>
+
+                <a href="clientes.html">
+                    <span>♙</span>
+                    Clientes
+                </a>
+
+                <a href="vendas.html">
+                    <span>🛒</span>
+                    Vendas
+                </a>
+
+                <a href="financeiro.html">
+                    <span>⌁</span>
+                    Financeiro
+                </a>
+
+                <a href="relatorios.html">
+                    <span>▥</span>
+                    Relatórios
+                </a>
+
+                <a href="configuracoes.html">
+                    <span>⚙</span>
+                    Configurações
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- ==========================================
+             CONTEÚDO PRINCIPAL
+        =========================================== -->
+
+        <main class="produtos-content">
+<p id="mensagemBanco" aria-live="polite"></p>
+
+
+            <!-- CABEÇALHO -->
+
+            <header class="produtos-header">
+
+                <div>
+
+                    <h1>
+                        Produtos
+                    </h1>
+
+                    <p>
+                        Gerencie os produtos da sua loja.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-button"
+                    id="novoProduto"
+                >
+                    + Novo Produto
+                </button>
+
+            </header>
+
+
+            <!-- ==========================================
+                 ÁREA DE PESQUISA
+            =========================================== -->
+
+            <section class="search-area">
+
+                <div class="search-box">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="buscarProduto"
+                        placeholder="Buscar produto..."
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 RESUMO
+            =========================================== -->
+
+            <section class="produto-resumo">
+
+                <div class="resumo-card">
+
+                    <span>
+                        TOTAL DE PRODUTOS
+                    </span>
+
+                    <strong id="totalProdutos">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="resumo-card">
+
+                    <span>
+                        PRODUTOS EM ESTOQUE
+                    </span>
+
+                    <strong id="produtosEstoque">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="resumo-card">
+
+                    <span>
+                        ESTOQUE BAIXO
+                    </span>
+
+                    <strong id="estoqueBaixo">
+                        0
+                    </strong>
+
+                </div>
+
+                <div class="resumo-card">
+
+                    <span>
+                        VALOR DO ESTOQUE
+                    </span>
+
+                    <strong id="valorEstoque">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 TABELA DE PRODUTOS
+            =========================================== -->
+
+            <section class="panel produtos-panel">
+
+                <div class="table-header">
+
+                    <div>
+
+                        <h2>
+                            Lista de Produtos
+                        </h2>
+
+                        <p>
+                            Produtos cadastrados no sistema
+                        </p>
+
+                    </div>
+
+                    <span class="product-count">
+                        0 produtos
+                    </span>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Código
+                                </th>
+
+                                <th>
+                                    Imagem
+                                </th>
+
+                                <th>
+                                    Nome
+                                </th>
+
+                                <th>
+                                    Categoria
+                                </th>
+
+                                <th>
+                                    Tamanho
+                                </th>
+
+                                <th>
+                                    Cor
+                                </th>
+
+                                <th>
+                                    Valor de Venda
+                                </th>
+
+                                <th>
+                                    Estoque
+                                </th>
+
+                                <th>
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="listaProdutos">
+
+                            <!-- Os produtos serão inseridos pelo JavaScript -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- PAGINAÇÃO -->
+
+                <div class="pagination">
+
+                    <span>
+                        Mostrando 1 a 5 de 0 produtos
+                    </span>
+
+                    <div class="pagination-buttons">
+
+                        <button>
+                            ‹
+                        </button>
+
+                        <button class="active">
+                            1
+                        </button>
+
+                        <button>
+                            2
+                        </button>
+
+                        <button>
+                            3
+                        </button>
+
+                        <button>
+                            4
+                        </button>
+
+                        <button>
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- ==========================================
+             MENU MOBILE
+        =========================================== -->
+
+        <nav class="mobile-menu">
+
+            <a href="dashboard.html">
+                <span>⌂</span>
+                <small>Home</small>
+            </a>
+
+            <a href="vendas.html">
+                <span>🛒</span>
+                <small>Vendas</small>
+            </a>
+
+            <a href="produtos.html" class="active">
+                <span>▦</span>
+                <small>Produtos</small>
+            </a>
+
+            <a href="estoque.html">
+                <span>▣</span>
+                <small>Estoque</small>
+            </a>
+
+            <a href="configuracoes.html">
+                <span>☰</span>
+                <small>Mais</small>
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- JavaScript da tela -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/inventario.js"></script>
+<script src="../js/produtos.js"></script>
+    <script src="../js/js/theme.js"></script>
+    <button id="theme-toggle" class="theme-button">
+    ☀️ Modo Claro
+</button>
+
+</body>
+
+</html>

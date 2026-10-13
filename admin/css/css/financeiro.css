@@ -1,0 +1,297 @@
+/* ==========================================================================
+   ESTRUTURA GERAL E LAYOUT
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333333;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar / Menu Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #1e293b;
+    color: #ffffff;
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.sidebar .logo h2 {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #334155;
+    font-size: 1.3rem;
+}
+
+.menu ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.menu ul li a {
+    display: block;
+    padding: 12px 24px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.menu ul li a:hover,
+.menu ul li a.active {
+    background-color: #334155;
+    color: #ffffff;
+    border-left: 4px solid #38bdf8;
+}
+
+/* Main Content e Topbar */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.topbar {
+    background-color: #ffffff;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.topbar h1 {
+    font-size: 1.4rem;
+    color: #0f172a;
+}
+
+.user-info {
+    font-weight: 600;
+    color: #475569;
+}
+
+.content-body {
+    padding: 25px 30px;
+}
+
+/* ==========================================================================
+   CARDS DE RESUMO FINANCEIRO
+   ========================================================================== */
+.cards-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #cbd5e0;
+}
+
+.card-summary.receita { border-left-color: #10b981; }
+.card-summary.despesa { border-left-color: #ef4444; }
+.card-summary.saldo { border-left-color: #3b82f6; }
+
+.card-info span {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.card-info h3 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin-top: 4px;
+}
+
+.card-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-summary.receita .card-icon { background-color: #d1fae5; color: #047857; }
+.card-summary.despesa .card-icon { background-color: #fee2e2; color: #b91c1c; }
+.card-summary.saldo .card-icon { background-color: #dbeafe; color: #1d4ed8; }
+
+/* ==========================================================================
+   GRID FINANCEIRO (FORMULÁRIO E EXTRATO)
+   ========================================================================== */
+.financeiro-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.card h2 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: #ffffff;
+    color: #1e293b;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Tabela e Extrato */
+.table-responsive {
+    overflow-x: auto;
+}
+
+#tabela-financeiro {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+#tabela-financeiro th,
+#tabela-financeiro td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#tabela-financeiro th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+}
+
+.empty-row td {
+    text-align: center;
+    color: #94a3b8;
+    padding: 20px !important;
+}
+
+/* Badges e Cores */
+.badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-receita { background-color: #d1fae5; color: #047857; }
+.badge-despesa { background-color: #fee2e2; color: #b91c1c; }
+
+td.receita { color: #059669; }
+td.despesa { color: #dc2626; }
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    width: 100%;
+}
+
+.btn-primary:hover { background-color: #1d4ed8; }
+
+.btn-danger {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+.btn-danger:hover { background-color: #dc2626; }
+
+.btn-sm {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .financeiro-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card-summary.lucro { border-left-color: #8b5cf6; }
+.card-summary.previsto { border-left-color: #f59e0b; }
+.card-summary.lucro .card-icon { background-color: #ede9fe; color: #6d28d9; }
+.card-summary.previsto .card-icon { background-color: #fef3c7; color: #b45309; }
+.financeiro-nota {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: #eef6ff;
+    color: #334155;
+    border: 1px solid #dbeafe;
+    font-size: 0.9rem;
+}

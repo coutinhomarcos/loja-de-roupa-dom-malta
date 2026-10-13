@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dashboard - Loja de Roupas</title>
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+<body>
+<main class="dashboard-layout">
+<p id="mensagemBanco" aria-live="polite"></p>
+<aside class="sidebar">
+<h2>♧ LOJA DE <span>ROUPAS</span></h2><p>SISTEMA DE GESTÃO</p>
+<nav>
+<a class="active" href="dashboard.html">⌂ Dashboard</a>
+<a href="produtos.html">▣ Produtos</a><a href="estoque.html">▦ Estoque</a>
+<a href="clientes.html">♙ Clientes</a><a href="vendas.html">🛒 Vendas</a>
+<a href="financeiro.html">⌁ Financeiro</a><a href="relatorios.html">▥ Relatórios</a>
+<a href="configuracoes.html">⚙ Configurações</a>
+</nav></aside>
+<section class="dashboard-content">
+<header class="topbar"><input placeholder="🔍 Buscar algo..."><div>👤 <strong>Marcos</strong><small>Gerente</small></div></header>
+<h1>Olá, Marcos! 👋</h1><p>Aqui está o resumo da sua loja hoje.</p>
+<section class="summary-cards">
+<article><span>VENDAS HOJE</span><strong>R$ 0,00</strong></article>
+<article><span>FATURAMENTO</span><strong>R$ 0,00</strong></article>
+<article><span>LUCRO</span><strong>R$ 0,00</strong></article>
+<article><span>DESPESAS</span><strong>R$ 0,00</strong></article>
+</section>
+<section class="dashboard-grid">
+<article class="panel"><h2>Gráfico de vendas</h2><div class="fake-chart">📈<br><span>Seg &nbsp; Ter &nbsp; Qua &nbsp; Qui &nbsp; Sex &nbsp; Sáb &nbsp; Dom</span></div></article>
+<article class="panel"><h2>Produtos mais vendidos</h2><p>Nenhum produto <strong>0</strong></p><p></p><p></p><h2>Estoque baixo</h2><p>Nenhum produto cadastrado <b class="ok">OK</b></p><p></p><p></p></article>
+</section>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/dashboard.js"></script>
+<script src="../js/js/theme.js"></script>
+<button id="theme-toggle" class="theme-button">
+    ☀️ Modo Claro
+</button>
+</body></html>

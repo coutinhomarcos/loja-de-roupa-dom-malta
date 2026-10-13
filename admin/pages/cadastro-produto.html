@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Cadastrar Produto - Loja de Roupas</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+
+    <link rel="stylesheet" href="../css/cadastro-produto.css">
+
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+
+<body>
+
+    <div class="cadastro-layout">
+
+        <!-- BARRA LATERAL -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-icon">
+                    ♧
+                </div>
+
+                <div>
+
+                    <h2>
+                        LOJA DE <span>ROUPAS</span>
+                    </h2>
+
+                    <p>
+                        SISTEMA DE GESTÃO
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="produtos.html" class="active">
+                    <span>▦</span>
+                    Produtos
+                </a>
+
+                <a href="estoque.html">
+                    <span>▣</span>
+                    Estoque
+                </a>
+
+                <a href="clientes.html">
+                    <span>♙</span>
+                    Clientes
+                </a>
+
+                <a href="vendas.html">
+                    <span>🛒</span>
+                    Vendas
+                </a>
+
+                <a href="financeiro.html">
+                    <span>⌁</span>
+                    Financeiro
+                </a>
+
+                <a href="relatorios.html">
+                    <span>▥</span>
+                    Relatórios
+                </a>
+
+                <a href="configuracoes.html">
+                    <span>⚙</span>
+                    Configurações
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTEÚDO -->
+
+        <main class="cadastro-content">
+<p id="mensagemBanco" aria-live="polite"></p>
+
+            <header class="cadastro-header">
+
+                <div>
+
+                    <h1>
+                        Cadastrar Produto
+                    </h1>
+
+                    <p>
+                        Cadastre um novo produto no estoque.
+                    </p>
+
+                </div>
+
+                <button
+                    class="secondary-button"
+                    onclick="window.location.href='produtos.html'"
+                >
+                    ← Voltar
+                </button>
+
+            </header>
+
+
+            <!-- FORMULÁRIO -->
+
+            <section class="cadastro-panel">
+
+                <form id="formProduto">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="codigo">
+                                Código do Produto
+                            </label>
+
+                            <input
+                                type="text"
+                                id="codigo"
+                                placeholder="Ex: CB006"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nome">
+                                Nome do Produto
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nome"
+                                placeholder="Ex: Camiseta Básica"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="categoria">
+                                Categoria
+                            </label>
+
+                            <select id="categoria" required>
+
+                                <option value="">
+                                    Selecione uma categoria
+                                </option>
+
+                                <option value="Camisas">Camisas</option><option value="Bermudas">Bermudas</option><option value="Camisetas">
+                                    Camisetas
+                                </option>
+
+                                <option value="Calças">
+                                    Calças
+                                </option>
+
+                                <option value="Vestidos">
+                                    Vestidos
+                                </option>
+
+                                <option value="Jaquetas">
+                                    Jaquetas
+                                </option>
+
+                                <option value="Blusas">
+                                    Blusas
+                                </option>
+
+                                <option value="Tênis">
+                                    Tênis
+                                </option>
+
+                                <option value="Outro">
+                                    Outro
+                                </option>
+
+                            </select>
+
+                            <input
+                                type="text"
+                                id="categoriaOutro"
+                                placeholder="Digite a categoria"
+                                style="display:none; margin-top:10px;"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="tamanhos">Tamanhos (separados por vírgula)</label><input id="tamanhos" placeholder="38, 40, 42 ou P, M, G" required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="cores">
+                                Cor
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cores"
+                                placeholder="Preto, Azul, Bege"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="custo">
+                                Valor de Custo
+                            </label>
+
+                            <input
+                                type="number"
+                                id="custo"
+                                placeholder="0,00"
+                                step="0.01"
+                                min="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="preco">
+                                Valor de Venda
+                            </label>
+
+                            <input
+                                type="number"
+                                id="preco"
+                                placeholder="0,00"
+                                step="0.01"
+                                min="0"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="marca">Marca (opcional)</label><input id="marca" maxlength="100"></div>
+
+
+                        <div class="form-group">
+
+                            <label for="imagem">
+                                Imagem do Produto (até 300 KB)
+                            </label>
+
+                            <input
+                                type="file"
+                                id="imagem"
+                                accept="image/jpeg,image/png,image/webp"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group"><label for="descricao">Descrição (opcional)</label><textarea id="descricao" maxlength="2000"></textarea></div>
+<section class="grade-painel" aria-label="Variações do produto">
+<h2>Tamanhos, cores e quantidades</h2>
+<p>Informe tamanhos e cores acima. Gere a grade e preencha a quantidade de cada combinação.</p>
+<div class="grade-controles"><button type="button" id="gerarGrade" class="secondary-button">Gerar grade</button>
+<label for="quantidadePadrao">Quantidade para todas</label><input type="number" id="quantidadePadrao" min="0" max="1000000" step="1" value="0">
+<button type="button" id="aplicarQuantidade" class="secondary-button">Aplicar a todas</button></div>
+<p id="resumoGrade" aria-live="polite">Nenhuma grade gerada.</p>
+<div class="grade-tabela"><table><thead><tr><th>Tamanho</th><th>Cor</th><th>Quantidade</th></tr></thead><tbody id="gradeVariacoes"></tbody></table></div>
+</section>
+<div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            onclick="window.location.href='produtos.html'"
+                        >
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+                            Cadastrar Produto
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/grade.js"></script>
+<script src="../js/cadastro-produto.js"></script>
+
+    <script src="../js/js/theme.js"></script>
+
+</body>
+
+</html>

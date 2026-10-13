@@ -1,0 +1,137 @@
+/* =========================================================
+   RESET E CONFIGURAÇÕES INICIAIS
+   ========================================================= */
+
+/* Remove margens e espaçamentos padrão dos elementos */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   VARIÁVEIS DE CORES DO PROJETO
+   ========================================================= */
+
+:root {
+
+    /* Tema Escuro */
+
+    --bg: #070a1c;
+
+    --panel: #11162d;
+    --panel2: #171c35;
+
+    --border: #343b68;
+
+    --purple: #914cff;
+    --purple-light: #b177ff;
+    --blue: #1594ff;
+
+    --text: #f2f4ff;
+    --muted: #aab4cf;
+
+    --sidebar: #0c1025;
+    --input-bg: #171c35;
+}
+
+
+/* =========================================================
+   TEMA CLARO
+   ========================================================= */
+
+body.light-theme {
+
+    --bg: #f4f6f9;
+
+    --panel: #ffffff;
+    --panel2: #f1f5f9;
+
+    --border: #d1d5db;
+
+    --purple: #7c3aed;
+    --purple-light: #6d28d9;
+    --blue: #2563eb;
+
+    --text: #1e293b;
+    --muted: #64748b;
+
+    --sidebar: #ffffff;
+    --input-bg: #ffffff;
+}
+
+
+/* =========================================================
+   CONFIGURAÇÕES GERAIS DA PÁGINA
+   ========================================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+
+/* =========================================================
+   BOTÕES E CAMPOS DE FORMULÁRIO
+   ========================================================= */
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* Cursor de clique nos botões */
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+    color: var(--purple-light);
+    text-decoration: none;
+}
+
+/* =========================================================
+   BOTÃO DE TEMA
+   ========================================================= */
+
+.theme-button {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.theme-button:hover {
+    background: var(--panel2);
+}
+
+/* Ajustes do tema claro para elementos que ainda usam cores fixas */
+body.light-theme {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+body.light-theme .theme-button {
+    background: var(--panel);
+    color: var(--text);
+}
+
+.theme-button {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9999;
+}

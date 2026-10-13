@@ -1,0 +1,269 @@
+/* =========================================================
+   ESTRUTURA GERAL E EFEITOS DE FUNDO
+   ========================================================= */
+
+.login-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: radial-gradient(circle at 10% 10%, rgba(115, 52, 255, .18), transparent 28%), #070a1c;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(35px);
+}
+
+.glow-left {
+  width: 260px;
+  height: 260px;
+  left: -100px;
+  top: -80px;
+  background: rgba(121, 50, 255, .2);
+}
+
+.glow-right {
+  width: 350px;
+  height: 350px;
+  right: -160px;
+  bottom: -120px;
+  background: rgba(52, 35, 200, .2);
+}
+
+/* =========================================================
+   CONTAINER PRINCIPAL (CARD)
+   ========================================================= */
+
+.login-card {
+  z-index: 1;
+  width: min(100%, 720px);
+  padding: 48px 58px 36px;
+  border-radius: 28px;
+  border: 2px solid #6d43d7;
+  background: rgba(16, 20, 43, .96);
+  box-shadow: 0 0 45px rgba(126, 58, 255, .2);
+}
+
+/* =========================================================
+   CABEÇALHO E MARCA (BRAND)
+   ========================================================= */
+
+.brand {
+  text-align: center;
+}
+
+.brand-icon {
+  font-size: 58px;
+  color: var(--purple-light);
+}
+
+.brand h1 {
+  font-size: 42px;
+  margin-top: 8px;
+}
+
+.brand h1 span {
+  color: var(--purple-light);
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.brand h2 {
+  margin-top: 28px;
+  color: var(--purple-light);
+  font-size: 25px;
+}
+
+.brand > p:last-child {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* =========================================================
+   SEPARADORES E DIVISÓRIAS
+   ========================================================= */
+
+.separator,
+.bio-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.separator {
+  margin: 34px 0;
+}
+
+.separator span,
+.bio-divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.separator i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--purple-light);
+}
+
+/* =========================================================
+   FORMULÁRIO, CAMPOS E INPUTS
+   ========================================================= */
+
+form {
+  display: grid;
+  gap: 11px;
+}
+
+form > label {
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.input-box {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.input-box:focus-within {
+  border-color: var(--purple);
+}
+
+.input-box > span {
+  font-size: 22px;
+  color: var(--purple-light);
+}
+
+.input-box input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.input-box button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+}
+
+/* =========================================================
+   OPÇÕES (LEMBRAR-SE E LINKS)
+   ========================================================= */
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 10px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remember input {
+  accent-color: var(--purple);
+  width: 20px;
+  height: 20px;
+}
+
+/* =========================================================
+   BOTÕES DE AÇÃO E AUTENTICAÇÃO
+   ========================================================= */
+
+.primary-button {
+  min-height: 64px;
+  border: 0;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 21px;
+  font-weight: bold;
+  background: linear-gradient(100deg, #8737ef, #5429d8, #118ae5);
+  box-shadow: 0 8px 28px rgba(103, 49, 229, .3);
+}
+
+.primary-button span {
+  float: right;
+  margin-right: 25px;
+  font-size: 28px;
+}
+
+.bio-divider {
+  margin: 32px 0 18px;
+  color: var(--muted);
+}
+
+.bio-button {
+  display: block;
+  margin: auto;
+  width: 72px;
+  height: 72px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--panel2);
+  color: var(--purple-light);
+  font-size: 34px;
+}
+
+/* =========================================================
+   RODAPÉ E INFORMAÇÕES DE SEGURANÇA
+   ========================================================= */
+
+.create-account {
+  text-align: center;
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.create-account a {
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.security-info {
+  z-index: 1;
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--muted);
+}
+
+.security-info > span {
+  font-size: 34px;
+}
+
+.security-info strong,
+.security-info small {
+  display: block;
+}
+
+.security-info small {
+  margin-top: 5px;
+}

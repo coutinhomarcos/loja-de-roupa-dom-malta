@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - Loja de Roupas</title>
+    <!-- Vinculação do CSS Externo -->
+    <link rel="stylesheet" href="../css/clientes.css">
+    <link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Menu Lateral -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>LOJA DE ROUPAS</h2>
+                <span>Sistema de Gestão</span>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="../index.html">🏠 Dashboard</a></li>
+                    <li><a href="produtos.html">👕 Produtos</a></li>
+                    <li><a href="estoque.html">📦 Estoque</a></li>
+                    <li><a href="clientes.html" class="active">👤 Clientes</a></li>
+                    <li><a href="vendas.html">🛒 Vendas</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li>
+                    <li><a href="configuracoes.html">⚙️ Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+<p id="mensagemBanco" aria-live="polite"></p>
+            <header class="topbar">
+                <div class="search-box">
+                    <input type="text" id="search-cliente" placeholder="Buscar cliente...">
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">M</div>
+                    <span><strong>Marcos</strong> (Gerente)</span>
+                </div>
+            </header>
+
+            <section class="content-body">
+                <div class="page-header">
+                    <div>
+                        <h1>Clientes</h1>
+                        <p>Gerencie os clientes cadastrados na loja.</p>
+                    </div>
+                    <button id="btn-novo-cliente" class="btn-add">+ NOVO CLIENTE</button>
+                </div>
+
+                <!-- Métricas -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span>Total de Clientes</span>
+                        <h2 id="total-clientes">0</h2>
+                    </div>
+                    <div class="metric-card">
+                        <span>Novos Clientes</span>
+                        <h2 id="novos-clientes">0</h2>
+                    </div>
+                    <div class="metric-card">
+                        <span>Clientes Ativos</span>
+                        <h2 id="clientes-ativos">0</h2>
+                    </div>
+                    <div class="metric-card">
+                        <span>Compras Realizadas</span>
+                        <h2 id="compras-realizadas">0</h2>
+                    </div>
+                </div>
+
+                <!-- Tabela de Clientes -->
+                <div class="table-container">
+                    <div class="table-header-info">
+                        <h3>Clientes cadastrados</h3>
+                        <span id="clientes-count">0 clientes</span>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th>Compras</th>
+                                <th>Última Compra</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts do Sistema -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/app.js"></script>
+    <script src="../js/clientes.js"></script>
+    <script src="../js/js/theme.js"></script>
+    <button id="theme-toggle" class="theme-button">
+    ☀️ Modo Claro
+</button>
+</body>
+</html>

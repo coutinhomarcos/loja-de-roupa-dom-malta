@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja de Roupas - Login</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/responsivo.css">
+  
+<link rel="stylesheet" href="css/banco.css">
+</head>
+<body>
+  <main class="login-page">
+    <div class="glow glow-left"></div>
+    <div class="glow glow-right"></div>
+
+    <section class="login-card">
+      <div class="brand">
+        <div class="brand-icon">♧</div>
+        <h1>LOJA DE <span>ROUPAS</span></h1>
+        <p class="subtitle">SISTEMA DE GESTÃO</p>
+        <h2>Bem-vindo de volta!</h2>
+        <p>Faça login para acessar sua conta</p>
+      </div>
+
+      <div class="separator"><span></span><i></i><span></span></div>
+
+      <p id="mensagemBanco" aria-live="polite"></p>
+<form id="loginForm">
+        <label for="email">E-mail</label>
+        <div class="input-box">
+          <span>✉</span>
+          <input id="email" type="email" required autocomplete="username" placeholder="Digite seu e-mail">
+        </div>
+
+        <label for="senha">Senha</label>
+        <div class="input-box">
+          <span>🔒</span>
+          <input id="senha" type="password" required autocomplete="current-password" placeholder="Digite sua senha">
+          <button type="button" id="togglePassword">◉</button>
+        </div>
+
+        <div class="options" hidden>
+          <label class="remember"><input type="checkbox" checked> Lembrar-me</label>
+          <a href="#">Esqueci minha senha</a>
+        </div>
+
+        <button class="primary-button" type="submit">ENTRAR <span>→</span></button>
+      </form>
+
+      <p class="create-account">Acesso exclusivo à administração da DOM MALTA.</p>
+    </section>
+
+    <section class="security-info">
+      <span>🛡</span>
+      <div><strong>Seus dados estão protegidos</strong><small>Segurança e privacidade garantidas</small></div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="js/banco.js"></script>
+<script src="js/login.js"></script>
+  <script src="js/js/theme.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,551 @@
+/* ==================================================
+   LAYOUT PRINCIPAL
+================================================== */
+
+.produtos-layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background: var(--bg);
+}
+
+
+/* ==================================================
+   BARRA LATERAL
+================================================== */
+
+.sidebar {
+    padding: 28px 18px;
+    border-right: 1px solid var(--border);
+    background: var(--sidebar);
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.brand-icon {
+    font-size: 34px;
+    color: var(--purple-light);
+}
+
+.sidebar-brand h2 {
+    font-size: 17px;
+}
+
+.sidebar-brand h2 span {
+    color: var(--purple-light);
+}
+
+.sidebar-brand p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+
+/* ==================================================
+   MENU LATERAL
+================================================== */
+
+.sidebar-menu {
+    display: grid;
+    gap: 8px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.sidebar-menu a span {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    color: #ffffff;
+    background: rgba(145, 76, 255, 0.20);
+}
+
+
+/* ==================================================
+   CONTEÚDO
+================================================== */
+
+.produtos-content {
+    padding: 30px;
+    overflow-x: hidden;
+}
+
+
+/* ==================================================
+   CABEÇALHO
+================================================== */
+
+.produtos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.produtos-header h1 {
+    font-size: 30px;
+}
+
+.produtos-header p {
+    margin-top: 6px;
+    color: var(--muted);
+}
+
+
+/* ==================================================
+   BOTÃO PRINCIPAL
+================================================== */
+
+.primary-button {
+    padding: 13px 22px;
+
+    border: none;
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        var(--blue)
+    );
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   PESQUISA
+================================================== */
+
+.search-area {
+    margin-bottom: 20px;
+}
+
+.search-box {
+    width: 360px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--panel2);
+}
+
+.search-box span {
+    color: var(--muted);
+    font-size: 20px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+}
+
+.search-box input::placeholder {
+    color: var(--muted);
+}
+
+
+/* ==================================================
+   CARDS DE RESUMO
+================================================== */
+
+.produto-resumo {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.resumo-card {
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    background: var(--panel);
+}
+
+.resumo-card span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.resumo-card strong {
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: 22px;
+}
+
+
+/* ==================================================
+   PAINEL
+================================================== */
+
+.panel {
+    padding: 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    background: var(--panel);
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    font-size: 19px;
+}
+
+.table-header p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.product-count {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   TABELA
+================================================== */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 900px;
+
+    border-collapse: collapse;
+}
+
+thead {
+    background: var(--panel2);
+}
+
+th {
+    padding: 14px;
+
+    color: var(--muted);
+
+    text-align: left;
+
+    font-size: 12px;
+    font-weight: normal;
+}
+
+td {
+    padding: 14px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: rgba(145, 76, 255, 0.05);
+}
+
+
+/* ==================================================
+   IMAGEM DO PRODUTO
+================================================== */
+
+.product-image {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #eeeeee;
+
+    font-size: 25px;
+}
+
+
+/* ==================================================
+   ESTOQUE
+================================================== */
+
+.stock {
+    display: inline-block;
+
+    padding: 6px 9px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.stock-ok {
+    color: #55d88b;
+    background: rgba(85, 216, 139, 0.15);
+}
+
+.stock-warning {
+    color: #f2bb52;
+    background: rgba(242, 187, 82, 0.15);
+}
+
+.stock-danger {
+    color: #ff6b78;
+    background: rgba(255, 107, 120, 0.15);
+}
+
+
+/* ==================================================
+   AÇÕES
+================================================== */
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-button {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    cursor: pointer;
+}
+
+.action-button:hover {
+    color: #ffffff;
+    background: rgba(145, 76, 255, 0.20);
+}
+
+
+/* ==================================================
+   PAGINAÇÃO
+================================================== */
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.pagination-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.pagination-buttons button {
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    cursor: pointer;
+}
+
+.pagination-buttons button.active,
+.pagination-buttons button:hover {
+    color: #ffffff;
+    background: var(--purple);
+}
+
+
+/* ==================================================
+   MENU MOBILE
+================================================== */
+
+.mobile-menu {
+    display: none;
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+@media (max-width: 900px) {
+
+    .produtos-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .produtos-content {
+        padding: 20px;
+        padding-bottom: 90px;
+    }
+
+    .produto-resumo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mobile-menu {
+        position: fixed;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: 70px;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        border-top: 1px solid var(--border);
+
+        background: var(--sidebar);
+
+        z-index: 100;
+    }
+
+    .mobile-menu a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+
+        color: var(--muted);
+
+        text-decoration: none;
+
+        font-size: 20px;
+    }
+
+    .mobile-menu small {
+        font-size: 10px;
+    }
+
+    .mobile-menu a.active {
+        color: var(--purple-light);
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .produtos-content {
+        padding: 16px;
+        padding-bottom: 90px;
+    }
+
+    .produtos-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .produtos-header h1 {
+        font-size: 24px;
+    }
+
+    .primary-button {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .produto-resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .table-header {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .pagination {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}

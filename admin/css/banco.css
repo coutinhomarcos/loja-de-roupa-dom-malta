@@ -1,0 +1,10 @@
+.aguardando-login body > * { visibility: hidden; }
+#mensagemBanco { padding: 12px; color: #b45309; font-weight: 600; }
+#mensagemBanco:empty { display: none; }
+.banco-sair { position: fixed; right: 20px; top: 12px; z-index: 100; padding: 8px 18px; border-radius: 8px; cursor: pointer; background: #fff; color: #222; border: 1px solid #888; }
+.grade-painel { margin-top: 24px; }
+.grade-controles { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+.grade-tabela { overflow-x: auto; }
+.grade-tabela table { width: 100%; border-collapse: collapse; }
+.grade-tabela th,.grade-tabela td { padding: 12px; border-bottom: 1px solid #8885; text-align: left; }
+.grade-tabela input { width: 110px; padding: 8px; }

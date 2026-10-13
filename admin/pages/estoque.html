@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Estoque - Loja de Roupas</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/global.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/estoque.css"
+    >
+
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+
+<body>
+
+    <main class="dashboard-layout">
+<p id="mensagemBanco" aria-live="polite"></p>
+
+        <!-- =========================
+             MENU LATERAL
+        ========================== -->
+
+        <aside class="sidebar">
+
+            <h2>
+                LOJA DE
+                <span>ROUPAS</span>
+            </h2>
+
+            <p>SISTEMA DE GESTÃO</p>
+
+            <nav>
+
+                <a href="dashboard.html">
+                    🏠 Dashboard
+                </a>
+
+                <a href="produtos.html">
+                    👕 Produtos
+                </a>
+
+                <a
+                    href="estoque.html"
+                    class="active"
+                >
+                    📦 Estoque
+                </a>
+
+                <a href="clientes.html">
+                    👤 Clientes
+                </a>
+
+                <a href="vendas.html">
+                    🛒 Vendas
+                </a>
+
+                <a href="financeiro.html">
+                    💰 Financeiro
+                </a>
+
+                <a href="relatorios.html">
+                    📊 Relatórios
+                </a>
+
+                <a href="configuracoes.html">
+                    ⚙ Configurações
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- =========================
+             CONTEÚDO PRINCIPAL
+        ========================== -->
+
+        <section class="dashboard-content">
+
+            <!-- CABEÇALHO -->
+
+            <header class="topbar">
+
+                <input
+                    type="text"
+                    id="searchStock"
+                    placeholder="🔍  Buscar produto..."
+                >
+
+                <div>
+
+                    🔔
+
+                    <span class="avatar">
+                        M
+                    </span>
+
+                    <b>Marcos</b>
+
+                    <small>
+                        Gerente
+                    </small>
+
+                </div>
+
+            </header>
+
+
+            <!-- TÍTULO -->
+
+            <h1>
+                Controle de Estoque
+            </h1>
+
+            <p>
+                Acompanhe a quantidade de produtos disponíveis na loja.
+            </p>
+
+
+            <!-- =========================
+                 CARDS DE RESUMO
+            ========================== -->
+
+            <section class="summary-cards">
+
+                <article>
+
+                    <span>
+                        TOTAL DE PRODUTOS
+                    </span>
+
+                    <strong id="totalProdutosEstoque">
+                        0
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        ESTOQUE DISPONÍVEL
+                    </span>
+
+                    <strong id="estoqueDisponivel">
+                        0
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        ESTOQUE BAIXO
+                    </span>
+
+                    <strong id="estoqueBaixo">
+                        0
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        PRODUTOS ESGOTADOS
+                    </span>
+
+                    <strong id="produtosEsgotados">
+                        0
+                    </strong>
+
+                </article>
+
+            </section>
+
+
+            <!-- =========================
+                 AÇÕES DO ESTOQUE
+            ========================== -->
+
+            <div class="head">
+
+                <h2>
+                    Produtos em Estoque
+                </h2>
+
+                <button
+                    class="primary-button"
+                    onclick="registrarEntrada()"
+                >
+                    + ENTRADA DE PRODUTO
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 TABELA DE ESTOQUE
+            ========================== -->
+
+            <section class="panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Código
+                            </th>
+
+                            <th>
+                                Produto
+                            </th>
+
+                            <th>
+                                Categoria
+                            </th>
+
+                            <th>
+                                Tamanho
+                            </th>
+
+                            <th>
+                                Cor
+                            </th>
+
+                            <th>
+                                Quantidade
+                            </th>
+
+                            <th>
+                                Mínimo
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Ações
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="stockTable"></tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =========================
+                 ALERTAS DE ESTOQUE
+            ========================== -->
+
+            <section class="dashboard-grid">
+
+                <section class="panel">
+                    <h2>⚠ Produtos com Estoque Baixo</h2>
+                    <p>Nenhum produto cadastrado.</p>
+                </section>
+
+                <section class="panel">
+                    <h2>📦 Últimas Movimentações</h2>
+                    <p>Nenhuma movimentação registrada.</p>
+                </section>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT DA TELA -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/inventario.js"></script>
+<script src="../js/estoque.js"></script>
+    <script src="../js/js/theme.js"></script>
+    <button id="theme-toggle" class="theme-button">
+    ☀️ Modo Claro
+</button>
+
+</body>
+
+</html>

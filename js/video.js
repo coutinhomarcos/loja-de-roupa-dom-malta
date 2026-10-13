@@ -1,32 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
     const video = document.getElementById("videoCabecalho");
-    const botao = document.getElementById("silenciarVideo");
-    if (!video || !botao) return;
-    let silenciadoPeloCliente = false, bloqueado = false;
+    const pausar = document.getElementById("pausarVideo");
+    const silenciar = document.getElementById("silenciarVideo");
+    if (!video || !pausar || !silenciar) return;
+    let bloqueado = false, pausaManual = false, somManual = false;
     function atualizar() {
-        botao.textContent = silenciadoPeloCliente ? "Reativar som" : "Silenciar m\u00fasica";
-        botao.setAttribute("aria-pressed", String(silenciadoPeloCliente));
+        pausar.textContent = video.paused || bloqueado ? "Iniciar m\u00fasica" : "Pausar m\u00fasica";
+        pausar.setAttribute("aria-pressed", String(!video.paused && !bloqueado));
+        silenciar.textContent = video.muted ? "Ativar som" : "Silenciar";
+        silenciar.setAttribute("aria-pressed", String(video.muted));
     }
-    async function reproduzir() {
-        video.muted = silenciadoPeloCliente;
+    async function iniciar() {
+        if (!somManual) video.muted = false;
         try { await video.play(); bloqueado = false; }
         catch {
-            bloqueado = !silenciadoPeloCliente;
+            bloqueado = true;
             video.muted = true;
-            try { await video.play(); } catch { /* Aguarda interacao do visitante. */ }
+            try { await video.play(); } catch { /* Tentar novamente pelo botao. */ }
         }
         atualizar();
     }
-    botao.addEventListener("click", () => {
-        silenciadoPeloCliente = !silenciadoPeloCliente;
-        video.muted = silenciadoPeloCliente;
-        reproduzir();
+    pausar.addEventListener("click", () => {
+        if (video.paused || bloqueado) { pausaManual = false; iniciar(); }
+        else { pausaManual = true; video.pause(); atualizar(); }
+    });
+    silenciar.addEventListener("click", () => {
+        video.muted = !video.muted;
+        somManual = video.muted;
+        if (!video.muted) { pausaManual = false; iniciar(); }
+        atualizar();
     });
     document.addEventListener("click", e => {
-        if (e.target.closest(".controle-musica")) return;
-        if (bloqueado && !silenciadoPeloCliente) reproduzir();
+        if (bloqueado && !pausaManual && !somManual && !e.target.closest(".controle-musica")) iniciar();
     });
+    ["play", "pause", "volumechange"].forEach(e => video.addEventListener(e, atualizar));
     video.volume = 1;
-    atualizar();
-    reproduzir();
+    iniciar();
 });

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="aguardando-login">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - Loja de Roupas</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <style>
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333333;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Menu Lateral (Sidebar) */
+        .sidebar {
+            width: 240px;
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar .logo h2 {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .menu ul li a {
+            display: block;
+            padding: 12px 20px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .menu ul li a:hover,
+        .menu ul li a.active {
+            background-color: #334155;
+            color: #ffffff;
+            border-left: 4px solid #38bdf8;
+        }
+
+        /* Área Principal */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            background-color: #ffffff;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .topbar h1 {
+            font-size: 1.4rem;
+            color: #0f172a;
+        }
+
+        .user-info {
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .content-body {
+            padding: 25px 30px;
+        }
+
+        /* Cards em Grid */
+        .relatorios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        /* Formulários */
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background-color: #ffffff;
+            color: #1e293b;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background-color: #0d9488;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0f766e;
+        }
+    </style>
+<link rel="stylesheet" href="../css/banco.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Loja de Roupas</h2>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="../index.html">Dashboard</a></li>
+                    <li><a href="produtos.html">Produtos</a></li>
+                    <li><a href="estoque.html">Estoque</a></li>
+                    <li><a href="clientes.html">Clientes</a></li>
+                    <li><a href="vendas.html">Vendas</a></li>
+                    <li><a href="financeiro.html">Financeiro</a></li>
+                    <li><a href="relatorios.html" class="active">Relatórios</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+<p id="mensagemBanco" aria-live="polite"></p>
+            <header class="topbar">
+                <h1>Central de Relatórios</h1>
+                <div class="user-info">
+                    <span>Operador: Admin</span>
+                </div>
+            </header>
+
+            <section class="content-body">
+                <p style="color: #64748b;">Gere relatórios detalhados para análise de desempenho da sua loja.</p>
+
+                <div class="relatorios-grid">
+                    <!-- Relatório de Vendas -->
+                    <div class="card">
+                        <h2>Relatório de Vendas</h2>
+                        <p>Filtre o histórico de vendas por período e exporte os resultados.</p>
+                        <form id="form-relatorio-vendas">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vendas-inicio">Data Início</label>
+                                    <input type="date" id="vendas-inicio" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vendas-fim">Data Fim</label>
+                                    <input type="date" id="vendas-fim" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="vendas-metodo">Forma de Pagamento</label>
+                                <select id="vendas-metodo">
+                                    <option value="todos">Todas</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                    <option value="cartao">Cartão de Crédito/Débito</option>
+                                    <option value="pix">PIX</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+                        </form>
+                    </div>
+
+                    <!-- Relatório de Estoque -->
+                    <div class="card">
+                        <h2>Posição de Estoque</h2>
+                        <p>Acompanhe os produtos disponíveis, em alerta de baixo estoque ou esgotados.</p>
+                        <form id="form-relatorio-estoque">
+                            <div class="form-group">
+                                <label for="estoque-status">Filtrar por Status</label>
+                                <select id="estoque-status">
+                                    <option value="todos">Todos os Produtos</option>
+                                    <option value="baixo">Estoque Baixo</option>
+                                    <option value="esgotado">Esgotados</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="estoque-categoria">Categoria</label>
+                                <select id="estoque-categoria">
+                                    <option value="todas">Todas as Categorias</option>
+                                    <option value="camisetas">Camisetas</option>
+                                    <option value="calcas">Calças</option>
+                                    <option value="vestidos">Vestidos</option>
+                                    <option value="acessorios">Acessórios</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-secondary">Gerar Relatório</button>
+                        </form>
+                    </div>
+
+                    <!-- Relatório Financeiro -->
+                    <div class="card">
+                        <h2>Balanço Financeiro</h2>
+                        <p>Consolidado de entradas, saídas e lucro do período selecionado.</p>
+                        <form id="form-relatorio-financeiro">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fin-inicio">Mês/Ano Início</label>
+                                    <input type="month" id="fin-inicio" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fin-fim">Mês/Ano Fim</label>
+                                    <input type="month" id="fin-fim" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fin-tipo">Tipo de Lançamento</label>
+                                <select id="fin-tipo">
+                                    <option value="todos">Receitas e Despesas</option>
+                                    <option value="receita">Apenas Receitas</option>
+                                    <option value="despesa">Apenas Despesas</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script de Funcionalidades -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../js/banco.js"></script>
+<script src="../js/app.js"></script>
+    <script src="../js/relatorios.js"></script>
+    <script src="../js/js/theme.js"></script>
+    <button id="theme-toggle" class="theme-button">
+    ☀️ Modo Claro
+</button>
+
+</body>
+</html>
