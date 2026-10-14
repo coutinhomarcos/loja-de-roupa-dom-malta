@@ -118,6 +118,29 @@
     </section>
 
 
+    <!-- Produtos consultados no mesmo estoque da Coleção -->
+    <section class="secao secao-preta" aria-labelledby="tituloDestaques">
+        <div class="container">
+            <div class="titulo-secao">
+                <span>DOM MALTA</span>
+                <h2 id="tituloDestaques">Peças em destaque</h2>
+                <p>Conheça algumas peças disponíveis e escolha seu estilo.</p>
+            </div>
+            <nav class="atalhos-inicio" aria-label="Categorias de produtos">
+                <a class="botao botao-dourado" href="pages/colecao.html#disponiveis_camisas">Camisas</a>
+                <a class="botao botao-dourado" href="pages/colecao.html#disponiveis_calcas">Calças</a>
+                <a class="botao botao-dourado" href="pages/colecao.html#disponiveis_bermudas">Bermudas</a>
+            </nav>
+            <p id="avisoCatalogo" role="status">Consultando os produtos disponíveis…</p>
+            <div id="catalogoBanco" data-inicio="true">
+                <div class="galeria-destaques"></div>
+            </div>
+            <div class="ver-colecao">
+                <a href="pages/colecao.html" class="botao botao-dourado">Ver toda a coleção</a>
+            </div>
+        </div>
+    </section>
+
     <!-- DESTAQUES -->
     <section class="secao secao-escura">
 
@@ -225,73 +248,6 @@
 
                 </div>
 
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         ALGUMAS PE AS
-    ========================== -->
-
-    <section class="secao secao-preta">
-
-        <div class="container">
-
-            <div class="titulo-secao">
-                <span>DOM MALTA</span>
-                <h2>Algumas de nossas pe&#231;as</h2>
-                <p>Veja alguns modelos da cole&#231;&#227;o e acesse a galeria completa.</p>
-            </div>
-
-            <div class="galeria-destaques">
-
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="images/produtos/camisas/camisas-01.jpg" alt="Camisa DOM MALTA" loading="lazy">
-                    </div>
-                    <div class="produto-info">
-                        <h3>Camisas</h3>
-                        <p>Confira os modelos dispon&#237;veis.</p>
-                    </div>
-                </article>
-
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="images/produtos/camisas/camisas-02.jpg" alt="Camisa DOM MALTA" loading="lazy">
-                    </div>
-                    <div class="produto-info">
-                        <h3>Camisas</h3>
-                        <p>Estilo e personalidade.</p>
-                    </div>
-                </article>
-
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="images/produtos/calcas/calcas-01.jpg" alt="Cal&#231;a DOM MALTA" loading="lazy">
-                    </div>
-                    <div class="produto-info">
-                        <h3>Cal&#231;as</h3>
-                        <p>Conforto para diferentes ocasi&#245;es.</p>
-                    </div>
-                </article>
-
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="images/produtos/bermudas/bermudas-01.jpg" alt="Bermuda DOM MALTA" loading="lazy">
-                    </div>
-                    <div class="produto-info">
-                        <h3>Bermudas</h3>
-                        <p>Op&#231;&#245;es para um visual casual.</p>
-                    </div>
-                </article>
-
-            </div>
-
-            <div style="text-align: center; margin-top: 35px;">
-                <a href="pages/colecao.html" class="botao botao-dourado">Ver todas as fotos da cole&#231;&#227;o</a>
             </div>
 
         </div>
@@ -425,5 +381,8 @@
     </div>
 </div>
 <script src="js/video.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/catalogo.js"></script>
 </body>
 </html>

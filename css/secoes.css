@@ -1053,3 +1053,11 @@ body { padding-bottom:105px; }
 #catalogoBanco select { width: 100%; margin: 10px 0; padding: 10px; background: #fff; color: #222; border-radius: 6px; }
 #catalogoBanco [hidden] { display: none; }
 #catalogoBanco .produto-imagem img { aspect-ratio: 3 / 4; object-fit: contain; }
+
+/* Destaques do estoque na página inicial */
+.atalhos-inicio { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:24px; }
+.ver-colecao { text-align:center; margin-top:35px; }
+#avisoCatalogo { margin-bottom:20px; }
+#catalogoBanco[data-inicio] .produto-imagem img { aspect-ratio:3 / 4; object-fit:contain; }
+#catalogoBanco[data-inicio] .produto-imagem { width:100%; }
+#catalogoBanco[data-inicio] select { max-width:100%; width:100%; }
