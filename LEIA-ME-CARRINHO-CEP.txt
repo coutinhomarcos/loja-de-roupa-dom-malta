@@ -1,0 +1,21 @@
+DOM MALTA — Carrinho, pedidos e consulta de CEP
+
+INSTALAÇÃO (com orientação passo a passo):
+1. Faça uma cópia de segurança da pasta atual.
+2. Copie o conteúdo desta pasta para a pasta ligada ao GitHub, preservando .git.
+3. No Supabase SQL Editor, abra uma nova consulta e execute somente supabase/03_pedidos_site.sql. Não repita 02_integracao.sql.
+4. Abra o index.html no Live Server e teste o carrinho com uma peça disponível.
+5. Escolha entrega, consulte o CEP e confira rua, bairro, cidade e UF. Preencha número e complemento. A consulta também acontece ao sair do campo CEP. Endereço editável manualmente em caso de falha ou CEP genérico.
+6. Envie um pedido de teste. No /admin/, abra Pedidos do site. Deve aparecer o pedido, sem mudar estoque, vendas ou financeiro.
+7. Envie as alterações ao GitHub depois dos testes e aguarde Ready no Vercel.
+
+FRETE E PAGAMENTO
+- CEP de origem provisório: 32044-420, configurado em js/cep.js para uso futuro.
+- Consulta de endereço via ViaCEP (https://viacep.com.br/), sem valor ou prazo dos Correios.
+- Frete a combinar: subtotal só das peças, sem tratar frete desconhecido como grátis.
+- Ainda sem Pix ou cartão. O pedido é uma solicitação pendente de contato. Sem cobrança, reserva ou baixa de estoque.
+- Somente IDs e quantidades do carrinho ficam no navegador; dados pessoais do formulário não são persistidos ali.
+- O servidor valida preços, saldo e quantidades e evita duplicar o mesmo envio. Só administradores podem consultar os dados dos pedidos.
+- Painel exibe até 100 pedidos recentes, sem ações de cancelamento ou conclusão nesta etapa.
+- Antes de receber pedidos em escala, implementar proteção contra envios automatizados no backend junto ao pagamento.
+- Próxima etapa: frete com peso/dimensões e provedor habilitado, pagamento, reserva com expiração e confirmação de estoque/financeiro por webhook.

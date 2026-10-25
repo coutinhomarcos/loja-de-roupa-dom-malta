@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Carrinho | DOM MALTA</title>
+<link rel="stylesheet" href="../css/global.css"><link rel="stylesheet" href="../css/header.css"><link rel="stylesheet" href="../css/secoes.css"><link rel="stylesheet" href="../css/responsivo.css"><link rel="stylesheet" href="../css/carrinho.css">
+</head><body>
+<header class="cabecalho"><div class="container cabecalho-conteudo"><a href="../index.html" class="logo-menu"><strong>DOM MALTA</strong><span>Elegância que impõe respeito</span></a><nav class="menu"><a href="../index.html">Início</a><a href="colecao.html">Coleção</a><a href="contato.html">Contato</a></nav></div></header>
+<main class="compra-pagina"><div class="container"><h1>Seu carrinho</h1><p>Revise suas peças e envie o pedido para a loja. O pagamento online ainda não está disponível.</p><p id="mensagemCompra" role="status" aria-live="polite">Consultando preços e estoque…</p>
+<div class="compra-layout"><section class="compra-bloco" aria-labelledby="tituloItens"><h2 id="tituloItens">Suas peças</h2><div id="itensCarrinho"></div><p class="compra-total" id="totalCarrinho"></p><p><strong>Frete a combinar.</strong> O subtotal inclui somente as peças.</p><a class="botao botao-dourado" href="colecao.html">Continuar comprando</a><button id="recarregarCarrinho" class="botao" type="button">Atualizar disponibilidade</button></section>
+<section class="compra-bloco"><h2>Dados para o pedido</h2><form id="formPedido">
+<label>Nome completo<input name="nome" autocomplete="name" minlength="3" maxlength="120" required></label>
+<label>E-mail<input name="email" type="email" autocomplete="email" maxlength="160" required></label>
+<label>Telefone com DDD<input name="telefone" type="tel" autocomplete="tel" maxlength="20" required></label>
+<label>Recebimento<select name="recebimento"><option value="retirada">Retirada na loja</option><option value="entrega">Solicitar entrega — frete a combinar</option></select></label>
+<div id="camposEndereco" hidden>
+<label>CEP<input name="cep" autocomplete="postal-code" inputmode="numeric" maxlength="9" placeholder="00000-000" aria-describedby="mensagemCep"></label>
+<button type="button" id="buscarCep" class="botao botao-dourado">Consultar CEP</button>
+<p id="mensagemCep" role="status" aria-live="polite"></p>
+<label>Rua / logradouro<input name="logradouro" autocomplete="address-line1" maxlength="120"></label>
+<div class="campos-duplos"><label>Número (ou S/N)<input name="numero" maxlength="20"></label><label>Complemento (opcional)<input name="complemento" autocomplete="address-line2" maxlength="80"></label></div>
+<label>Bairro<input name="bairro" autocomplete="address-level3" maxlength="80"></label>
+<div class="campos-duplos"><label>Cidade<input name="cidade" autocomplete="address-level2" maxlength="80"></label><label>UF<select name="uf" autocomplete="address-level1"><option value="">Selecione</option><option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select></label></div>
+<p>Confira o endereço preenchido. A loja combinará com você o valor do frete e o prazo de entrega antes do pagamento.</p>
+</div>
+<label>Observações (opcional)<textarea name="observacoes" maxlength="500"></textarea></label>
+<p>Enviar este pedido não reserva estoque nem confirma uma compra paga. A loja entrará em contato para combinar o atendimento.</p>
+<label class="aceite"><input type="checkbox" required><span>Autorizo o uso dos dados informados para atender este pedido e entrar em contato comigo.</span></label>
+<button class="botao botao-dourado" id="enviarPedido" type="submit" disabled>Enviar pedido para a loja</button>
+</form></section></div></div></main>
+<footer class="rodape"><p>DOM MALTA — Elegância que impõe respeito.</p></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/supabase-config.js"></script><script src="../js/carrinho.js"></script><script src="../js/cep.js"></script><script src="../js/checkout.js"></script>
+</body></html>

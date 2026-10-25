@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded',async()=>{
     if(!aviso||!mostra)return;
     const inicio=mostra.dataset.inicio==='true';
     const base=inicio?'':'../';
-    const contato=inicio?'pages/contato.html':'contato.html';
     const cfg=window.DOMMaltaConfig;
     const normal=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
     try{
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
         // As fotos originais continuam disponíveis em um mostruário separado.
         // As ofertas vendáveis são somente as cadastradas no banco.
         if(!produtos.length){aviso.textContent=inicio?'Ainda não há peças disponíveis em destaque. Confira nossa coleção ou fale com a loja.':'Nenhum produto cadastrado para venda. As fotos abaixo são o mostruário da loja; consulte disponibilidade pelo contato.';return;}
-        aviso.textContent='Escolha tamanho e cor para consultar a disponibilidade. A solicitação será enviada pela página de contato.';
+        aviso.textContent='Escolha tamanho e cor para consultar a disponibilidade. Adicione suas peças ao carrinho para revisar o pedido.';
         if(!inicio){
             mostra.querySelectorAll('[data-categoria]').forEach(secao=>{
                 const categoria=secao.dataset.categoria;
@@ -49,13 +48,14 @@ document.addEventListener('DOMContentLoaded',async()=>{
             const select=document.createElement('select');select.setAttribute('aria-label','Tamanho e cor de '+p.nome);
             vars.forEach(v=>{const disp=v.estoque-v.reservado;const option=new Option(`${v.tamanho} / ${v.cor} — ${disp>0?disp+' disponíveis':'Esgotado'}`,v.id);option.disabled=disp<=0;select.append(option);});
             const disponivel=vars.find(v=>v.estoque-v.reservado>0);if(disponivel)select.value=disponivel.id;
-            const link=document.createElement('a');link.className='botao botao-dourado botao-compra';
+            const link=document.createElement('button');link.type='button';link.className='botao botao-dourado botao-compra';
             function atualizar(){
                 const v=vars.find(v=>v.id===select.value);
-                if(!v||v.estoque-v.reservado<=0){link.textContent='Esgotado';link.removeAttribute('href');select.disabled=true;return;}
-                link.textContent='🛒 Solicitar compra';
-                link.href=contato+'?'+new URLSearchParams({produto:`${p.nome} — ${v.tamanho} / ${v.cor} — ${preco.textContent}`});
+                if(!v||v.estoque-v.reservado<=0){link.textContent='Esgotado';link.disabled=true;select.disabled=true;return;}
+                link.textContent='🛒 Adicionar ao carrinho';link.disabled=false;
+
             }
+            link.addEventListener('click',()=>{try{const v=vars.find(v=>v.id===select.value);Carrinho.adicionar(v.id,v.estoque-v.reservado);aviso.textContent=p.nome+' adicionado ao carrinho. Use Carrinho no menu para revisar.';}catch(erro){aviso.textContent=erro.message;}});
             select.addEventListener('change',atualizar);info.append(select,link);card.append(info);secao.querySelector(inicio?'.galeria-destaques':'.galeria-produtos').append(card);atualizar();
         });
     }catch(erro){console.error(erro);aviso.textContent=inicio?'Não foi possível consultar os destaques agora. Acesse a coleção ou tente novamente.':'Não foi possível consultar o estoque agora. As fotos abaixo são o mostruário; consulte disponibilidade pelo contato.';}
