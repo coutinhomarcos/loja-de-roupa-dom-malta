@@ -135,7 +135,10 @@ async function consultar(c, admin, vendedor, body) {
                     || !Array.isArray(comprador.tags)
                     || !comprador.tags.includes('test_user')
                 ) {
-                    divergencias.push('comprador não confirmado como conta de teste');
+                    divergencias.push(
+                        'comprador do pagamento: ' + compradorId
+                        + '; comprador de teste esperado: 3789173753'
+);
     }
 }
 
