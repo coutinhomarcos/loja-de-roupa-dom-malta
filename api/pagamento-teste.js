@@ -84,6 +84,10 @@ async function criar(c, admin, vendedor, body) {
         p_admin: admin, p_vendedor: vendedor
     });
     if (pedido.preferencia_id && pedido.checkout_url) return { id: pedido.id, checkout_url: checkoutValido(pedido.checkout_url) };
+    await banco(c, 'rpc/reservar_estoque_teste', 'POST', {
+    p_pedido: pedido.id,
+    p_admin: admin
+    });
     const inicio = await banco(c, 'rpc/iniciar_checkout_mp_teste', 'POST', { p_id: pedido.id, p_admin: admin });
     if (!inicio.criar) return { id: inicio.id, checkout_url: checkoutValido(inicio.checkout_url) };
     const retorno = c.origem + '/pages/resultado-teste.html?pedido=' + pedido.id;
@@ -169,7 +173,12 @@ async function consultar(c, admin, vendedor, body) {
             const dados = { status: pagamento.status, pagamento_id: String(pagamento.id), consultado_em: new Date().toISOString() };
             await banco(c, 'pedidos_mp_teste?id=eq.' + pedido.id + '&admin_id=eq.' + admin, 'PATCH', dados);
             Object.assign(pedido, dados);
-        }
+        if (pagamento.status === 'approved') {
+    await banco(c, 'rpc/confirmar_venda_teste', 'POST', {
+        p_pedido: pedido.id,
+        p_admin: admin
+    });
+}}
     }
     return { id: pedido.id, total: pedido.total, status: pedido.status, pagamento_id: pedido.pagamento_id, checkout_url: pedido.checkout_url, teste: true };
 }
