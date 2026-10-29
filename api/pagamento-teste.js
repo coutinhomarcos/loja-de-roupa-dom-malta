@@ -123,12 +123,21 @@ async function consultar(c, admin, vendedor, body) {
             const pagamento = await mp(c, '/v1/payments/' + candidato.id);
             const divergencias = [];
 
-            if (pagamento.live_mode !== false)
-                divergencias.push(
-                    'ambiente do pagamento: live_mode='
-                    + String(pagamento.live_mode)
-                    + ' (tipo ' + typeof pagamento.live_mode + ')'
-                );
+            const compradorId = String(pagamento.payer?.id || '');
+
+            if (!/^\d{1,30}$/.test(compradorId)) {
+                divergencias.push('comprador sem identificação válida');
+            } else {
+                const comprador = await mp(c, '/users/' + compradorId);
+
+                if (
+                    String(comprador.id) !== compradorId
+                    || !Array.isArray(comprador.tags)
+                    || !comprador.tags.includes('test_user')
+                ) {
+                    divergencias.push('comprador não confirmado como conta de teste');
+    }
+}
 
             if (String(pagamento.collector_id) !== vendedor)
                 divergencias.push('vendedor');
