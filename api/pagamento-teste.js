@@ -121,10 +121,36 @@ async function consultar(c, admin, vendedor, body) {
         if (candidato) {
             if (!/^\d{1,30}$/.test(String(candidato.id))) throw new Falha(502, 'Identificador de pagamento inválido.');
             const pagamento = await mp(c, '/v1/payments/' + candidato.id);
-            if (pagamento.live_mode !== false || String(pagamento.collector_id) !== vendedor
-                || pagamento.external_reference !== pedido.id || pagamento.currency_id !== 'BRL'
-                || Math.round(Number(pagamento.transaction_amount) * 100) !== Math.round(Number(pedido.total) * 100)
-                || !ESTADOS.has(pagamento.status)) throw new Falha(409, 'O pagamento não corresponde ao teste. Nenhuma venda foi registrada.');
+            const divergencias = [];
+
+            if (pagamento.live_mode !== false)
+                divergencias.push('ambiente do pagamento');
+
+            if (String(pagamento.collector_id) !== vendedor)
+                divergencias.push('vendedor');
+
+            if (pagamento.external_reference !== pedido.id)
+                divergencias.push('protocolo do pedido');
+
+            if (pagamento.currency_id !== 'BRL')
+                divergencias.push('moeda');
+
+            if (
+                Math.round(Number(pagamento.transaction_amount) * 100)
+                !== Math.round(Number(pedido.total) * 100)
+            )
+                divergencias.push('valor');
+
+            if (!ESTADOS.has(pagamento.status))
+                divergencias.push('status');
+
+            if (divergencias.length) {
+                throw new Falha(
+                    409,
+                    'Divergência: ' + divergencias.join(', ')
+                    + '. Nenhuma venda foi registrada.'
+                );
+            }
             const dados = { status: pagamento.status, pagamento_id: String(pagamento.id), consultado_em: new Date().toISOString() };
             await banco(c, 'pedidos_mp_teste?id=eq.' + pedido.id + '&admin_id=eq.' + admin, 'PATCH', dados);
             Object.assign(pedido, dados);
