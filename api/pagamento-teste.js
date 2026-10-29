@@ -124,23 +124,22 @@ async function consultar(c, admin, vendedor, body) {
             const divergencias = [];
 
             const compradorId = String(pagamento.payer?.id || '');
+            const compradorEsperado = (
+                process.env.MERCADO_PAGO_TEST_BUYER_ID || ''
+            ).trim();
 
-            if (!/^\d{1,30}$/.test(compradorId)) {
-                divergencias.push('comprador sem identificação válida');
-            } else {
-                const comprador = await mp(c, '/users/' + compradorId);
-
-                if (
-                    String(comprador.id) !== compradorId
-                    || !Array.isArray(comprador.tags)
-                    || !comprador.tags.includes('test_user')
-                ) {
-                    divergencias.push(
-                        'comprador do pagamento: ' + compradorId
-                        + '; comprador de teste esperado: 3789173753'
-);
-    }
+            if (!/^\d{1,30}$/.test(compradorEsperado)) {
+                throw new Falha(
+                    503,
+                    'Configure MERCADO_PAGO_TEST_BUYER_ID no ambiente Preview.'
+    );
 }
+
+        if (compradorId !== compradorEsperado) {
+            divergencias.push(
+                'comprador diferente da conta de teste configurada'
+            );
+        }
 
             if (String(pagamento.collector_id) !== vendedor)
                 divergencias.push('vendedor');
