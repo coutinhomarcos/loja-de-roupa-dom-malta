@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado do teste | DOM MALTA</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/secoes.css">
+    <link rel="stylesheet" href="../css/responsivo.css">
+    <link rel="stylesheet" href="../css/carrinho.css">
+</head>
+<body>
+    <header class="cabecalho"><div class="container cabecalho-conteudo"><a href="../index.html" class="logo-menu"><strong>DOM MALTA</strong><span>Elegância que impõe respeito</span></a><nav class="menu"><a href="compra-teste.html">Novo teste</a><a href="carrinho.html">Carrinho</a><a href="../admin/">Painel de estoque</a></nav></div></header>
+    <main class="compra-pagina"><div class="container"><h1>Resultado do pagamento de teste</h1>
+        <p>Somente simulação. Nenhuma venda real, reserva, baixa de estoque ou receita é registrada nesta etapa.</p>
+        <section class="compra-bloco"><h2>Consultar no Mercado Pago</h2>
+            <p>Use a mesma sessão do painel de estoque desta publicação. Se necessário, <a href="../admin/" target="_blank" rel="noopener">entre no painel em outra aba</a> e volte aqui.</p>
+            <form id="formConsultaTeste"><label>Protocolo do teste<input id="protocoloTeste" required maxlength="36" autocomplete="off"></label><button class="botao botao-dourado" id="consultarTeste">Consultar pagamento</button></form>
+            <p id="statusTeste" role="status" aria-live="polite">Selecione um teste para consultar.</p>
+            <a id="retomarTeste" class="botao" hidden>Voltar ao checkout de teste</a>
+        </section>
+        <section class="compra-bloco"><h2>Meus últimos 20 testes</h2><ul id="testesRecentes"></ul></section>
+    </div></main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/resultado-teste.js"></script>
+</body>
+</html>

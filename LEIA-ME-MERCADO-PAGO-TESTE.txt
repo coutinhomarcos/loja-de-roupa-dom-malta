@@ -1,0 +1,89 @@
+DOM MALTA — MERCADO PAGO / CHECKOUT PRO / PREFERENCES — ETAPA DE TESTES
+
+INSTALAÇÃO COM ACOMPANHAMENTO
+1. Faça uma cópia de segurança da pasta do projeto no notebook.
+2. No VS Code, confirme que está em teste-mercado-pago.
+3. Este ZIP é uma ATUALIZAÇÃO: copie o conteúdo de loja-de-roupa-dom-malta
+   sobre o projeto existente. Preserve todos os arquivos antigos e a pasta .git.
+   Somente pages/carrinho.html é atualizado; os demais arquivos são novos.
+4. No Supabase SQL Editor, em nova consulta, execute apenas
+   supabase/04_mercado_pago_teste.sql. Não precisa repetir 01, 02 ou 03.
+5. Faça commit e envie a ramificação teste-mercado-pago ao GitHub.
+6. Aguarde um NOVO deployment Preview ficar Ready. Se a Vercel não gerar
+   automaticamente, use Deployments > ... > Create Deployment e selecione
+   teste-mercado-pago. Abra a publicação nova, não a URL antiga.
+
+VARIÁVEIS SOMENTE PREVIEW (já configuradas com você)
+MERCADO_PAGO_ACCESS_TOKEN: credencial do vendedor de teste.
+MERCADO_PAGO_MODO: teste
+SUPABASE_URL: endereço HTTPS base do projeto, sem /rest/v1.
+SUPABASE_SECRET_KEY: chave privada sb_secret_, mantida só na Vercel.
+Nunca coloque essas chaves no código, em imagens, no GitHub ou neste ZIP.
+O código recusa execução em Production e recusa conta vendedora real.
+
+COMO TESTAR — DEPOIS DA INSTALAÇÃO
+1. Abra /admin/ NO ENDEREÇO DO NOVO PREVIEW e entre com o login do estoque.
+   A sessão do site de produção não vale automaticamente neste outro endereço.
+2. Em outra aba do mesmo navegador e mesmo endereço Preview, abra a Coleção,
+   adicione uma peça disponível e abra o Carrinho.
+3. Clique em "Abrir compra de teste com Mercado Pago (administrador)".
+   Também pode abrir /pages/compra-teste.html diretamente.
+4. Preencha dados fictícios válidos. O subtotal continua sem frete;
+   consulta de CEP e entrega a combinar permanecem disponíveis.
+5. Clique em "Abrir pagamento de teste". O checkout abre no Mercado Pago.
+6. Use exclusivamente o Buyer Test User e cartões de teste informados no painel
+   Mercado Pago. Prefira testar em uma janela anônima para não misturar a conta
+   pessoal: nessa janela, primeiro faça o login no /admin/ do Preview.
+   Não use cartão real e não transfira dinheiro por Pix.
+7. Após o retorno, clique em "Consultar pagamento". Caso o Mercado Pago não
+   retorne automaticamente, abra /pages/resultado-teste.html no mesmo Preview.
+   O histórico mostra os seus últimos 20 testes.
+8. No servidor, o status é consultado diretamente na API do Mercado Pago.
+   A URL de retorno e parâmetros como status=approved não confirmam pagamento.
+   São verificados vendedor, conta de teste, referência, moeda e valor.
+
+LIMITES DESTA ETAPA — LEIA ANTES DE TESTAR
+- Ainda NÃO é uma loja com pagamento real liberado ao público.
+- Pedidos deste fluxo ficam em pedidos_mp_teste, separados de pedidos_site.
+- Somente administradores já cadastrados podem iniciar e consultar testes.
+- NÃO altera estoque/reservado, vendas, clientes, transacoes nem financeiro.
+- NÃO há reserva de peças: é uma simulação da integração do pagamento.
+- NÃO é cobrança de frete: subtotal contém somente as peças.
+- O carrinho é preservado ao abrir o checkout. Abrir checkout não significa pagar.
+- Este primeiro teste consulta o status ao voltar ou ao clicar Consultar pagamento.
+  Ainda não inclui webhook, conciliação automática ou confirmação com página fechada.
+- Pix e outros meios offline podem continuar pendentes no ambiente de testes.
+  Isso não autoriza marcar como pago nem fazer transferência real.
+- Os meios exibidos dependem da conta e das opções disponibilizadas pelo Mercado Pago.
+- Se a criação do checkout sofrer timeout, não há nova criação automática com o
+  mesmo protocolo. Consulte o histórico; use um novo pedido apenas para reiniciar
+  conscientemente o teste. Isso evita checkouts duplicados em uma repetição de rede.
+- Depois de validar cartão e retorno, o próximo estágio será implementar reservas,
+  webhook validado, idempotência de venda/baixa e regras de expiração/cancelamento,
+  antes de liberar produção. Não promova esta versão como pagamento real pronto.
+
+SOLUÇÃO DE PROBLEMAS
+"Somente Preview": abra o NOVO deployment de teste, não Live Server nem produção.
+"Entre no painel": faça login no /admin/ do mesmo endereço exato do teste.
+"Execute o arquivo 04": execute o SQL em uma nova consulta no projeto correto.
+"Conta real não é aceita": copie o token do ambiente TESTE do Checkout Pro.
+O prefixo APP_USR, sozinho, não distingue uma conta real de uma fictícia.
+Não altere a validação para aceitar uma conta real.
+Confira as quatro variáveis no Preview e gere um deployment novo após mudanças.
+
+VALIDAÇÃO REALIZADA NA PREPARAÇÃO
+Testes locais com PostgreSQL (PGlite): migração repetível, permissões/RLS,
+validação de preço/quantidade/endereço, replay e exclusão de criação duplicada;
+estoque/financeiro permanecem intactos.
+API com respostas simuladas: bloqueio de Production, autorização de administrador,
+origem, vendedor fictício, cálculo no servidor, live_mode, valor e referência.
+Interface em DOM simulado: bloqueio sem Preview e montagem das páginas.
+Não houve cobrança nem chamada autenticada à sua conta Mercado Pago nesta preparação.
+O teste completo no seu Preview depende de você instalar e usar suas credenciais.
+
+DOCUMENTAÇÃO OFICIAL CONSULTADA
+https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-preferences/test-accounts
+https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-preferences/integration-test/test-purchases
+https://www.mercadopago.com.br/developers/pt/docs/checkout-pro-preferences/create-payment-preference
+https://supabase.com/docs/guides/getting-started/api-keys
+https://vercel.com/docs/functions/runtimes/node-js
