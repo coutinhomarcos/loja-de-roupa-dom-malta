@@ -124,7 +124,11 @@ async function consultar(c, admin, vendedor, body) {
             const divergencias = [];
 
             if (pagamento.live_mode !== false)
-                divergencias.push('ambiente do pagamento');
+                divergencias.push(
+                    'ambiente do pagamento: live_mode='
+                    + String(pagamento.live_mode)
+                    + ' (tipo ' + typeof pagamento.live_mode + ')'
+                );
 
             if (String(pagamento.collector_id) !== vendedor)
                 divergencias.push('vendedor');
