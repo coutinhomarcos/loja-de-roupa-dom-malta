@@ -140,9 +140,35 @@ async function consultar(c, admin, vendedor, body) {
     if (!rows.length) throw new Falha(404, 'Teste não encontrado para este administrador.');
     const pedido = rows[0];
     if (pedido.vendedor_id !== vendedor) throw new Falha(409, 'As credenciais do vendedor foram alteradas após criar este teste.');
+        let ausenciaPagamentosConfirmada = false;
+
     if (pedido.preferencia_id) {
-        const busca = await mp(c, '/v1/payments/search?external_reference=' + pedido.id + '&sort=date_created&criteria=desc&limit=50');
-        const encontrados = Array.isArray(busca.results) ? busca.results : [];
+        const busca = await mp(
+            c,
+            '/v1/payments/search?external_reference='
+            + pedido.id
+            + '&sort=date_created&criteria=desc&limit=50'
+        );
+
+        if (
+            !Array.isArray(busca.results)
+            || !Number.isInteger(busca.paging?.total)
+            || busca.paging.total < 0
+            || busca.paging.total < busca.results.length
+        ) {
+            throw new Falha(
+                502,
+                'Resposta inválida ao consultar pagamentos. Reserva mantida.'
+            );
+        }
+
+        const encontrados = busca.results;
+
+        ausenciaPagamentosConfirmada =
+            busca.paging.total === 0
+            && encontrados.length === 0
+            && pedido.pagamento_id === null
+            && pedido.status === 'aguardando_pagamento';
         // O retorno do navegador e seus parâmetros nunca confirmam um pagamento.
         // Prioriza um aprovado já associado ao pedido, depois aprovado, depois mais recente.
         const candidato =
