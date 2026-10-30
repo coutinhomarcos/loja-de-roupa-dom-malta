@@ -632,6 +632,94 @@ async function consultar(c, admin, vendedor, body) {
     };
 }
 
+async function expirarAutomaticamente(c, req, body) {
+    const { timingSafeEqual } = require('node:crypto');
+    const segredo = process.env.CRON_TESTE_SECRET || '';
+    const autorizacao = req.headers.authorization || '';
+
+    if (!/^[a-f0-9]{64}$/.test(segredo)) {
+        throw new Falha(503, 'Chave da automação não configurada.');
+    }
+
+    const esperado = Buffer.from('Bearer ' + segredo);
+    const recebido = Buffer.from(autorizacao);
+
+    if (
+        recebido.length !== esperado.length
+        || !timingSafeEqual(recebido, esperado)
+    ) {
+        throw new Falha(401, 'Automação não autorizada.');
+    }
+
+    if (typeof body.id !== 'string' || !UUID.test(body.id)) {
+        throw new Falha(400, 'Protocolo inválido.');
+    }
+
+    const reservas = await banco(
+        c,
+        'reservas_checkout_teste?select=expira_em'
+        + '&pedido_id=eq.' + body.id
+        + '&estado=eq.reservada'
+    );
+
+    if (!Array.isArray(reservas)) {
+        throw new Falha(502, 'Resposta de reservas inválida.');
+    }
+
+    if (reservas.length === 0) {
+        return { teste: true, resultado: 'sem_reserva_ativa' };
+    }
+
+    const limite = Date.now() - 60000;
+
+    if (reservas.some(reserva => {
+        const vencimento = Date.parse(reserva.expira_em);
+        return !Number.isFinite(vencimento) || vencimento > limite;
+    })) {
+        return { teste: true, resultado: 'reserva_ainda_no_prazo' };
+    }
+
+    const pedidos = await banco(
+        c,
+        'pedidos_mp_teste?select=id,admin_id'
+        + '&id=eq.' + body.id
+    );
+
+    if (
+        !Array.isArray(pedidos)
+        || pedidos.length !== 1
+        || !UUID.test(pedidos[0].admin_id)
+    ) {
+        throw new Falha(409, 'Pedido de teste inconsistente.');
+    }
+
+    const admin = pedidos[0].admin_id;
+
+    const administradores = await banco(
+        c,
+        'administradores?select=usuario_id&usuario_id=eq.' + admin
+    );
+
+    if (!Array.isArray(administradores) || administradores.length !== 1) {
+        throw new Falha(403, 'Administrador do teste não autorizado.');
+    }
+
+    const vendedor = await vendedorTeste(c);
+
+    // Reutiliza as verificações de pagamento e a liberação existentes.
+    const resposta = await consultar(c, admin, vendedor, {
+        id: body.id
+    });
+
+    return {
+        teste: true,
+        resultado: resposta.prazo_checkout?.reserva
+            ? 'reserva_verificada'
+            : 'reserva_mantida',
+        reserva: resposta.prazo_checkout?.reserva || null
+    };
+}
+
 module.exports = async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -689,8 +777,19 @@ module.exports = async function handler(req, res) {
             throw new Falha(400, 'Requisição inválida.');
         }
 
-        if (!['criar', 'consultar', 'listar', 'estoque'].includes(body.acao)) {
+                if (![
+            'criar',
+            'consultar',
+            'listar',
+            'estoque',
+            'expirar_automaticamente'
+        ].includes(body.acao)) {
             throw new Falha(400, 'Ação inválida.');
+        }
+
+        if (body.acao === 'expirar_automaticamente') {
+            const resposta = await expirarAutomaticamente(c, req, body);
+            return res.status(200).json(resposta);
         }
 
         const admin = await administrador(c, req);
