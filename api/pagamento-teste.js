@@ -120,8 +120,16 @@ async function consultar(c, admin, vendedor, body) {
         const encontrados = Array.isArray(busca.results) ? busca.results : [];
         // O retorno do navegador e seus parâmetros nunca confirmam um pagamento.
         // Prioriza um aprovado já associado ao pedido, depois aprovado, depois mais recente.
-        const candidato = encontrados.find(p => String(p.id) === pedido.pagamento_id)
-            || encontrados.find(p => p.status === 'approved') || encontrados[0];
+        const candidato =
+            encontrados.find(p => p.status === 'approved')
+            || encontrados.find(p =>
+                ['pending', 'in_process', 'authorized', 'in_mediation']
+                    .includes(p.status)
+            )
+            || encontrados.find(p =>
+                String(p.id) === pedido.pagamento_id
+            )
+            || encontrados[0];
         if (candidato) {
             if (!/^\d{1,30}$/.test(String(candidato.id))) throw new Falha(502, 'Identificador de pagamento inválido.');
             const pagamento = await mp(c, '/v1/payments/' + candidato.id);
