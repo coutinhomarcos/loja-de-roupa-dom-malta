@@ -57,7 +57,14 @@ document.addEventListener('DOMContentLoaded',async()=>{
             const destino=new URL(data.checkout_url);
             if(destino.protocol!=='https:'||!['www.mercadopago.com.br','sandbox.mercadopago.com.br'].includes(destino.hostname))throw new Error('Endereço de pagamento inválido.');
             window.location.assign(destino.href);
-        }catch(erro){mensagem.textContent=erro.message||'Não foi possível abrir o pagamento de teste. Atualize a disponibilidade e tente novamente.';}
+        } catch (erro) {
+            mensagem.textContent = erro.message || 'Não foi possível abrir o pagamento de teste.';
+            mensagem.style.scrollMarginTop = '100px';
+            mensagem.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
 
         finally{ocupado=false;form.inert=false;lista.inert=false;enviar.disabled=!valido;}
     });
