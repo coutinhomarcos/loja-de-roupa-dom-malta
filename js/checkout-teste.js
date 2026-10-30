@@ -25,6 +25,23 @@ document.addEventListener('DOMContentLoaded',async()=>{
             const {data:vs,error}=await banco.from('produto_variacoes').select('id,produto_id,tamanho,cor,estoque,reservado').in('id',itens.map(i=>i.id));if(error)throw error;
             const ids=[...new Set(vs.map(v=>v.produto_id))];
             const {data:ps,error:ep}=ids.length?await banco.from('produtos').select('id,nome,preco').eq('ativo',true).in('id',ids):{data:[],error:null};if(ep)throw ep;
+            const respostaEstoque = await chamada({
+                acao: 'estoque',
+                ids: itens.map(item => item.id)
+            });
+
+        const saldosTeste = new Map(
+                respostaEstoque.estoque.map(saldo => [
+                    saldo.variacao_id,
+                    saldo
+                ])
+        );
+
+        for (const variacao of vs) {
+            const saldo = saldosTeste.get(variacao.id);
+            variacao.estoque = saldo ? saldo.estoque : 0;
+            variacao.reservado = saldo ? saldo.reservado : 0;
+    }
             total=0;valido=true;
             for(const item of itens){
                 const v=vs.find(v=>v.id===item.id),p=v&&ps.find(p=>p.id===v.produto_id),disp=p?Math.max(0,v.estoque-v.reservado):0;

@@ -196,8 +196,28 @@ module.exports = async function handler(req, res) {
         try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; }
         catch { throw new Falha(400, 'JSON inválido.'); }
         if (!body || typeof body !== 'object' || Array.isArray(body) || JSON.stringify(body).length > 24000) throw new Falha(400, 'Requisição inválida.');
-        if (!['criar','consultar','listar'].includes(body.acao)) throw new Falha(400, 'Ação inválida.');
+        if (!['criar', 'consultar', 'listar', 'estoque'].includes(body.acao)) throw new Falha(400, 'Ação inválida.');
         const admin = await administrador(c, req);
+        if (body.acao === 'estoque') {
+            const ids = body.ids;
+
+        if (
+            !Array.isArray(ids) ||
+            ids.length === 0 ||
+            ids.length > 50 ||
+            !ids.every(id => typeof id === 'string' && UUID.test(id))
+        ) {
+            throw new Falha(400, 'Identificadores de estoque inválidos.');
+        }
+
+        const estoque = await banco(
+            c,
+            'estoque_checkout_teste?select=variacao_id,estoque,reservado'
+            + '&variacao_id=in.(' + ids.join(',') + ')'
+        );
+
+        return res.status(200).json({ estoque });
+    }
         if (body.acao === 'listar') {
             const pedidos = await banco(c, 'pedidos_mp_teste?select=id,criado_em,status,total&admin_id=eq.' + admin + '&order=criado_em.desc&limit=20');
             return res.status(200).json({ pedidos });
