@@ -213,7 +213,39 @@ async function consultar(c, admin, vendedor, body) {
     });
 }}
     }
-    return { id: pedido.id, total: pedido.total, status: pedido.status, pagamento_id: pedido.pagamento_id, checkout_url: pedido.checkout_url, teste: true };
+    let prazoCheckout = null;
+
+if (pedido.preferencia_id) {
+    const preferencia = await mp(
+        c,
+        '/checkout/preferences/' + encodeURIComponent(pedido.preferencia_id)
+    );
+
+    if (
+        String(preferencia.id) !== pedido.preferencia_id
+        || String(preferencia.collector_id) !== String(vendedor)
+        || preferencia.external_reference !== pedido.id
+    ) {
+        throw new Falha(409, 'A preferência não corresponde a este pedido.');
+    }
+
+    prazoCheckout = {
+        expires: preferencia.expires ?? null,
+        expiration_date_from: preferencia.expiration_date_from ?? null,
+        expiration_date_to: preferencia.expiration_date_to ?? null,
+        preference_expired: preferencia.preference_expired ?? null
+    };
+}
+
+return {
+    id: pedido.id,
+    total: pedido.total,
+    status: pedido.status,
+    pagamento_id: pedido.pagamento_id,
+    checkout_url: pedido.checkout_url,
+    prazo_checkout: prazoCheckout,
+    teste: true
+};
 }
 module.exports = async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store');
