@@ -22,20 +22,96 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     }
     const moeda = v => Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    async function consultar() {
+        async function consultar() {
         if (ocupado) return;
-        ocupado = true; botao.disabled = true; retomar.hidden = true;
+
+        ocupado = true;
+        botao.disabled = true;
+        retomar.hidden = true;
+        retomar.removeAttribute('href');
         mensagem.textContent = 'Consultando diretamente no Mercado Pago…';
+
         try {
-            const p = await chamada({ acao: 'consultar', id: campo.value.trim() });
-            mensagem.textContent = (nomes[p.status] || p.status) + ' · Subtotal: ' + moeda(p.total) + '. Estoque e financeiro reais permanecem sem alterações.';
-            if (p.status === 'pending') mensagem.textContent += ' Nos testes com Pix, o status pode continuar pendente. Não efetue transferência real.';
-            if (p.checkout_url && ['aguardando_pagamento','pending','in_process','rejected'].includes(p.status)) {
-                const u = new URL(p.checkout_url);
-                if (u.protocol === 'https:' && ['www.mercadopago.com.br','sandbox.mercadopago.com.br'].includes(u.hostname)) { retomar.href = u.href; retomar.hidden = false; }
+            const p = await chamada({
+                acao: 'consultar',
+                id: campo.value.trim()
+            });
+
+            const prazo = p.prazo_checkout;
+            const reserva = prazo?.reserva;
+
+            const reservaExpirada =
+                reserva?.estado === 'expirada'
+                || (
+                    p.status === 'aguardando_pagamento'
+                    && !p.pagamento_id
+                    && reserva?.reservas_liberadas === 0
+                    && reserva?.mensagem === 'Nenhuma reserva ativa.'
+                );
+
+            const vencimento = Date.parse(prazo?.expiration_date_to);
+
+            const checkoutVencido =
+                prazo?.expires === true
+                && Number.isFinite(vencimento)
+                && vencimento <= Date.now();
+
+            let descricao = nomes[p.status] || p.status;
+
+            if (reservaExpirada) {
+                descricao = 'Prazo do pagamento de teste encerrado. '
+                    + 'A reserva foi liberada';
+            } else if (
+                checkoutVencido
+                && p.status === 'aguardando_pagamento'
+            ) {
+                descricao = 'Prazo do checkout de teste encerrado. '
+                    + 'Liberação da reserva ainda não confirmada';
             }
-        } catch (e) { mensagem.textContent = e.message; }
-        finally { ocupado = false; botao.disabled = false; }
+
+            mensagem.textContent =
+                descricao
+                + ' · Subtotal: ' + moeda(p.total)
+                + '. Estoque e financeiro reais permanecem sem alterações.';
+
+            if (p.status === 'pending') {
+                mensagem.textContent +=
+                    ' Nos testes com Pix, o status pode continuar pendente. '
+                    + 'Não efetue transferência real.';
+            }
+
+            if (
+                !checkoutVencido
+                && !reservaExpirada
+                && p.checkout_url
+                && [
+                    'aguardando_pagamento',
+                    'pending',
+                    'in_process',
+                    'rejected'
+                ].includes(p.status)
+            ) {
+                const u = new URL(p.checkout_url);
+
+                if (
+                    u.protocol === 'https:'
+                    && [
+                        'www.mercadopago.com.br',
+                        'sandbox.mercadopago.com.br'
+                    ].includes(u.hostname)
+                    && !u.username
+                    && !u.password
+                ) {
+                    retomar.href = u.href;
+                    retomar.hidden = false;
+                }
+            }
+        } catch (e) {
+            mensagem.textContent = e.message;
+        } finally {
+            ocupado = false;
+            botao.disabled = false;
+        }
     }
     async function recentes() {
         try {
