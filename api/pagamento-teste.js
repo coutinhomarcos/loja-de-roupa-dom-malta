@@ -88,12 +88,37 @@ async function criar(c, admin, vendedor, body) {
     p_pedido: pedido.id,
     p_admin: admin
     });
+    const reservas = await banco(
+    c,
+    'reservas_checkout_teste?select=expira_em,estado'
+    + '&pedido_id=eq.' + pedido.id
+);
+
+const vencimentos = reservas.map(reserva =>
+    Date.parse(reserva.expira_em)
+);
+
+if (
+    reservas.length === 0 ||
+    reservas.some(reserva => reserva.estado !== 'reservada') ||
+    vencimentos.some(data => !Number.isFinite(data)) ||
+    Math.min(...vencimentos) <= Date.now()
+) {
+    throw new Falha(409, 'A reserva de teste não está ativa.');
+}
+
+const expiraEm = new Date(
+    Math.min(...vencimentos)
+).toISOString();
     const inicio = await banco(c, 'rpc/iniciar_checkout_mp_teste', 'POST', { p_id: pedido.id, p_admin: admin });
     if (!inicio.criar) return { id: inicio.id, checkout_url: checkoutValido(inicio.checkout_url) };
     const retorno = c.origem + '/pages/resultado-teste.html?pedido=' + pedido.id;
     const preferencia = await mp(c, '/checkout/preferences', 'POST', {
         items: pedido.itens.map(i => ({ id: i.variacao_id, title: ('TESTE — ' + i.nome + ' — ' + i.tamanho + ' / ' + i.cor).slice(0, 250), quantity: i.quantidade, currency_id: 'BRL', unit_price: Number(i.preco) })),
         external_reference: pedido.id,
+        expires: true,
+        expiration_date_from: new Date(Date.now() - 60000).toISOString(),
+        expiration_date_to: expiraEm,
         back_urls: { success: retorno, failure: retorno, pending: retorno },
         auto_return: 'approved',
         statement_descriptor: 'DOM MALTA TESTE'
