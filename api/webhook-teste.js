@@ -94,6 +94,17 @@ module.exports = async function handler(req, res) {
             res.setHeader('Allow', 'POST');
             throw new Falha(405, 'Método não permitido.');
         }
+    const urlEvento = new URL(req.url, 'https://webhook.local');
+
+    if (
+        urlEvento.searchParams.has('topic')
+     && !urlEvento.searchParams.has('data.id')
+    ) {
+        return res.status(200).json({
+            teste: true,
+            resultado: 'ipn_ignorado'
+        });
+    }
 
         const pagamentoId = verificarAssinatura(req);
 
