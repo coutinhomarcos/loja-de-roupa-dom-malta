@@ -46,7 +46,7 @@ begin
         limit 10
     loop
         perform net.http_post(
-            url := 'https://loja-de-roupa-dom-malta-cznl4ul88-coutinho-servicos.vercel.app/api/pagamento-teste',
+            url := 'https://loja-de-roupa-dom-malta-3l6l5fazb-coutinho-servicos.vercel.app/api/pagamento-teste',
             headers := jsonb_build_object(
                 'Content-Type', 'application/json',
                 'Authorization', 'Bearer ' || v_chave,
