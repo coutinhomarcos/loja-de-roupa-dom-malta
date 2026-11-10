@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
     if(!await adminPronto)return;
-    const [produtos,vendas,transacoes]=await Promise.all([Banco.produtos(),Banco.listar('vendas'),Banco.listar('transacoes')]);
+    const [produtos,vendas,transacoes,configuracoes]=await Promise.all([Banco.produtos(),Banco.listar('vendas'),Banco.listar('transacoes'),Banco.resultado(Banco.client.from('configuracoes_loja').select('limite_estoque,aviso_estoque').eq('id',1))]);
+    const cfg=configuracoes[0]||{limite_estoque:5,aviso_estoque:true};
     const hoje=new Date().toLocaleDateString('pt-BR');
     const receitas=vendas.reduce((s,v)=>s+Number(v.total),0)+transacoes.filter(t=>t.tipo==='receita').reduce((s,t)=>s+Number(t.valor),0);
     const despesas=transacoes.filter(t=>t.tipo==='despesa').reduce((s,t)=>s+Number(t.valor),0);
@@ -9,5 +10,5 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
     const painel=document.querySelector('.dashboard-grid .panel:last-child');
     const titulos=painel?.querySelectorAll('h2');
     if(titulos?.[0]?.nextElementSibling)titulos[0].nextElementSibling.textContent=`${vendas.length} vendas registradas`;
-    if(titulos?.[1]?.nextElementSibling)titulos[1].nextElementSibling.textContent=`${produtos.filter(p=>p.disponivel<=5).length} variações com estoque baixo`;
+    if(titulos?.[1]?.nextElementSibling)titulos[1].nextElementSibling.textContent=cfg.aviso_estoque?`${produtos.filter(p=>p.disponivel<=cfg.limite_estoque).length} variações com estoque baixo`:'Aviso de estoque desativado nas preferências';
 }));

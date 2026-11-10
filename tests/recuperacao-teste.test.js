@@ -55,3 +55,24 @@ test('resultado de busca incompleto não permite associar checkout', async () =>
         await assert.rejects(recuperarCheckout({ banco: 'https://banco.local' }, { id }, id, '123'), /conciliação|inconsistente/i);
     } finally { global.fetch = original; }
 });
+test('criação vencida sem preferência nem pagamento libera reserva por RPC restrita',async()=>{
+    const original=global.fetch;let liberou=false;
+    global.fetch=async(url)=>{
+        if(url.includes('/checkout/preferences/search'))return{ok:true,json:async()=>({total:0,elements:[]})};
+        if(url.includes('/v1/payments/search'))return{ok:true,json:async()=>({results:[],paging:{total:0}})};
+        if(url.includes('/rpc/expirar_checkout_sem_preferencia')){liberou=true;return{ok:true,json:async()=>({estado:'expirada'})};}
+        throw new Error('Chamada inesperada');
+    };
+    try{await recuperarCheckout({real:true,banco:'https://banco.local'},{id,checkout_expira_em:new Date(Date.now()-180000).toISOString()},id,'123');assert.equal(liberou,true);}
+    finally{global.fetch=original;}
+});
+test('pagamento ainda pendente impede liberação de uma criação incerta',async()=>{
+    const original=global.fetch;let liberou=false;
+    global.fetch=async(url)=>{
+        if(url.includes('/checkout/preferences/search'))return{ok:true,json:async()=>({total:0,elements:[]})};
+        if(url.includes('/v1/payments/search'))return{ok:true,json:async()=>({results:[{id:789,status:'pending'}],paging:{total:1}})};
+        liberou=true;throw new Error('Não deveria liberar');
+    };
+    try{await assert.rejects(recuperarCheckout({real:true,banco:'https://banco.local'},{id,checkout_expira_em:new Date(Date.now()-180000).toISOString()},id,'123'),/reserva foi mantida/);assert.equal(liberou,false);}
+    finally{global.fetch=original;}
+});

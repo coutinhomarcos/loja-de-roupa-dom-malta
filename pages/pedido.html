@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>Acompanhar pedido | DOM MALTA</title><link rel="stylesheet" href="../css/global.css"><link rel="stylesheet" href="../css/header.css"><link rel="stylesheet" href="../css/carrinho.css"></head>
+<body><header class="cabecalho"><div class="container cabecalho-conteudo"><a href="../index.html" class="logo-menu"><strong>DOM MALTA</strong></a><nav class="menu"><a href="colecao.html">Coleção</a><a href="contato.html">Contato</a></nav></div></header>
+<main class="compra-pagina"><div class="container"><h1>Acompanhe seu pedido</h1><section class="compra-bloco">
+<form id="formAcompanhamento"><label>Protocolo<input id="pedidoId" maxlength="36" required autocomplete="off"></label><label>Chave de acompanhamento<input id="pedidoChave" type="password" maxlength="43" required autocomplete="off"></label><button class="botao botao-dourado" type="submit">Consultar pedido</button></form>
+<p id="pedidoStatus" role="status" aria-live="polite">Use o mesmo navegador da compra ou informe o protocolo e a chave do seu pedido.</p><p id="pedidoValores"></p>
+<a id="pedidoCheckout" class="botao" hidden>Continuar pagamento</a><button id="copiarAcompanhamento" class="botao" type="button" hidden>Copiar link privado de acompanhamento</button>
+<button id="cancelarPedido" class="botao" type="button" hidden>Solicitar cancelamento ou estorno</button>
+<p>Guarde sua chave e compartilhe o link somente com quem poderá acompanhar o pedido. Para solicitar estorno ou combinar retirada, entre em contato com a loja e informe o protocolo.</p>
+</section></div></main><script src="../js/pedido.js"></script></body></html>

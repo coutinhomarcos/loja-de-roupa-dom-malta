@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
     function renderizar(){
         const receitas=vendas.reduce((s,v)=>s+Number(v.total),0)+transacoes.filter(t=>t.tipo==='receita').reduce((s,t)=>s+Number(t.valor),0);
         const despesas=transacoes.filter(t=>t.tipo==='despesa').reduce((s,t)=>s+Number(t.valor),0);
-        const lucro=vendas.reduce((s,v)=>s+Number(v.total)-(v.itens||[]).reduce((a,i)=>a+Number(i.custoUnit)*i.qtd,0),0);
+        const ajustesCheckout=transacoes.filter(t=>t.origem==='checkout'&&t.tipo==='despesa').reduce((s,t)=>s+Number(t.valor),0);
+        const lucro=vendas.reduce((s,v)=>s+Number(v.total)-(v.itens||[]).reduce((a,i)=>a+Number(i.custoUnit)*i.qtd,0),0)-ajustesCheckout;
         const previsto=produtos.reduce((s,p)=>s+(p.preco-p.custo)*p.disponivel,0);
         for(const[id,v]of Object.entries({'total-receita':receitas,'total-despesa':despesas,'saldo-total':receitas-despesas,'lucro-realizado':lucro,'lucro-previsto':previsto})){if(el(id))el(id).textContent=Banco.moeda(v);}
         const tbody=document.querySelector('#tabela-financeiro tbody');tbody.replaceChildren();
-        const linhas=[...transacoes,...vendas.map(v=>({data:v.data.slice(0,10),descricao:'Venda de balcão',categoria:'Vendas',tipo:'receita',valor:v.total,origem:'venda'}))].sort((a,b)=>b.data.localeCompare(a.data));
+        const linhas=[...transacoes,...vendas.map(v=>({data:v.data.slice(0,10),descricao:v.origem==='checkout'?'Venda online':'Venda de balcão',categoria:'Vendas',tipo:'receita',valor:v.total,origem:'venda'}))].sort((a,b)=>b.data.localeCompare(a.data));
         for(const t of linhas){
             const tr=document.createElement('tr');tr.innerHTML=`<td>${Banco.esc(t.data.split('-').reverse().join('/'))}</td><td>${Banco.esc(t.descricao)}</td><td>${Banco.esc(t.categoria)}</td><td>${Banco.esc(t.tipo)}</td><td>${Banco.moeda(t.valor)}</td><td></td>`;
             if(t.origem==='manual'){

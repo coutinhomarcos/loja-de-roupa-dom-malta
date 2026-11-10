@@ -1,0 +1,8 @@
+# Credenciais e arquivos gerados localmente.
+.env
+.env.*
+!.env.production.example
+.vercel/
+node_modules/
+.worktrees/
+*.log

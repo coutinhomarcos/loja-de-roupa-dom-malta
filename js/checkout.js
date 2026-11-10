@@ -4,9 +4,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     const banco=window.supabase?.createClient(cfg.url,cfg.chavePublica,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
     const moeda=v=>Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
     const criar=(tag,texto)=>{const e=document.createElement(tag);e.textContent=texto;return e;};
+    let pagamentoOnline=false;
+    const acompanhamento=document.getElementById('retomarPedido');
+    function rotuloPagamento(){enviar.textContent=pagamentoOnline&&form.elements.recebimento.value==='retirada'?'Pagar retirada com Mercado Pago':'Enviar pedido para a loja';}
+    fetch('/api/pagamento').then(r=>r.ok?r.json():null).then(c=>{
+        pagamentoOnline=c?.habilitado===true;rotuloPagamento();
+        if(pagamentoOnline)document.getElementById('modoPedido').textContent='Pagamento online disponível para retirada. Para entrega, envie o pedido e combine o frete com a loja antes de pagar.';
+    }).catch(()=>{});
     let valido=false,total=0,ocupado=false,tentativa=null;
     function campos(){const entrega=form.elements.recebimento.value==='entrega';document.getElementById('camposEndereco').hidden=!entrega;['cep','logradouro','numero','bairro','cidade','uf'].forEach(n=>form.elements[n].required=entrega);}
-    form.elements.recebimento.addEventListener('change',campos);campos();
+    form.elements.recebimento.addEventListener('change',()=>{campos();rotuloPagamento();});campos();
     async function carregar(){
         if(ocupado)return;
         ocupado=true;valido=false;enviar.disabled=true;lista.replaceChildren();totalEl.textContent='';mensagem.textContent='Consultando preços e estoque…';
@@ -42,11 +49,22 @@ document.addEventListener('DOMContentLoaded',()=>{
         if(!tentativa||tentativa.assinatura!==assinatura)tentativa={id:crypto.randomUUID(),assinatura};
         ocupado=true;enviar.disabled=true;form.inert=true;lista.inert=true;mensagem.textContent='Enviando seu pedido…';
         try{
+            if(pagamentoOnline&&!entrega){
+                if(!tentativa.chave){const bytes=crypto.getRandomValues(new Uint8Array(32));tentativa.chave=btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+                sessionStorage.setItem('domMaltaPedido:'+tentativa.id,tentativa.chave);
+                sessionStorage.setItem('domMaltaUltimoPedido',tentativa.id);
+                acompanhamento.href='pedido.html?pedido='+tentativa.id;acompanhamento.hidden=false;
+                const resposta=await fetch('/api/pagamento',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'criar',id:tentativa.id,chave:tentativa.chave,cliente,itens,total:total/100})});
+                const pedido=await resposta.json();if(!resposta.ok)throw new Error(pedido.erro||'Não foi possível iniciar o pagamento.');
+                const destino=new URL(pedido.checkout_url);
+                if(destino.protocol!=='https:'||!['www.mercadopago.com.br','sandbox.mercadopago.com.br'].includes(destino.hostname)||destino.username||destino.password)throw new Error('Endereço de pagamento inválido.');
+                window.location.assign(destino.href);return;
+            }
             const {data,error}=await banco.rpc('criar_pedido_site',{p_id:tentativa.id,p_cliente:cliente,p_itens:itens,p_total:total/100});if(error)throw error;
             const atuais=Carrinho.ler().map(i=>({...i,quantidade:i.quantidade-(itens.find(x=>x.id===i.id)?.quantidade||0)})).filter(i=>i.quantidade>0);Carrinho.salvar(atuais);
             form.reset();form.hidden=true;lista.replaceChildren();totalEl.textContent='Subtotal das peças no pedido: '+moeda(data.total);
             mensagem.textContent='Pedido recebido! Protocolo: '+data.id+'. A loja combinará pagamento e recebimento com você. Frete a combinar. Não houve cobrança ou reserva de estoque.';valido=false;tentativa=null;
-        }catch(erro){mensagem.textContent=erro.code==='P0001'?erro.message+' Clique em Atualizar disponibilidade antes de tentar novamente.':'Não foi possível confirmar o envio. Tente novamente sem alterar os dados para evitar duplicação. Se persistir, entre em contato com a loja.';if(erro.code==='P0001'){valido=false;tentativa=null;}console.error(erro);}
+        }catch(erro){mensagem.textContent=pagamentoOnline&&!entrega?(erro.message+' Consulte o acompanhamento antes de criar outro pedido.'):erro.code==='P0001'?erro.message+' Clique em Atualizar disponibilidade antes de tentar novamente.':'Não foi possível confirmar o envio. Tente novamente sem alterar os dados para evitar duplicação. Se persistir, entre em contato com a loja.';if(erro.code==='P0001'){valido=false;tentativa=null;}console.error(erro);}
         finally{ocupado=false;form.inert=false;lista.inert=false;enviar.disabled=!valido;}
     });
     window.addEventListener('storage',()=>{if(!ocupado){tentativa=null;carregar();}});carregar();

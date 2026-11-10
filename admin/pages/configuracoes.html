@@ -244,21 +244,21 @@
                         <form id="form-config-loja">
                             <div class="form-group">
                                 <label for="nome-loja">Nome Fantasia</label>
-                                <input type="text" id="nome-loja" value="Minha Loja de Roupas" required>
+                                <input type="text" id="nome-loja" value="DOM MALTA" required>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label for="cnpj">CNPJ / CPF</label>
-                                    <input type="text" id="cnpj" value="00.000.000/0001-00">
+                                    <label for="cnpj">CNPJ (opcional)</label>
+                                    <input type="text" id="cnpj" value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="telefone">Telefone / WhatsApp</label>
-                                    <input type="text" id="telefone" value="(31) 99999-9999">
+                                    <input type="text" id="telefone" value="">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="endereco">Endereço Completo</label>
-                                <input type="text" id="endereco" value="Rua Exemplo, 123 - Centro">
+                                <label for="endereco">Endereço público da loja (opcional)</label>
+                                <input type="text" id="endereco" value="">
                             </div>
                             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                         </form>
@@ -272,8 +272,8 @@
                                 <label for="moeda">Moeda Padrão</label>
                                 <select id="moeda">
                                     <option value="BRL" selected>Real (R$)</option>
-                                    <option value="USD">Dólar ($)</option>
-                                    <option value="EUR">Euro (€)</option>
+
+
                                 </select>
                             </div>
                             <div class="form-group">
@@ -281,12 +281,12 @@
                                 <input type="number" id="limite-estoque" value="5" min="1">
                             </div>
                             <div class="checkbox-group">
-                                <input type="checkbox" id="notif-email" checked>
-                                <label for="notif-email">Notificar vendas por e-mail</label>
+                                <input type="checkbox" id="notif-email" disabled>
+                                <label for="notif-email">E-mails automáticos — aguardando configuração do provedor</label>
                             </div>
                             <div class="checkbox-group">
                                 <input type="checkbox" id="notif-estoque" checked>
-                                <label for="notif-estoque">Alerta sonoro ao atingir estoque baixo</label>
+                                <label for="notif-estoque">Exibir alerta de estoque baixo no painel</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Atualizar Preferências</button>
                         </form>
@@ -315,11 +315,11 @@
                     <div class="card">
                         <h2>Dados do Sistema</h2>
                         <p style="color:#64748b; line-height:1.5;">
-                            Use esta opção para apagar os dados cadastrados e começar novamente.
+                            A exclusão geral está desativada para proteger o banco compartilhado.
                             O tema e os dados de acesso não serão apagados.
                         </p>
                         <button type="button" class="btn" style="background:#dc2626;color:#fff;" onclick="resetarDadosSistema()">
-                            🗑️ Resetar todos os dados
+                            Exclusão geral desativada
                         </button>
                     </div>
                 </div>
@@ -327,35 +327,11 @@
         </main>
     </div>
 
-    <!-- Script JS Interno -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    
-                    if (form.id === 'form-config-seguranca') {
-                        const novaSenha = document.getElementById('nova-senha').value;
-                        const confirmaSenha = document.getElementById('confirma-senha').value;
-                        
-                        if (novaSenha !== confirmaSenha) {
-                            alert('Erro: A confirmação de senha não confere!');
-                            return;
-                        }
-                    }
-                    
-                    alert('Alterações salvas com sucesso!');
-                });
-            });
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../../js/supabase-config.js"></script>
 <script src="../js/banco.js"></script>
 <script src="../js/configuracoes.js"></script>
     <script src="../js/js/theme.js"></script>
-    <script src="../js/js/theme.js"></script>
-    
+
 </body>
 </html>

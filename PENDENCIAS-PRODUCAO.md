@@ -1,5 +1,7 @@
 # Pagamentos e frete — situação em 09/11/2026
 
+Atualização de entrega em 10/11/2026: consulte `ENTREGA-LOJA.md` para o estado final. Checkout público e integração real estão preparados no código; a instalação da migration 18 e do agendamento permanece bloqueada pela revisão automática. Pagamentos continuam desativados.
+
 ## Implementado localmente nesta etapa
 
 - Resultado e histórico identificam “Checkout expirado” a partir das reservas verificadas no servidor. Ausência de reserva não é tratada como prova de expiração.
@@ -30,14 +32,14 @@
 4. Peso e dimensões das embalagens e regra de embalagem para múltiplas peças. CEP de origem já informado. Esta parte foi explicitamente adiada.
 5. Contrato/cartão de postagem e acesso CWS dos Correios com APIs Preço e Prazo habilitadas, ou definição de uma integração intermediária autorizada caso não haja contrato.
 6. Reposição de peças já consumidas depende de conferência física; nenhum estorno ou contestação repõe peças automaticamente.
-7. Webhook do novo Preview: criação de chave persistente de acesso foi recusada pela revisão automática por exigir autorização específica. Acesso autenticado para inspecionar a publicação permanece disponível. Não foi alterada a proteção do projeto nem a URL de webhook existente.
+7. Webhook do novo Preview configurado após autorização explícita para criar chave persistente. Variável sensível restrita à branch `codex/concluir-checkout-teste`, ambiente Preview. Republicação READY; acesso direto verificado com GET 405 e POST sem assinatura 401. Proteção do projeto preservada. Falta validar as exceções no gateway com notificações assinadas reais do sandbox.
 
 ## Trabalho ainda necessário antes de vender
 
 - Implementar cotação autenticada no servidor, validar CEP/embalagem e persistir frete, serviço, prazo e total. A criação atual cobra apenas as peças.
-- Implementar checkout público separado da autenticação administrativa. Manter consulta de pedidos e dados pessoais protegidos.
-- Integrar reserva e baixa ao estoque real numa transação com registro único por pedido/pagamento.
-- Integrar reversões parciais e totais, taxas e valor líquido; registrar estorno/contestação e sua resolução sem duplicar lançamentos. O painel já considera vendas como receita: inserir uma segunda receita em `transacoes` duplicaria a soma.
+- Instalar e validar o checkout público preparado no código, com chave privada de acompanhamento e gestão administrativa separada.
+- Autorizar a migration 18 preparada para reserva, baixa, cliente, venda e ajustes financeiros sem duplicidade; validar no banco com rollback antes da ativação.
+- Conferir no gateway da conta correta os estornos parciais/totais, taxas e valores líquidos. O painel já considera vendas como receita; os ajustes preparados não geram uma segunda receita para a mesma venda.
 - Em falhas sem preferência encontrada ou com mais de uma preferência, manter conciliação operacional. A busca do Mercado Pago cobre os últimos 90 dias; não criar cobrança substituta automaticamente.
 - Configurar domínio HTTPS, webhook público com assinatura e credenciais de produção.
 - Validar apenas as etapas novas e depois uma compra completa com confirmação, cancelamento/estorno e conferência de peças, frete, taxas e valores líquidos.
@@ -45,5 +47,7 @@
 No Supabase `dom-malta`, foram aplicadas as migrations de teste 15–17, restritas às tabelas simuladas. Os cenários SQL usam fixtures e rollback. Nenhum pagamento real, estorno no gateway ou alteração de estoque/financeiro real foi executado. O bloqueio de pagamentos reais permanece ativo.
 
 A versão publicada de testes aponta para `a8131969dba302c2723050526cd480f55891a1a1`, diferente do HEAD local inicial `6464d76`. O código local de pagamento foi integrado com a confirmação atômica e a configuração de webhook dessa versão publicada. Os demais arquivos divergentes precisam ser preservados ao preparar a publicação; não substituir a branch remota pela árvore local antiga.
+
+A atualização foi publicada em Preview separado na branch `codex/concluir-checkout-teste`, commit `7609504`, preservando a base remota. Deployment READY e verificações HTTP aprovadas. Detalhes e pendência de configuração do novo webhook: `docs/VALIDACAO-CHECKOUT-TESTE.md`.
 
 Referência oficial para a cotação: https://www.correios.com.br/atendimento/developers/manuais/manual-api-preco-1
