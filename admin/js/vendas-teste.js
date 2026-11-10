@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
             <table style="width:100%;border-collapse:collapse">
                 <caption style="text-align:left;padding:12px 0">
                     Últimos 50 registros de venda simulada.
-                    O registro não representa o acompanhamento de estornos.
+                    Taxas, estornos e líquido são snapshots informados pelo Mercado Pago.
                 </caption>
                 <thead>
                     <tr>
@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
                         <th scope="col">Pedido</th>
                         <th scope="col">Pagamento</th>
                         <th scope="col">Valor simulado</th>
+                        <th scope="col">Situação</th>
+                        <th scope="col">Estornado</th>
+                        <th scope="col">Taxas</th>
+                        <th scope="col">Líquido informado</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -56,7 +60,7 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
             const vendas = await Banco.resultado(
                 Banco.client
                     .from('vendas_checkout_teste')
-                    .select('pedido_id,pagamento_id,total,registrado_em')
+                    .select('pedido_id,pagamento_id,total,registrado_em,pedidos_mp_teste(status,conciliacao,valor_estornado,taxa_mp,valor_liquido)')
                     .order('registrado_em', { ascending: false })
                     .order('pedido_id', { ascending: true })
                     .limit(50)
@@ -66,11 +70,20 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
 
             for (const venda of vendas) {
                 const linha = document.createElement('tr');
+                const pedido = venda.pedidos_mp_teste || {};
+                const estados = {
+                    approved: 'Aprovado', refunded: 'Estornado', charged_back: 'Contestado', in_mediation: 'Em mediação'
+                };
+                const informado = valor => valor == null ? 'Não informado' : Banco.moeda(valor);
                 const valores = [
                     new Date(venda.registrado_em).toLocaleString('pt-BR'),
                     venda.pedido_id,
                     venda.pagamento_id,
-                    Banco.moeda(venda.total)
+                    Banco.moeda(venda.total),
+                    pedido.conciliacao === 'estorno_parcial' ? 'Estorno parcial' : estados[pedido.status] || pedido.status || 'Consultar resultado',
+                    informado(pedido.valor_estornado),
+                    informado(pedido.taxa_mp),
+                    informado(pedido.valor_liquido)
                 ];
 
                 for (const valor of valores) {

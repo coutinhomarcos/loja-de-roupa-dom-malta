@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
         if(!tentativa||tentativa.assinatura!==assinatura)tentativa={id:crypto.randomUUID(),assinatura};
         ocupado=true;enviar.disabled=true;form.inert=true;lista.inert=true;mensagem.textContent='Enviando seu pedido…';
         try{
+            // Permite localizar a tentativa mesmo quando a resposta externa se perde.
+            sessionStorage.setItem('domMaltaUltimoTeste',tentativa.id);
             const data=await chamada({acao:'criar',id:tentativa.id,cliente,itens,total:total/100});
             sessionStorage.setItem('domMaltaUltimoTeste',data.id);
             // Carrinho só será limpo por ação explícita; abrir checkout não é pagamento.
@@ -75,7 +77,9 @@ document.addEventListener('DOMContentLoaded',async()=>{
             if(destino.protocol!=='https:'||!['www.mercadopago.com.br','sandbox.mercadopago.com.br'].includes(destino.hostname))throw new Error('Endereço de pagamento inválido.');
             window.location.assign(destino.href);
         } catch (erro) {
-            mensagem.textContent = erro.message || 'Não foi possível abrir o pagamento de teste.';
+            mensagem.textContent = (erro.message || 'Não foi possível abrir o pagamento de teste.')
+                + ' Protocolo: ' + tentativa.id
+                + '. Consulte o resultado antes de criar outro pedido; a criação pode estar sem confirmação.';
             mensagem.style.scrollMarginTop = '100px';
             mensagem.scrollIntoView({
                 behavior: 'smooth',

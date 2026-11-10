@@ -18,7 +18,14 @@
             <p>Use a mesma sessão do painel de estoque desta publicação. Se necessário, <a href="../admin/" target="_blank" rel="noopener">entre no painel em outra aba</a> e volte aqui.</p>
             <form id="formConsultaTeste"><label>Protocolo do teste<input id="protocoloTeste" required maxlength="36" autocomplete="off"></label><button class="botao botao-dourado" id="consultarTeste">Consultar pagamento</button></form>
             <p id="statusTeste" role="status" aria-live="polite">Selecione um teste para consultar.</p>
+            <p id="valoresTeste"></p>
             <a id="retomarTeste" class="botao" hidden>Voltar ao checkout de teste</a>
+            <form id="estornoTeste" hidden>
+                <h3>Estorno de teste</h3>
+                <p id="mensagemEstorno" role="status" aria-live="polite"></p>
+                <label>Valor a devolver (R$)<input id="valorEstorno" type="number" min="0.01" step="0.01" required></label>
+                <button id="solicitarEstorno" class="botao" type="submit">Solicitar estorno de teste</button>
+            </form>
         </section>
         <section class="compra-bloco"><h2>Meus últimos 20 testes</h2><ul id="testesRecentes"></ul></section>
     </div></main>
