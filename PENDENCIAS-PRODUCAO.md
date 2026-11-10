@@ -1,6 +1,6 @@
 # Pagamentos e frete — situação em 09/11/2026
 
-Atualização de entrega em 10/11/2026: consulte `ENTREGA-LOJA.md` para o estado final. Checkout público e integração real estão preparados no código; a instalação da migration 18 e do agendamento permanece bloqueada pela revisão automática. Pagamentos continuam desativados.
+Atualização de entrega em 10/11/2026: consulte `ENTREGA-LOJA.md` para o estado final. Após autorização, a migration 18 foi instalada e validada com rollback; o Vault e o agendamento foram configurados. Novas fotos passam pelo Supabase Storage. Pagamentos reais continuam desativados por falta das credenciais do proprietário.
 
 ## Implementado localmente nesta etapa
 

@@ -55,7 +55,7 @@
 
 /* Cabe alho sobre a imagem principal */
 .cabecalho-inicio {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;

@@ -35,15 +35,12 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
         if (!valor || !Number.isInteger(n) || n < 0 || n > 1000000) throw new Error('Informe uma quantidade inteira válida.');
         grade.forEach(v => v.estoque=n); renderizar();
     }));
+    let arquivoEnviado=null,urlEnviada=null;
     async function imagem() {
         const file = el('imagem').files[0];
         if (!file) return null;
-        if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 300 * 1024)
-            throw new Error('Use imagem JPG, PNG ou WebP de até 300 KB.');
-        return new Promise((resolve,reject) => {
-            const reader=new FileReader(); reader.onload=()=>resolve(reader.result);
-            reader.onerror=()=>reject(new Error('Não foi possível ler a imagem.')); reader.readAsDataURL(file);
-        });
+        if(file===arquivoEnviado&&urlEnviada)return urlEnviada;
+        urlEnviada=await ImagensProduto.enviar(file);arquivoEnviado=file;return urlEnviada;
     }
     form.addEventListener('submit', async event => {
         event.preventDefault();

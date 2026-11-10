@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
             const src=p.imagem_url||base+'images/logo-dom-malta-atendimento-hd.jpg';
             const url=new URL(src,location.href);
             img.src=(url.protocol==='https:'||url.protocol==='http:'||/^data:image\/(jpeg|png|webp);base64,/.test(src))?src:base+'images/logo-dom-malta-atendimento-hd.jpg';
-            img.alt=p.nome;img.loading='lazy';
+            img.alt=p.nome;img.loading='lazy';img.decoding='async';
             const ampliar=document.createElement('button');ampliar.className='produto-imagem';ampliar.type='button';ampliar.setAttribute('aria-label',(inicio?'Ver na coleção: ':'Ampliar ')+p.nome);ampliar.append(img);
             ampliar.addEventListener('click',()=>{if(inicio)location.href='pages/colecao.html#disponiveis_'+destino;else abrirImagem(img);});card.append(ampliar);
             const info=document.createElement('div');info.className='produto-info';

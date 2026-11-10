@@ -1,0 +1,8 @@
+{
+  "headers": [
+    {"source": "/pages/pedido.html", "headers": [{"key": "Referrer-Policy", "value": "no-referrer"}, {"key": "Cache-Control", "value": "no-store"}]},
+    {"source": "/images/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800"}]},
+    {"source": "/audio/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800"}]},
+    {"source": "/videos/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800"}]}
+  ]
+}

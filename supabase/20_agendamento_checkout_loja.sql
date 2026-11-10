@@ -10,6 +10,10 @@ create or replace function public.disparar_expiracao_checkout_loja()
 returns void language plpgsql security definer set search_path='' as $$
 declare v_segredo text;
 begin
+    -- Sem reservas vencidas, não gera requisições nem consumo na Vercel.
+    if not exists(select 1 from public.reservas_checkout where estado='reservada' and expira_em<=now()) then
+        return;
+    end if;
     select decrypted_secret into strict v_segredo from vault.decrypted_secrets where name='loja_checkout_cron_secret';
     perform net.http_post(
         url:='https://loja-de-roupa-dom-malta.vercel.app/api/expirar-checkouts',

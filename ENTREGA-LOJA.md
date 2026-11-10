@@ -1,5 +1,7 @@
 # Entrega DOM MALTA — 10/11/2026
 
+Publicada em https://loja-de-roupa-dom-malta.vercel.app/ com pagamentos desativados. Fonte: branch `codex/entrega-loja`, commit `ba286005`. Evidências de publicação: `docs/VALIDACAO-ENTREGA-LOJA.md`.
+
 ## Disponível para uso sem pagamentos online
 
 - Catálogo, carrinho e envio de pedidos para a loja combinar pagamento/entrega.
@@ -19,7 +21,7 @@
 - Webhook assinado, limite de requisições e expiração com rotação para não bloquear pedidos atrás de pagamentos pendentes.
 - Desligar novas vendas preserva a gestão de pagamentos já existentes, desde que as credenciais e o banco continuem configurados.
 
-Essa integração está preparada no código, mas não instalada nem validada nas tabelas reais: a revisão automática bloqueou a migration 18. Não é possível garantir a operação financeira completa antes dessa instalação e da validação com a conta do proprietário.
+Após autorização do responsável, a migration 18 foi instalada e os cenários de estoque, venda e financeiro passaram no banco, com fixtures revertidas por rollback. A validação com pagamentos e estornos no gateway continua pendente da conta do proprietário.
 
 ## Pendências para ativar cobranças
 
@@ -27,8 +29,8 @@ Essa integração está preparada no código, mas não instalada nem validada na
 |---|---|
 | Conta Mercado Pago do proprietário | Access Token de produção, User ID do recebedor e segredo de assinatura do webhook. Configurar diretamente na Vercel, ambiente Production. |
 | Chave privada Supabase em Production | `SUPABASE_SECRET_KEY` do mesmo projeto utilizado pelo site. A chave pública do navegador não substitui essa chave. |
-| Instalação da integração real | Autorizar a migration `supabase/18_integracao_checkout_loja.sql`, validar `tests/checkout-loja-banco.sql` com rollback e só então definir `CHECKOUT_BANCO_INSTALADO=true`. |
-| Expiração automática | Autorizar guardar no Vault o segredo privado correspondente ao `CRON_SECRET` da Vercel e instalar `supabase/20_agendamento_checkout_loja.sql`. Depois definir `CHECKOUT_EXPIRACAO_CONFIGURADA=true`. O segredo foi gerado e salvo na Vercel; não há agendamento novo ativo. |
+| Integração real | Instalada e validada com rollback. `CHECKOUT_BANCO_INSTALADO=true`. Cobranças permanecem desativadas. |
+| Expiração automática | Segredo privado salvo no Vault e na Vercel. Agendamento instalado a cada cinco minutos; sem reservas vencidas, não faz requisições à Vercel. `CHECKOUT_EXPIRACAO_CONFIGURADA=true`. |
 | Aprovação final | Conferir com o proprietário catálogo, preços, custos, estoque, contatos, endereço de retirada e regras de devolução; testar pagamento/estorno e valores na conta correta. Só depois definir `PAGAMENTOS_REAIS_HABILITADOS=true`. |
 | Frete automático | CEP de origem já definido: 32044-420. Faltam peso/dimensões, regra para várias peças e contrato/credenciais Correios ou intermediador autorizado. Regra de acréscimo de 5% implementada em centavos, mas não existe cotação fictícia. Até resolver, entrega permanece como pedido por contato. |
 | E-mails automáticos de venda | Configurar provedor e remetente. Recuperação de senha usa o Supabase; conferir seu provedor e URLs de redirecionamento em produção. |
@@ -39,16 +41,17 @@ Essa integração está preparada no código, mas não instalada nem validada na
 - `LOJA_URL`, `SUPABASE_URL` e `LOJA_ADMIN_ID` configurados para o projeto existente.
 - `MERCADO_PAGO_MODO=producao`.
 - `CRON_SECRET` gerado e salvo como variável sensível, sem expor seu valor.
-- `CHECKOUT_BANCO_INSTALADO=false`, `CHECKOUT_EXPIRACAO_CONFIGURADA=false` e `PAGAMENTOS_REAIS_HABILITADOS=false`.
+- `CHECKOUT_BANCO_INSTALADO=true`, `CHECKOUT_EXPIRACAO_CONFIGURADA=true` e `PAGAMENTOS_REAIS_HABILITADOS=false`.
 - As variáveis de Preview e o fluxo de testes permanecem separados.
 
 O modelo de nomes está em `.env.production.example`. Nunca copiar valores secretos para o Git, documentos ou capturas de tela. O webhook de produção será `https://loja-de-roupa-dom-malta.vercel.app/api/webhook`.
 
 ## Evidências e limites
 
-- Testes Node: `node --test tests/*.test.js` — 33 aprovados, incluindo o envio real do formulário com serviços simulados.
+- Testes Node: `node --test tests/*.test.js` — 36 aprovados, incluindo o envio do formulário com serviços simulados e o upload de fotos otimizado.
 - Referências locais das 20 páginas: `node scripts/verificar-arquivos.js`.
 - O fluxo simulado foi validado com fixtures e rollback no banco. Os novos testes de API usam serviços simulados.
-- A migration 19 de configurações cadastrais foi aplicada; dados financeiros e estoque real não foram alterados.
-- A migration 18 e a gravação do segredo no Vault foram recusadas pela revisão automática por exigirem autorização específica. Não foram contornadas, e os marcadores de ativação permanecem desligados.
+- Migrations 18–21 instaladas após autorização. Os testes financeiros usaram rollback; nenhum pagamento real foi executado.
+- Novas fotos são otimizadas para WebP, com lado máximo de 1280 pixels e limite de 350 KB, e enviadas ao bucket público `produtos` do Supabase Storage. Somente administradores podem enviar/remover arquivos. O produto guarda somente a URL; as imagens não são incluídas no GitHub.
+- Cabeçalho da página inicial corrigido para acompanhar a rolagem. Cache das mídias estáticas ajustado para reduzir transferências em visitas repetidas.
 - Nenhuma cobrança ou devolução real foi executada. A validação ponta a ponta da operação financeira permanece pendente dessas autorizações e da conta correta.
