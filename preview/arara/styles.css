@@ -14,3 +14,10 @@
   --color-primary-foreground: #fff;
 }
 html,body {margin:0; background:var(--color-background); font-family:Arial,sans-serif;}
+.redes-peca { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:8px; }
+.rede-peca { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:11px 15px; border:1px solid #403725; border-radius:8px; color:#fff; font-weight:700; font-size:14px; text-decoration:none; transition:border-color .2s,color .2s; }
+.rede-peca img { width:20px; height:20px; }
+.rede-peca-whatsapp:hover { color:#25d366; border-color:#25d366; }
+.rede-peca-instagram:hover { border-color:#dd2a7b; }
+.rede-peca:focus-visible { outline:2px solid #d6af60; outline-offset:4px; }
+@media(min-width:768px) { .redes-peca { justify-content:flex-start; } }

@@ -1168,7 +1168,7 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
     if (event.key === "Escape") { event.preventDefault(); dismiss(); return; }
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") { turnTo(side === "front" ? "back" : "front"); return; }
     if (event.key !== "Tab") return;
-    const controls = [...(dialogRef.current?.querySelectorAll("button") ?? [])].filter((node) => !node.disabled);
+    const controls = [...(dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href]') ?? [])];
     const first = controls[0];
     const last = controls.at(-1);
     if (!first || !last) return;
@@ -1219,6 +1219,16 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
               {item.details.map((detail) => <li key={detail} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{detail}</li>)}
             </ul>
           )}
+          <nav aria-label="Redes sociais da loja" className="redes-peca">
+            <a href="https://chat.whatsapp.com/HFbKQFnzVo51rlqutK48PI?mode=gi_t" target="_blank" rel="noopener noreferrer" className="rede-peca rede-peca-whatsapp">
+              <img src="../../images/whatsapp-icon.svg" alt="" width="20" height="20" />
+              WhatsApp
+            </a>
+            <a href="https://www.instagram.com/dom_malta/" target="_blank" rel="noopener noreferrer" className="rede-peca rede-peca-instagram">
+              <img src="../../images/instagram-icon.svg" alt="" width="20" height="20" />
+              Instagram
+            </a>
+          </nav>
           {item.backImage && <div role="group" aria-label={`${labels.front} / ${labels.back}`} className="mt-2 inline-flex justify-center gap-6 md:justify-start">
             {(["front", "back"] as const).map((face) => (
               <button key={face} type="button" aria-pressed={side === face} onClick={() => turnTo(face)} className={`relative pb-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring ${side === face ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
