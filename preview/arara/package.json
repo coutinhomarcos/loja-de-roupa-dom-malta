@@ -1,0 +1,9 @@
+{
+  "name": "dom-malta-previa-arara",
+  "private": true,
+  "scripts": {
+    "build": "esbuild main.tsx --bundle --minify --outfile=rail.js --define:process.env.NODE_ENV=\"\\\"production\\\"\" && tailwindcss -i styles.css -o rail.css --minify"
+  },
+  "dependencies": {"react": "^19.2.0", "react-dom": "^19.2.0"},
+  "devDependencies": {"esbuild": "^0.25.0", "tailwindcss": "^4.1.0", "@tailwindcss/cli": "^4.1.0"}
+}

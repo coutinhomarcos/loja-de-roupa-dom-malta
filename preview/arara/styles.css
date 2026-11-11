@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@source "./product-rail-gallery.tsx";
+@source "./main.tsx";
+@theme {
+  --color-background: #080808;
+  --color-foreground: #f5f1e8;
+  --color-muted-foreground: #beb7a9;
+  --color-card: #d6af60;
+  --color-card-foreground: #17130c;
+  --color-ring: #b38736;
+  --color-border: #403725;
+  --color-muted: #1a1917;
+  --color-primary: #9c7229;
+  --color-primary-foreground: #fff;
+}
+html,body {margin:0; background:var(--color-background); font-family:Arial,sans-serif;}
