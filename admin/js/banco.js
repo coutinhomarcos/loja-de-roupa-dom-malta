@@ -99,6 +99,8 @@
         const verLoja = document.createElement('a');
         verLoja.textContent = '↗ Ver loja';
         verLoja.href = login ? '../index.html' : '../../index.html';
+        verLoja.target = '_blank';
+        verLoja.rel = 'noopener noreferrer';
         verLoja.className = 'banco-ver-loja';
         if (login) document.querySelector('.create-account')?.append(document.createElement('br'), verLoja);
         else document.querySelector('.sidebar nav')?.append(verLoja);
