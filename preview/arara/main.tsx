@@ -29,9 +29,9 @@ function Vitrine(){
       {[['todas','Todas'],['camisas','Camisas'],['calcas','Calças'],['bermudas','Bermudas']].map(([valor,nome])=><button key={valor} type="button" aria-pressed={categoria===valor} onClick={()=>{setCategoria(valor);setInicio(0);}}>{nome}</button>)}
     </div>
     <div className="navegacao-arara" aria-label="Navegar pelos cabides">
-      <button type="button" aria-label="Cabides anteriores" disabled={pagina.paginas<=1} onClick={()=>navegar(-1)}>←</button>
+      <button type="button" aria-label="Cabides anteriores" disabled={pagina.paginas<=1} onClick={()=>navegar(-1)}><svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
       <p role="status">{carregando?'Consultando a coleção…':pagina.total?`${pagina.de}–${pagina.ate} de ${pagina.total} fotos`:'Nenhum produto com foto nesta categoria.'}</p>
-      <button type="button" aria-label="Próximos cabides" disabled={pagina.paginas<=1} onClick={()=>navegar(1)}>→</button>
+      <button type="button" aria-label="Próximos cabides" disabled={pagina.paginas<=1} onClick={()=>navegar(1)}><svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
     </div>
     {erro&&<p className="aviso-arara" role="alert">{erro}</p>}
     {!!pagina.itens.length&&<ClothingRailHero key={`${categoria}-${pagina.indice}`} items={pagina.itens} detailItems={categoria === 'todas' ? pecas : pecas.filter(p => p.categoria === categoria)} hanger="wood" autoplay={false}
@@ -40,4 +40,5 @@ function Vitrine(){
   </div>;
 }
 createRoot(document.getElementById('root')!).render(<Vitrine/>);
+
 

@@ -42,3 +42,6 @@ html,body {margin:0; background:var(--color-background); font-family:Arial,sans-
  .detalhe-imagem{height:min(480px,calc(var(--arara-altura-visivel,100vh) - 130px))}
  .detalhe-navegacao{top:50%;left:-60px;right:-60px;transform:translateY(-50%)}
 }
+/* Mesma seta grossa na paginação do varal e nos detalhes. */
+.navegacao-arara button{display:grid;place-items:center;width:48px;height:48px;background:#d6af60;color:#101010;border:1px solid #d6af60;border-radius:999px}
+.navegacao-arara button svg{width:28px;height:28px;stroke-width:3.5}

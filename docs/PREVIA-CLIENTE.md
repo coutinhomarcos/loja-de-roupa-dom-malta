@@ -69,3 +69,8 @@ Atualização: busca por nome/categoria e filtros combinados por tamanho, cor e 
 - Teste simulado do erro 429 e liberação após o prazo aprovado, além dos dois testes existentes.
 - Nenhum novo e-mail foi disparado pelo agente; diagnóstico obtido por leitura dos logs. A revisão automática recusou a tentativa de envio com endereço específico, e não foi contornada.
 - Deployment da correção: dpl_3HMZQkwW8x8HUXy4FuqKwbU4Zkid.
+
+## Setas acima do varal — 13/11/2026
+- Corrigidas também as setas da paginação acima do varal, além das setas dos detalhes corrigidas antes.
+- SVG preto de 3,5px, botão circular de 48px e fundo amarelo/dourado #d6af60.
+- Conferido em 532x608: troca de 1–6 para 7–12 peças. Dois testes de navegação passaram.
