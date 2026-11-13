@@ -7,8 +7,8 @@
 }
 
 body {
-    background-color: #0b0f19;
-    color: #e2e8f0;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 .app-container {
@@ -19,28 +19,28 @@ body {
 /* Sidebar / Menu Lateral */
 .sidebar {
     width: 240px;
-    background-color: #0f172a;
-    color: #ffffff;
+    background-color: var(--sidebar);
+    color: var(--text);
     padding: 20px 0;
     flex-shrink: 0;
-    border-right: 1px solid #1e293b;
+    border-right: 1px solid var(--border);
 }
 
 .sidebar .logo {
     text-align: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid #1e293b;
+    border-bottom: 1px solid var(--border);
 }
 
 .sidebar .logo h2 {
     font-size: 1.2rem;
-    color: #ffffff;
+    color: var(--text);
     font-weight: 700;
 }
 
 .sidebar .logo span {
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -55,7 +55,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 12px 20px;
-    color: #94a3b8;
+    color: var(--muted);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
@@ -64,7 +64,7 @@ body {
 
 .menu ul li a:hover,
 .menu ul li a.active {
-    background-color: #1e293b;
+    background-color: var(--panel2);
     color: #38bdf8;
     border-left: 4px solid #38bdf8;
 }
@@ -77,22 +77,22 @@ body {
 }
 
 .topbar {
-    background-color: #0f172a;
+    background-color: var(--sidebar);
     padding: 18px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #1e293b;
+    border-bottom: 1px solid var(--border);
 }
 
 .topbar h1 {
     font-size: 1.4rem;
-    color: #f8fafc;
+    color: var(--text);
 }
 
 .user-info {
     font-size: 0.9rem;
-    color: #cbd5e1;
+    color: var(--muted);
 }
 
 .content-body {
@@ -107,8 +107,8 @@ body {
 }
 
 .card {
-    background-color: #ffffff;
-    color: #1e293b;
+    background-color: var(--panel);
+    color: var(--text);
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -116,9 +116,9 @@ body {
 
 .card h2 {
     font-size: 1.2rem;
-    color: #0f172a;
+    color: var(--text);
     padding-bottom: 12px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border);
     margin-bottom: 18px;
 }
 
@@ -132,7 +132,7 @@ body {
 .form-group label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #475569;
+    color: var(--muted);
     margin-bottom: 6px;
 }
 
@@ -140,16 +140,16 @@ body {
 .form-group input {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--border);
     border-radius: 6px;
     font-size: 0.9rem;
-    color: #1e293b;
-    background-color: #ffffff;
+    color: var(--text);
+    background-color: var(--panel);
     outline: none;
 }
 
 .form-group input[readonly] {
-    background-color: #f1f5f9;
+    background-color: var(--panel2);
 }
 
 .form-row {
@@ -189,24 +189,24 @@ table.cart-table {
 }
 
 table.cart-table th {
-    background-color: #f8fafc;
-    color: #64748b;
+    background-color: var(--panel2);
+    color: var(--muted);
     font-size: 0.8rem;
     text-transform: uppercase;
     padding: 10px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border);
 }
 
 table.cart-table td {
     padding: 12px 10px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
     font-size: 0.9rem;
-    color: #334155;
+    color: var(--text);
 }
 
 .empty-msg {
     text-align: center;
-    color: #94a3b8;
+    color: var(--muted);
     padding: 30px 0;
 }
 
@@ -220,7 +220,7 @@ table.cart-table td {
 
 /* Totalizadores */
 .cart-summary {
-    border-top: 1px dashed #cbd5e1;
+    border-top: 1px dashed var(--border);
     padding-top: 15px;
 }
 
@@ -230,7 +230,7 @@ table.cart-table td {
     align-items: center;
     margin-bottom: 10px;
     font-size: 0.95rem;
-    color: #475569;
+    color: var(--muted);
 }
 
 .summary-total {
@@ -239,10 +239,10 @@ table.cart-table td {
     align-items: center;
     margin-top: 15px;
     padding-top: 10px;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--border);
     font-size: 1.3rem;
     font-weight: 700;
-    color: #1e3a8a;
+    color: var(--purple-light);
 }
 
 .btn-finish {

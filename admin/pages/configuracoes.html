@@ -15,8 +15,8 @@
         }
 
         body {
-            background-color: #f4f6f9;
-            color: #333333;
+            background-color: var(--bg);
+            color: var(--text);
         }
 
         .app-container {
@@ -27,8 +27,8 @@
         /* Sidebar / Menu Lateral */
         .sidebar {
             width: 240px;
-            background-color: #1e293b;
-            color: #ffffff;
+            background-color: var(--panel2);
+            color: var(--text);
             padding: 20px 0;
             flex-shrink: 0;
         }
@@ -36,9 +36,9 @@
         .sidebar .logo h2 {
             text-align: center;
             padding-bottom: 20px;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border);
             font-size: 1.2rem;
-            color: #ffffff;
+            color: var(--text);
         }
 
         .menu ul {
@@ -49,7 +49,7 @@
         .menu ul li a {
             display: block;
             padding: 12px 20px;
-            color: #94a3b8;
+            color: var(--muted);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s;
@@ -57,8 +57,8 @@
 
         .menu ul li a:hover,
         .menu ul li a.active {
-            background-color: #334155;
-            color: #ffffff;
+            background-color: var(--panel2);
+            color: var(--text);
             border-left: 4px solid #38bdf8;
         }
 
@@ -70,22 +70,22 @@
         }
 
         .topbar {
-            background-color: #ffffff;
+            background-color: var(--panel);
             padding: 18px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border);
         }
 
         .topbar h1 {
             font-size: 1.4rem;
-            color: #0f172a;
+            color: var(--text);
         }
 
         .user-info {
             font-weight: 600;
-            color: #475569;
+            color: var(--muted);
         }
 
         .content-body {
@@ -101,19 +101,19 @@
         }
 
         .card {
-            background-color: #ffffff;
+            background-color: var(--panel);
             border-radius: 8px;
             padding: 20px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .card h2 {
             font-size: 1.1rem;
-            color: #1e293b;
+            color: var(--text);
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border);
         }
 
         /* Formulários */
@@ -126,7 +126,7 @@
         .form-group label {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #475569;
+            color: var(--muted);
             margin-bottom: 5px;
         }
 
@@ -134,11 +134,11 @@
         .form-group select {
             width: 100%;
             padding: 9px 12px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border);
             border-radius: 6px;
             font-size: 0.9rem;
-            background-color: #ffffff;
-            color: #1e293b;
+            background-color: var(--panel);
+            color: var(--text);
         }
 
         .form-row {
@@ -163,7 +163,7 @@
 
         .checkbox-group label {
             font-size: 0.9rem;
-            color: #334155;
+            color: var(--text);
             cursor: pointer;
         }
 
@@ -235,7 +235,7 @@
 </header>
 
             <section class="content-body">
-                <p style="color: #64748b;">Gerencie dados da loja, preferências do sistema e dados da conta.</p>
+                <p style="color:var(--muted);">Gerencie dados da loja, preferências do sistema e dados da conta.</p>
 
                 <div class="config-grid">
                     <!-- Dados da Loja -->
@@ -314,7 +314,7 @@
                     <!-- Dados do Sistema -->
                     <div class="card">
                         <h2>Dados do Sistema</h2>
-                        <p style="color:#64748b; line-height:1.5;">
+                        <p style="color:var(--muted); line-height:1.5;">
                             A exclusão geral está desativada para proteger o banco compartilhado.
                             O tema e os dados de acesso não serão apagados.
                         </p>
