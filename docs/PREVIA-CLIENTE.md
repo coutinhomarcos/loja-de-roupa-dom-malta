@@ -62,3 +62,10 @@ Atualização: busca por nome/categoria e filtros combinados por tamanho, cor e 
 - Página própria solicita e-mail e chama resetPasswordForEmail; não revela se o endereço existe. Não cria contas e não altera senha sem sessão validada pelo Supabase.
 - Destino solicitado ao provedor: /admin/pages/redefinir-senha.html no mesmo domínio. Esse endereço precisa estar autorizado em Authentication > URL Configuration do Supabase; a entrega na caixa de entrada e o redirecionamento completo dependem dessa configuração e do provedor de e-mail.
 - Dois testes passaram com serviço simulado; navegação do link conferida no navegador. Nenhum e-mail real foi enviado, nenhuma senha foi alterada.
+
+## Diagnóstico do envio — 13/11/2026
+- Logs Auth do Supabase confirmaram respostas 429 às 16:33:38 e 16:33:42 UTC, com espera indicada de 56 e 51 segundos. Não é prova de falha permanente do serviço.
+- A tela agora diferencia limite de envio e exibe contagem regressiva, impedindo repetição até terminar o prazo.
+- Teste simulado do erro 429 e liberação após o prazo aprovado, além dos dois testes existentes.
+- Nenhum novo e-mail foi disparado pelo agente; diagnóstico obtido por leitura dos logs. A revisão automática recusou a tentativa de envio com endereço específico, e não foi contornada.
+- Deployment da correção: dpl_3HMZQkwW8x8HUXy4FuqKwbU4Zkid.
