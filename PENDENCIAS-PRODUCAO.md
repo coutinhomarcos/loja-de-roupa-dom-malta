@@ -1,3 +1,7 @@
+# Situação atual — 13/11/2026
+
+Consulte docs/PROXIMOS-PASSOS.md para a lista consolidada. O conteúdo abaixo é histórico: migração 18 e agendamento já foram instalados; fotos foram integradas ao Supabase. Pagamentos reais permanecem desligados e os dados do proprietário continuam pendentes. Não repetir instalação com base na lista antiga.
+
 # Pagamentos e frete — situação em 09/11/2026
 
 Atualização de entrega em 10/11/2026: consulte `ENTREGA-LOJA.md` para o estado final. Após autorização, a migration 18 foi instalada e validada com rollback; o Vault e o agendamento foram configurados. Novas fotos passam pelo Supabase Storage. Pagamentos reais continuam desativados por falta das credenciais do proprietário.
@@ -51,3 +55,4 @@ A versão publicada de testes aponta para `a8131969dba302c2723050526cd480f55891a
 A atualização foi publicada em Preview separado na branch `codex/concluir-checkout-teste`, commit `7609504`, preservando a base remota. Deployment READY e verificações HTTP aprovadas. Detalhes e pendência de configuração do novo webhook: `docs/VALIDACAO-CHECKOUT-TESTE.md`.
 
 Referência oficial para a cotação: https://www.correios.com.br/atendimento/developers/manuais/manual-api-preco-1
+

@@ -37,3 +37,9 @@ Salvo em 11/11/2026, a pedido do usuário, para continuar amanhã.
 - Loja oficial não alterada; pagamentos reais continuam desativados. Dados do proprietário, Mercado Pago e frete continuam pendentes.
 - Não alterar SIGAP, Java 21 nem atualizar VS Code.
 - Ao retomar, consultar docs/PREVIA-CLIENTE.md para o histórico e aguardar o próximo ajuste do usuário.
+
+## Retomada de 13/11/2026
+- Usuário confirmou: dados reais do proprietário ainda pendentes.
+- Próximos passos e lista exata de dados organizados em docs/PROXIMOS-PASSOS.md; pendências antigas identificadas como histórico.
+- Corrigido scripts/preparar-previa-cliente.js: manifesto explícito, somente runtime e fotos novas; documentos/env/SQL e sobras não são publicados. Imagens antigas/música reutilizam URLs publicadas.
+- Teste tests/previa-pacote.test.js passou; pacote real 99 arquivos / 1.495.670 bytes, 21 páginas válidas. Não foi necessária nova publicação do visual nem mudança no banco.

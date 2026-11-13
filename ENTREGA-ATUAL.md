@@ -15,7 +15,7 @@ Prévia: execute node scripts/preview-local.js e abra http://127.0.0.1:5501/inde
 Painel: http://127.0.0.1:5501/admin/index.html (login administrativo existente).
 
 ## Antes de publicar o visual
-As roupas de exemplo de preview/arara/dados-exemplo.js só aparecem em localhost. As sete fotos novas de images/colecao-nova estão fora do Git. Para disponibilizá-las no domínio público, cadastrar produtos definitivos e enviar as fotos pelo painel ao Supabase. Não inventar preços ou quantidades reais. O ZIP inclui as fotos locais para preservação; não deve ser enviado inteiro à Vercel.
+As roupas de exemplo de preview/arara/dados-exemplo.js só aparecem em localhost. As sete fotos novas de images/colecao-nova foram incluídas no commit de backup 77e2080 na branch codex/previa-dom-malta-2026-11-12. Para disponibilizá-las no domínio público, cadastrar produtos definitivos e enviar as fotos pelo painel ao Supabase. Não inventar preços ou quantidades reais. O ZIP inclui as fotos locais para preservação; não deve ser enviado inteiro à Vercel.
 
 ## Antes de receber pagamentos reais
 - Credenciais Mercado Pago e assinatura do webhook da conta do proprietário.
@@ -27,3 +27,6 @@ As roupas de exemplo de preview/arara/dados-exemplo.js só aparecem em localhost
 Manter PAGAMENTOS_REAIS_HABILITADOS=false. Esta etapa não publica nem ativa cobranças.
 
 Detalhes e evidências: docs/CATALOGO-AUTOMATICO.md e ENTREGA-LOJA.md.
+
+Próximos passos consolidados em 13/11/2026: docs/PROXIMOS-PASSOS.md.
+
