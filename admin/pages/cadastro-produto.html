@@ -284,14 +284,14 @@
                         <div class="form-group">
 
                             <label for="imagem">
-                                Foto do produto (JPG, PNG ou WebP, até 8 MB; otimizada antes de salvar)
+                                Foto do produto para a arara e a Coleção (JPG, PNG ou WebP, até 8 MB)
                             </label>
 
                             <input
                                 type="file"
-                                id="imagem"
+                                id="imagem" aria-describedby="ajudaFotoProduto"
                                 accept="image/jpeg,image/png,image/webp"
-                            >
+                            ><p id="ajudaFotoProduto">A foto fica no Supabase Storage. Categoria, cores e tamanhos deste cadastro aparecem automaticamente no site. Sem foto, o produto fica fora da arara.</p>
 
                         </div>
 

@@ -1,0 +1,50 @@
+/* Contatos comuns às páginas públicas. */
+.aviso-demonstracao { border:1px solid #8c6c32; border-radius:12px; padding:12px; color:#d6af60; font-size:12px; margin-top:12px; margin-bottom:18px; }
+.redes-flutuantes { position:fixed; right:20px; bottom:20px; z-index:10010; display:flex; align-items:center; gap:10px; }
+.rede-flutuante { display:grid; place-items:center; width:48px; height:48px; border:1px solid #d6af60; border-radius:50%; box-shadow:0 4px 18px #0007; transition:transform .2s; }
+.rede-flutuante:hover { transform:translateY(-3px); }
+.rede-flutuante img { width:24px; height:24px; display:block; }
+.rede-flutuante-whatsapp { background:#176b35; }
+.rede-flutuante-instagram { background:#211322; }
+.rede-flutuante:focus-visible { outline:2px solid #e0ad4e; outline-offset:4px; }
+body .acoes-contato .botao,
+body .atalho-contato,
+body .contato-atalhos .atalho-contato,
+body .colecao-redes .botao { border-radius:999px; border:1px solid #c79c49; }
+body .acoes-contato .botao:hover,
+body .atalho-contato:hover,
+body .colecao-redes .botao:hover { border-color:#e0ad4e; }
+body .controle-musica { bottom:88px; }
+/* A linha do slogan está incompleta no arquivo original: exibir em texto. */
+.marca-catalogo { display:flex; flex-direction:column; width:100%; max-width:100%; align-items:center; background:#080808; }
+.marca-catalogo-imagem { display:block; width:100%; aspect-ratio:1510/1330; overflow:hidden; }
+body #catalogoBanco .produto-imagem .marca-catalogo-imagem img { width:100%; height:auto; max-height:none; aspect-ratio:auto; display:block; object-fit:contain; transform:none; }
+.marca-catalogo-frase { display:block; width:100%; padding:10px 8px 12px; color:#d6af60; font:600 clamp(8px,.8vw,11px)/1.7 "Times New Roman",Georgia,serif; text-transform:uppercase; letter-spacing:.12em; text-shadow:0 1px 1px #51350d; text-align:center; text-wrap:balance; white-space:normal; overflow-wrap:normal; }
+body #catalogoBanco .produto-imagem:has(.marca-catalogo) { height:auto; padding:0; background:#080808; }
+@media(max-width:600px) {
+  .redes-flutuantes { right:12px; bottom:12px; gap:8px; }
+  .rede-flutuante { width:44px; height:44px; }
+  body .controle-musica { bottom:76px; }
+}
+@media(prefers-reduced-motion:reduce) { .rede-flutuante { transition:none; } }
+
+/* No celular, a música acompanha o carrinho sem cobrir as roupas. */
+@media(max-width:760px) {
+  body .cabecalho .menu { flex-wrap:wrap; overflow:visible; }
+  body .cabecalho .musica-no-menu {
+    position:static; inset:auto; z-index:auto; max-width:100%; padding:4px;
+    flex:0 1 auto; margin:0; background:#101010;
+  }
+  .musica-no-menu .faixa-atual { display:none; }
+  .musica-no-menu .botoes-musica { flex-wrap:nowrap; gap:4px; }
+  body .musica-no-menu .botao-musica { flex:none; min-width:36px; min-height:36px; padding:6px; font-size:0; }
+  .musica-no-menu [data-acao="pausar"]::after { content:'▶'; font-size:16px; }
+  .musica-no-menu [data-acao="pausar"][aria-pressed="true"]::after { content:'Ⅱ'; }
+  .musica-no-menu [data-acao="silenciar"]::after { content:'🔇'; font-size:16px; }
+  .musica-no-menu [data-acao="silenciar"][aria-pressed="true"]::after { content:'🔊'; }
+  .musica-no-menu [data-acao="proxima"]::after { content:'⏭'; font-size:18px; }
+}
+.carrinho-e-musica { display:contents; }
+@media(max-width:760px) {
+  .carrinho-e-musica { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+}

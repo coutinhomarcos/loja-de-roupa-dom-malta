@@ -1,15 +1,4 @@
-# Projeto - Sistema de Gestão de Loja de Roupas
+# Painel administrativo DOM MALTA
 
-## Organização
-- index.html: entrada do projeto
-- pages/: telas HTML
-- css/: estilos
-- js/: JavaScript
-- java/: código Java separado do front-end
-- assets/: imagens e ícones
-
-Abra a pasta no VS Code e execute o index.html usando Live Server.
-
-Login de demonstração:
-E-mail: admin@loja.com
-Senha: 123456
+Abra /admin/index.html e entre com uma conta cadastrada no Supabase e autorizada na tabela de administradores. Não existem credenciais fixas de demonstração para compartilhar.
+Consulte docs/MANUAL-OPERACAO.md para cadastro de produtos, fotos, estoque e vendas. Nunca inclua senhas ou chaves privadas em arquivos publicados.

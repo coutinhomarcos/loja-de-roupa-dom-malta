@@ -1,0 +1,51 @@
+# Prévia para o cliente — DOM MALTA
+
+Link público verificado: https://dom-malta-previa-cliente.vercel.app/
+
+Projeto Vercel separado: dom-malta-previa-cliente (prj_jPP5wV9Yjvlp4Vxlw79UaitfavVf).
+Deployment: dpl_HWx8QUx35Aj4jUmGcx8PCAZRvrKm — READY.
+A publicação não alterou o projeto/endereço oficial loja-de-roupa-dom-malta.
+
+Demonstração com fotos e dados ilustrativos; pagamentos e envio de pedidos desativados. Catálogo da prévia isolado do catálogo real. As imagens antigas e músicas reutilizam os endereços já publicados para reduzir armazenamento; as fotos novas foram incluídas no pacote de prévia. Somente as novas fotos cadastradas de verdade pelo painel vão para o Supabase.
+
+Verificado: acesso anônimo HTTP 200; fotos novas e antigas HTTP 200; API de pagamento retorna habilitado=false; POST de pedido retorna 405; filtros e navegação de seis cabides funcionam; largura de celular sem transbordamento. Nenhuma credencial do dono foi necessária.
+
+O pacote omite README/documentos administrativos e não inclui chaves privadas. SIGAP, Java e VS Code não foram alterados.
+
+Atualização: busca por nome/categoria e filtros combinados por tamanho, cor e disponibilidade publicados. Teste público em celular: camisa marrom + G + Marrom + disponíveis retornou 2 produtos; limpar restaurou a lista. Três testes novos cobrem acentos, combinação na mesma variação e catálogo sem filtros.
+
+## Ajustes de 12/11/2026
+- Arara acompanha a altura do conteúdo e mantém apenas a rolagem da página.
+- Controles de música ficam ao lado do carrinho em telas até 760px; no computador continuam no canto inferior direito.
+- Projeto separado de prévia atualizado, deployment dpl_DWD8mDVjLSVaVkdLDfpZ6Ff4YVHG.
+- Quatro testes direcionados de música/navegação passaram; referências das 21 páginas válidas.
+
+## Padronização dos botões — 12/11/2026
+- Todos os botões e links de ação públicos usam cápsula dourada (#d6af60), texto escuro e borda dourada, incluindo cabeçalho, categorias, filtros, carrinho, música e diálogos.
+- Atalhos de Instagram/WhatsApp e áreas das fotos preservados.
+- Skill local dom-malta-identidade atualizada para manter o padrão nas próximas alterações.
+- Conferidos Início, Coleção, Sobre nós, Contato e Carrinho; celular de 390px sem transbordamento na Coleção.
+- Deployment da prévia: dpl_9esMK6GKBYuVGbxawTYud41sUs3S.
+
+## Carrinho e detalhes da arara — 12/11/2026
+- Ações Continuar comprando/Atualizar disponibilidade separadas por 16px no celular.
+- Player único de música também no Carrinho, com iniciar/pausar, silenciar e próxima faixa. Em celular fica junto ao carrinho no cabeçalho.
+- Setas douradas à esquerda e à direita, abaixo de Fechar, percorrem todas as fotos da categoria dentro do diálogo, sem precisar fechá-lo; ao chegar ao fim retornam à primeira.
+- Validada navegação 1 → 2 → 1 e 6 → 7; player com um único áudio, próxima faixa e pausa conferidos. Compilação React e quatro testes direcionados passaram; 21 páginas com referências válidas.
+- Deployment: dpl_8zx8UiPDCMe6fuhSyrRgBte9hemZ.
+
+## Foto inteira e setas acessíveis — 12/11/2026
+- No desktop as setas ficam ao lado da foto, centralizadas verticalmente.
+- No celular mantêm a posição abaixo de Fechar; agora usam SVG com traço preto de 3px.
+- O pai informa ao iframe a área visível abaixo do cabeçalho fixo; o diálogo respeita essa área e reserva espaço acima da foto. Corrigido o rosto cortado ao abrir os detalhes em celular.
+- Conferidos celular 532x608 e desktop 1280x900, navegação entre peças e foto completa.
+- Build da arara, quatro testes direcionados e referências de 21 páginas passaram.
+- Deployment da correção: dpl_EffoxPKdiT7QTn5CYfXrQjCXas9Z.
+
+## Música entre páginas — 12/11/2026
+- Removida a pausa automática por visibilitychange: deixar a aba em segundo plano não interrompe o player.
+- A sessão da aba preserva arquivo da faixa, tempo, fila e silêncio ao navegar entre Início, Coleção, Sobre nós, Contato e Carrinho.
+- A próxima página retoma a faixa; pausa manual continua respeitada. Uma nova reprodução em outra aba interrompe a anterior para evitar sobreposição.
+- Navegação tradicional pode ter um breve intervalo de carregamento; a retomada automática depende das permissões de áudio do navegador.
+- Três testes de áudio passaram, incluindo restauração de tempo/faixa e pausa manual. Navegação com reprodução conferida no navegador.
+- Deployment: dpl_BAEL967QtGEeY4CiwSyEAG59qGfe.

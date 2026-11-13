@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path');
 const raiz=path.resolve(__dirname,'..');let html=0;const faltam=[];
 function verificar(pasta){for(const item of fs.readdirSync(pasta,{withFileTypes:true})){
-    if(['.git','node_modules','.worktrees'].includes(item.name))continue;
+    if(['.git','node_modules','.worktrees','.preview-cliente'].includes(item.name))continue;
     const arquivo=path.join(pasta,item.name);if(item.isDirectory()){verificar(arquivo);continue;}
     if(!arquivo.endsWith('.html'))continue;html++;
     const texto=fs.readFileSync(arquivo,'utf8');

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
     el('form-relatorio-vendas').addEventListener('submit',Banco.executar(async e=>{
         e.preventDefault();const inicio=el('vendas-inicio').value,fim=el('vendas-fim').value;periodo(inicio,fim);
         const metodo=el('vendas-metodo').value,vendas=await Banco.listar('vendas');
-        const lista=vendas.filter(v=>{const d=new Date(v.data).toLocaleDateString('en-CA');return d>=inicio&&d<=fim&&(metodo==='todos'||(metodo==='cartao'?normal(v.pagamento).includes('cartao'):normal(v.pagamento)===metodo));});
+        const lista=vendas.filter(v=>{const d=CalculosLoja.dia(v.data);return d>=inicio&&d<=fim&&(metodo==='todos'||(metodo==='cartao'?normal(v.pagamento).includes('cartao'):normal(v.pagamento)===metodo));});
         csv('vendas',['Data','Pagamento','Total'],lista.map(v=>[new Date(v.data).toLocaleString('pt-BR'),v.pagamento,v.total]));
     }));
     const produtos=await Banco.produtos(),categorias=el('estoque-categoria');categorias.replaceChildren(new Option('Todas as categorias','todas'));
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
     el('form-relatorio-financeiro').addEventListener('submit',Banco.executar(async e=>{
         e.preventDefault();const inicio=el('fin-inicio').value,fim=el('fin-fim').value;periodo(inicio,fim);
         const tipo=el('fin-tipo').value,[ts,vs]=await Promise.all([Banco.listar('transacoes'),Banco.listar('vendas')]);
-        const lista=[...ts,...vs.map(v=>({data:new Date(v.data).toLocaleDateString('en-CA'),tipo:'receita',descricao:v.origem==='checkout'?'Venda online':'Venda de balcão',valor:v.total}))].filter(t=>t.data.slice(0,7)>=inicio&&t.data.slice(0,7)<=fim&&(tipo==='todos'||tipo===t.tipo));
+        const lista=[...ts,...vs.map(v=>({data:CalculosLoja.dia(v.data),tipo:'receita',descricao:v.origem==='checkout'?'Venda online':'Venda de balcão',valor:v.total}))].filter(t=>t.data.slice(0,7)>=inicio&&t.data.slice(0,7)<=fim&&(tipo==='todos'||tipo===t.tipo));
         csv('financeiro',['Data','Tipo','Descrição','Valor'],lista.map(t=>[t.data,t.tipo,t.descricao,t.valor]));
     }));
 }));

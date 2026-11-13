@@ -8,3 +8,35 @@
 .grade-tabela table { width: 100%; border-collapse: collapse; }
 .grade-tabela th,.grade-tabela td { padding: 12px; border-bottom: 1px solid #8885; text-align: left; }
 .grade-tabela input { width: 110px; padding: 8px; }
+/* O painel mantém todas as abas acessíveis na janela dividida e no celular. */
+@media (max-width: 900px) {
+  .dashboard-layout,.produtos-layout,.cadastro-layout { grid-template-columns:minmax(0,1fr); }
+  .app-container { flex-direction:column; }
+  .sidebar { display:block; position:static; width:100%; height:auto; padding:20px 18px; border-right:0; border-bottom:1px solid var(--border,#334155); }
+  .sidebar nav,.sidebar nav ul { display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:12px 0 0; list-style:none; }
+  .sidebar nav li { margin:0; }
+  .sidebar nav a { display:flex; align-items:center; gap:6px; padding:10px 14px; margin:0; border:1px solid var(--border,#334155); border-radius:999px; white-space:nowrap; }
+  .sidebar > p { margin-bottom:12px; }
+  .dashboard-content,.main-content { min-width:0; }
+  .mobile-menu { display:none; }
+  .banco-sair { position:static; display:block; margin:12px 18px; border-radius:999px; }
+}
+.inventario-dialog{width:min(92vw,520px);max-height:90vh;overflow:auto;margin:auto;padding:24px;border:1px solid #d6af60;border-radius:20px;background:var(--panel,#151515);color:var(--text,#fff)}
+.inventario-dialog::backdrop{background:#000a}.inventario-dialog form,.inventario-dialog label{display:grid;gap:8px}.inventario-dialog form{gap:14px}.inventario-dialog input{width:100%;padding:10px;background:var(--input-bg,#202020);color:inherit;border:1px solid #777;border-radius:8px}.inventario-dialog form>div{display:flex;gap:12px;justify-content:flex-end}.inventario-dialog button{padding:10px 16px;border-radius:999px;border:1px solid #d6af60;background:#d6af60;color:#151515}
+/* Controles administrativos seguem o padrão arredondado da loja. */
+button,.btn,.primary-button{border-radius:999px}
+.table-responsive,.table-container,.grade-tabela{max-width:100%;overflow-x:auto}
+@media(max-width:900px){
+ .main-content,.dashboard-content,.content-area,.produtos-content,.cadastro-content{min-width:0;max-width:100%}
+ .topbar{gap:12px;flex-wrap:wrap;padding:16px}
+ .topbar input,.search-box,.search-box input{max-width:100%;min-width:0}
+ .content,.content-area,.page-content{padding:18px;min-width:0}
+ .cards-grid,.summary-cards,.stats-grid,.financeiro-grid,.reports-grid{grid-template-columns:minmax(0,1fr)}
+ .form-row{flex-wrap:wrap;grid-template-columns:minmax(0,1fr)}
+ input,select,textarea{max-width:100%;box-sizing:border-box}
+ .sidebar nav.menu{width:100%;height:auto;overflow:visible}
+ .sidebar nav.menu ul{flex-wrap:wrap}
+ .theme-button{max-width:calc(100% - 36px)}
+}
+#resumoSemanal table{width:100%;border-collapse:collapse}#resumoSemanal td,#resumoSemanal th{padding:12px 8px;text-align:left;border-bottom:1px solid #8884}
+@media(max-width:900px){.pdv-grid{grid-template-columns:minmax(0,1fr)}.pdv-grid>.card{min-width:0}.cart-table-container{max-width:100%;overflow-x:auto}.content-body{min-width:0;padding:18px}.cart-summary{min-width:0}.summary-total{flex-wrap:wrap}}

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
     el('select-cliente').addEventListener('change',()=>vendaId=crypto.randomUUID());
     finish.addEventListener('click',async()=>{
         if(enviando||!carrinho.length)return;
-        if(!confirm('O pagamento já foi recebido fora do sistema? Confirmar registra a venda e baixa o estoque.'))return;
+        if(!await Banco.confirmar('O pagamento já foi recebido fora do sistema? Confirmar registra a venda e baixa o estoque.'))return;
         enviando=true;renderizar();
         try{
             const raw=el('select-pagamento').selectedOptions[0].textContent.trim();

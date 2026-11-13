@@ -7,3 +7,8 @@ node_modules/
 .worktrees/
 *.log
 DOM-MALTA-atualizado.zip
+# Referências fotográficas locais; fotos definitivas são enviadas pelo painel ao Storage.
+/images/colecao-nova/
+
+/.preview-cliente/
+/.preview-cliente-manifest.json

@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
                     if(atual.estorno_consultado?.estado==='confirmado'){sessionStorage.removeItem(chave);local=null;}
                     let tentativa=atual.estorno_pendente||local;
                     const saldo=Math.max(0,Math.round((Number(atual.total)-Number(atual.valor_estornado||0))*100)/100);
-                    if(!tentativa){const entrada=prompt('Valor a estornar em reais (máximo '+Banco.moeda(saldo)+'):',saldo.toFixed(2));if(entrada===null)return;const valor=Number(entrada.replace(',','.'));if(!Number.isFinite(valor)||valor<=0||valor>saldo||Math.abs(valor*100-Math.round(valor*100))>0.000001)throw new Error('Informe um valor em centavos dentro do saldo.');tentativa={tentativa:crypto.randomUUID(),valor};}
-                    if(!confirm('Confirmar estorno de '+Banco.moeda(tentativa.valor)+'? A operação será enviada ao Mercado Pago. Peças não serão repostas automaticamente.'))return;
+                    if(!tentativa){const form=await Banco.formulario({titulo:'Valor a estornar',campos:[{nome:'valor',label:'Valor em reais (máximo '+Banco.moeda(saldo)+')',tipo:'number',valor:saldo.toFixed(2),min:0.01,max:saldo,step:0.01}]});if(!form)return;const valor=Number(form.valor);if(!Number.isFinite(valor)||valor<=0||valor>saldo||Math.abs(valor*100-Math.round(valor*100))>0.000001)throw new Error('Informe um valor em centavos dentro do saldo.');tentativa={tentativa:crypto.randomUUID(),valor};}
+                    if(!await Banco.confirmar('Confirmar estorno de '+Banco.moeda(tentativa.valor)+'? A operação será enviada ao Mercado Pago. Peças não serão repostas automaticamente.'))return;
                     sessionStorage.setItem(chave,JSON.stringify(tentativa));
                     const r=await chamada({acao:'estornar',id:p.id,tentativa:tentativa.tentativa,valor:Number(tentativa.valor)});
                     if(r.estorno?.estado==='confirmado')sessionStorage.removeItem(chave);
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded',Banco.executar(async()=>{
                 }));
                 if(p.status==='approved'&&!p.conciliacao&&!p.solicitacao_cancelamento&&['separacao','pronto_retirada'].includes(p.atendimento)){
                     const proximo=p.atendimento==='separacao'?'pronto_retirada':'entregue';
-                    acoes.append(botao(proximo==='entregue'?'Confirmar entrega':'Marcar pronto para retirada',async()=>{if(!confirm('Confirmar esta etapa do atendimento?'))return;await chamada({acao:'atender',id:p.id,estado:proximo});await carregar();}));
+                    acoes.append(botao(proximo==='entregue'?'Confirmar entrega':'Marcar pronto para retirada',async()=>{if(!await Banco.confirmar('Confirmar esta etapa do atendimento?'))return;await chamada({acao:'atender',id:p.id,estado:proximo});await carregar();}));
                 }
             }
             tr.append(identidade,situacao,valores,acoes);corpo.append(tr);

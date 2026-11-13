@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
                 marca:el('marca').value.trim(),descricao:el('descricao').value.trim(),imagem_url:await imagem()
             };
             await Banco.rpc('cadastrar_produto_grade',{dados,grade});
+            try{localStorage.setItem('domMaltaCatalogoAtualizado',String(Date.now()));}catch{}
             alert('Produto e variações cadastrados no Supabase.'); location.href='produtos.html';
         } catch(erro) { Banco.mensagem(erro); }
         finally { btn.disabled=false; }

@@ -60,6 +60,24 @@
         excluir: (tabela, coluna, valor) => resultado(verificar().from(tabela).delete().eq(coluna, valor)),
         atualizar: (tabela, dados, coluna, valor) => resultado(verificar().from(tabela).update(dados).eq(coluna, valor).select())
     };
+    // Formulários nativos da página: funcionam também no navegador de prévia.
+    window.Banco.formulario = ({titulo,campos,confirmacao=false}) => new Promise(resolve=>{
+        const dialog=document.createElement('dialog');dialog.className='inventario-dialog';
+        const form=document.createElement('form'),h=document.createElement('h2');h.textContent=titulo;form.append(h);
+        const inputs={};
+        for(const campo of campos){
+            const label=document.createElement('label'),input=document.createElement('input');label.textContent=campo.label;
+            input.name=campo.nome;input.type=campo.tipo||'text';input.value=campo.valor??'';input.required=campo.obrigatorio!==false;
+            for(const atributo of ['min','max','step','maxLength'])if(campo[atributo]!==undefined)input[atributo]=campo[atributo];
+            inputs[campo.nome]=input;label.append(input);form.append(label);
+        }
+        const acoes=document.createElement('div'),cancelar=document.createElement('button'),salvar=document.createElement('button');
+        cancelar.type='button';cancelar.textContent='Cancelar';salvar.type='submit';salvar.textContent=confirmacao?'Confirmar':'Continuar';acoes.append(cancelar,salvar);form.append(acoes);dialog.append(form);
+        let resultado=null;cancelar.addEventListener('click',()=>dialog.close());
+        form.addEventListener('submit',e=>{e.preventDefault();resultado=Object.fromEntries(Object.entries(inputs).map(([k,i])=>[k,i.value.trim()]));dialog.close();});
+        dialog.addEventListener('close',()=>{dialog.remove();resolve(resultado);},{once:true});document.body.append(dialog);dialog.showModal();
+    });
+    window.Banco.confirmar = async texto => (await Banco.formulario({titulo:texto,campos:[],confirmacao:true}))!==null;
     const login = document.getElementById('loginForm');
     window.adminPronto = (async () => {
         if (login) return true;
@@ -78,6 +96,12 @@
         }
     })();
     document.addEventListener('DOMContentLoaded', () => {
+        const verLoja = document.createElement('a');
+        verLoja.textContent = '↗ Ver loja';
+        verLoja.href = login ? '../index.html' : '../../index.html';
+        verLoja.className = 'banco-ver-loja';
+        if (login) document.querySelector('.create-account')?.append(document.createElement('br'), verLoja);
+        else document.querySelector('.sidebar nav')?.append(verLoja);
         if (login) return;
         const sair = document.createElement('button');
         sair.type = 'button'; sair.textContent = 'Sair'; sair.className = 'banco-sair';

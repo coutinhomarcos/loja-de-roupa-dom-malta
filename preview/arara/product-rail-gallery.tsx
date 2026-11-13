@@ -37,6 +37,7 @@ export interface ClothingRailHeroLabels {
 
 export interface ClothingRailHeroProps extends React.ComponentProps<"section"> {
   items: RailGarment[];
+  detailItems?: RailGarment[];
   eyebrow?: string;
   heading?: string;
   /** Shown under the rail while nothing is turned to the front. */
@@ -524,6 +525,7 @@ function footprint(h: number, angle: number, sideW = 0.4) {
 
 export function ClothingRailHero({
   items,
+  detailItems = items,
   eyebrow,
   heading,
   caption,
@@ -552,6 +554,7 @@ export function ClothingRailHero({
   const [active, setActive] = React.useState(null as number | null);
   const [focusIndex, setFocusIndex] = React.useState(0);
   const [openIndex, setOpenIndex] = React.useState(null as number | null);
+  const [detailIndex, setDetailIndex] = React.useState(0);
   const [reduced, setReduced] = React.useState(false);
   const [playing, setPlaying] = React.useState(autoplay);
   const [lifted, setLifted] = React.useState(null as number | null);
@@ -789,8 +792,9 @@ export function ClothingRailHero({
     stop();
     setActive(index);
     setOpenIndex(index);
+    setDetailIndex(Math.max(0, detailItems.findIndex(item => item.id === items[index].id)));
     onOpenChange?.(index);
-  }, [onOpenChange, stop]);
+  }, [onOpenChange, stop, detailItems, items]);
 
   const close = React.useCallback(() => {
     setOpenIndex(null);
@@ -940,7 +944,7 @@ export function ClothingRailHero({
         ref={stageRef}
         data-stage
         role="group"
-        aria-label={heading ?? "Clothing rail"}
+        aria-label={heading ?? "Arara da coleção"}
         className="relative mt-5 w-full touch-pan-y select-none"
         style={{ height: Math.round(railY + h * bottom + h * 0.05 + 12), overflowX: "clip" }}
         onPointerMove={onPointerMove}
@@ -1041,14 +1045,16 @@ export function ClothingRailHero({
 
       {openIndex !== null && items[openIndex] && (
         <Detail
+          key={detailItems[detailIndex].id}
           uid={uid}
-          item={items[openIndex]}
-          index={openIndex}
-          total={count}
+          item={detailItems[detailIndex]}
+          index={detailIndex}
+          total={detailItems.length}
+          onNavigate={(direction) => setDetailIndex(i => (i + direction + detailItems.length) % detailItems.length)}
           hanger={hanger}
           labels={labels}
           reduced={reduced}
-          source={() => turns.current[openIndex]?.getBoundingClientRect() ?? null}
+          source={() => detailItems[detailIndex].id === items[openIndex].id ? turns.current[openIndex]?.getBoundingClientRect() ?? null : null}
           onLift={(lift) => setLifted(lift ? openIndex : null)}
           onClose={() => { const index = openIndex; returnFocus.current = index; close(); impulse(index, (index % 2 ? 1 : -1) * 44); }}
         />
@@ -1057,7 +1063,7 @@ export function ClothingRailHero({
   );
 }
 
-function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLift, onClose }: {
+function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLift, onClose, onNavigate }: {
   uid: string;
   item: RailGarment;
   index: number;
@@ -1068,6 +1074,7 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
   source: () => DOMRect | null;
   onLift: (lifted: boolean) => void;
   onClose: () => void;
+  onNavigate: (direction: number) => void;
 }) {
   const dialogRef = React.useRef(null as HTMLDivElement | null);
   const figureRef = React.useRef(null as HTMLDivElement | null);
@@ -1157,16 +1164,16 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
       const dialog = dialogRef.current;
       if (!dialog || dialog.contains(event.target as Node)) return;
       if (event.key === "Escape") { event.preventDefault(); dismiss(); }
-      else if (event.key === "ArrowLeft" || event.key === "ArrowRight") turnTo(side === "front" ? "back" : "front");
+      else if (event.key === "ArrowLeft" || event.key === "ArrowRight") onNavigate(event.key === "ArrowRight" ? 1 : -1);
       else if (event.key === "Tab") { const first = dialog.querySelector("button"); if (first) { event.preventDefault(); first.focus(); } }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [dismiss, turnTo, side]);
+  }, [dismiss, onNavigate]);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Escape") { event.preventDefault(); dismiss(); return; }
-    if (event.key === "ArrowLeft" || event.key === "ArrowRight") { turnTo(side === "front" ? "back" : "front"); return; }
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") { onNavigate(event.key === "ArrowRight" ? 1 : -1); return; }
     if (event.key !== "Tab") return;
     const controls = [...(dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href]') ?? [])];
     const first = controls[0];
@@ -1177,12 +1184,12 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
   };
 
   const stage = (
-    <div ref={figureRef} className="relative mx-auto aspect-[200/310] h-[min(62vh,560px)] max-h-full origin-top">
+    <div ref={figureRef} className="detalhe-imagem relative mx-auto aspect-[200/310] h-[min(62vh,560px)] max-h-full origin-top">
       <div aria-hidden="true" className="absolute left-1/2 top-[-40vh] h-[40vh] w-[3px] -translate-x-1/2 rounded-full" style={{ background: "linear-gradient(to right, color-mix(in oklab, var(--color-muted-foreground) 50%, white), var(--color-muted-foreground), color-mix(in oklab, var(--color-muted-foreground) 50%, black))", top: `calc(-40vh + ${(HOOK_TOP / VB_H) * 100}%)` }} />
       <div
         className="absolute inset-0 cursor-grab touch-pan-y active:cursor-grabbing"
         style={{ perspective: "1400px" }}
-        onPointerDown={(event) => { const a = angle.current; a.dragging = true; a.startX = event.clientX; a.startAngle = a.value; cancelAnimationFrame(a.raf); a.raf = 0; a.last = 0; event.currentTarget.setPointerCapture(event.pointerId); }}
+        onPointerDown={(event) => { if (!item.backImage) return; const a = angle.current; a.dragging = true; a.startX = event.clientX; a.startAngle = a.value; cancelAnimationFrame(a.raf); a.raf = 0; a.last = 0; event.currentTarget.setPointerCapture(event.pointerId); }}
         onPointerMove={(event) => { const a = angle.current; if (!a.dragging) return; a.value = clamp(a.startAngle + (event.clientX - a.startX) * 0.45, a.startAngle - 220, a.startAngle + 220); if (spinRef.current) spinRef.current.style.transform = `rotateY(${a.value.toFixed(2)}deg)`; }}
         onPointerUp={() => { const a = angle.current; if (!a.dragging) return; a.dragging = false; const facing = (((a.value % 360) + 360) % 360); turnTo(facing > 90 && facing < 270 ? "back" : "front"); }}
         onPointerCancel={() => { angle.current.dragging = false; turnTo(side); }}
@@ -1202,14 +1209,20 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
   );
 
   return createPortal(
-    <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby={titleId} className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-6 text-foreground" onKeyDown={onKeyDown}>
+    <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby={titleId} className="detalhe-dialogo fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-6 text-foreground" onKeyDown={onKeyDown}>
       <div aria-hidden="true" className={`absolute inset-0 bg-background/90 backdrop-blur-xl transition-opacity duration-300 motion-reduce:transition-none ${shown ? "opacity-100" : "opacity-0"}`} onClick={dismiss} />
       <button ref={closeRef} type="button" onClick={dismiss} className={`absolute right-5 top-5 z-10 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium tracking-wide text-muted-foreground outline-none transition-[opacity,color] duration-300 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none ${shown ? "opacity-100" : "opacity-0"}`}>
         {labels.close}
         <svg aria-hidden="true" viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M3 3l10 10M13 3L3 13" /></svg>
       </button>
-      <div className="relative grid w-full max-w-5xl items-center gap-10 pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
-        {stage}
+      <div className="detalhe-conteudo relative grid w-full max-w-5xl items-center gap-10 pt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
+        <div className="detalhe-foto">
+          {stage}
+          <nav className="detalhe-navegacao" aria-label="Navegar entre as roupas">
+            <button type="button" aria-label="Roupa anterior" disabled={total < 2} onClick={() => onNavigate(-1)}><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
+            <button type="button" aria-label="Próxima roupa" disabled={total < 2} onClick={() => onNavigate(1)}><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+          </nav>
+        </div>
         <div className={`flex flex-col gap-4 text-center transition-[opacity,transform] delay-150 duration-500 motion-reduce:transition-none md:text-left ${shown ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"}`}>
           <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</p>
           <h3 id={titleId} className="text-2xl font-medium tracking-tight sm:text-3xl">{item.name}</h3>
@@ -1245,3 +1258,5 @@ function Detail({ uid, item, index, total, hanger, labels, reduced, source, onLi
 }
 
 export default ClothingRailHero;
+
+
