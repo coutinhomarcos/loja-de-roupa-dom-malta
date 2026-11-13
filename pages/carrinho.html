@@ -4,8 +4,9 @@
 <link rel="stylesheet" href="../css/redes.css">
 <link rel="stylesheet" href="../css/botoes.css">
 </head><body>
+<a class="pular-conteudo" href="#conteudoPrincipal">Pular para o conteúdo</a>
 <header class="cabecalho"><div class="container cabecalho-conteudo"><a href="../index.html" class="logo-menu"><strong>DOM MALTA</strong><span>Elegância que impõe respeito</span></a><nav class="menu"><a href="../index.html">Início</a><a href="colecao.html">Coleção</a><a href="contato.html">Contato</a></nav></div></header>
-<main class="compra-pagina"><div class="container"><h1>Seu carrinho</h1><p id="modoPedido">Revise suas peças e envie o pedido para a loja. O pagamento online ainda não está disponível.</p><p id="mensagemCompra" role="status" aria-live="polite">Consultando preços e estoque…</p><a id="retomarPedido" class="botao" hidden>Consultar acompanhamento deste pedido</a>
+<main id="conteudoPrincipal" tabindex="-1" class="compra-pagina"><div class="container"><h1>Seu carrinho</h1><p id="modoPedido">Revise suas peças e envie o pedido para a loja. O pagamento online ainda não está disponível.</p><p id="mensagemCompra" role="status" aria-live="polite">Consultando preços e estoque…</p><a id="retomarPedido" class="botao" hidden>Consultar acompanhamento deste pedido</a>
 <div class="compra-layout"><section class="compra-bloco" aria-labelledby="tituloItens"><h2 id="tituloItens">Suas peças</h2><div id="itensCarrinho"></div><p class="compra-total" id="totalCarrinho"></p><p><strong>Frete a combinar.</strong> O subtotal inclui somente as peças.</p><div class="acoes-carrinho"><a class="botao botao-dourado" href="colecao.html">Continuar comprando</a><button id="recarregarCarrinho" class="botao" type="button">Atualizar disponibilidade</button></div></section>
 <section class="compra-bloco"><h2>Dados para o pedido</h2><form id="formPedido">
 <label>Nome completo<input name="nome" autocomplete="name" minlength="3" maxlength="120" required></label>
@@ -32,7 +33,7 @@
 <script src="../js/atalho-teste.js"></script>
 <script src="../js/redes.js"></script>
 <div class="controle-musica" aria-label="Controles de música">
-<audio class="musica-pagina" data-pasta="../audio/playlist/" preload="metadata"></audio>
+<audio class="musica-pagina" data-pasta="../audio/playlist/" preload="none"></audio>
 <p class="faixa-atual" aria-live="polite"></p>
 <div class="botoes-musica"><button class="botao-musica" data-acao="pausar" type="button">Iniciar música</button><button class="botao-musica" data-acao="silenciar" type="button" aria-pressed="false">Silenciar</button><button class="botao-musica" data-acao="proxima" type="button">Próxima música</button></div>
 </div><script src="../js/playlist.js"></script><script src="../js/musica.js"></script>

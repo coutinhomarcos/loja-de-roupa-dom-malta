@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
     const aviso=document.getElementById('avisoCatalogo');
     const mostra=document.getElementById('catalogoBanco');
     if(!aviso||!mostra)return;
+    const tentar=document.createElement('button');tentar.type='button';tentar.className='botao';tentar.textContent='Tentar novamente';tentar.hidden=true;aviso.after(tentar);
+    tentar.addEventListener('click',()=>renderizar(true));
     const inicio=mostra.dataset.inicio==='true';
     const base=inicio?'':'../';
     const formFiltros=document.getElementById('filtrosColecao');let dadosAtuais=null;
@@ -16,8 +18,9 @@ document.addEventListener('DOMContentLoaded',async()=>{
         }
     }
     async function renderizar(recarregar=false){
+    tentar.hidden=true;mostra.setAttribute('aria-busy','true');
     try{
-        const dados=dadosAtuais=(!dadosAtuais||recarregar)?await CatalogoLoja.obter():dadosAtuais;
+        const dados=dadosAtuais=(!dadosAtuais||recarregar)?await CatalogoLoja.obter(recarregar):dadosAtuais;
         opcoes(dados);const selecao=filtros();const temFiltros=Object.values(selecao).some(v=>String(v).trim());
         const pResult={data:formFiltros?CatalogoFiltros.filtrar(dados.produtos,dados.variacoes,selecao):dados.produtos};
         const vs=dados.variacoes;
@@ -77,7 +80,12 @@ document.addEventListener('DOMContentLoaded',async()=>{
             link.addEventListener('click',()=>{try{const v=vars.find(v=>v.id===select.value);Carrinho.adicionar(v.id,v.estoque-v.reservado);aviso.textContent=p.nome+' adicionado ao carrinho. Use Carrinho no menu para revisar.';}catch(erro){aviso.textContent=erro.message;}});
             select.addEventListener('change',atualizar);info.append(select,link);card.append(info);secao.querySelector(inicio?'.galeria-destaques':'.galeria-produtos').append(card);atualizar();
         });
-    }catch(erro){console.error(erro);aviso.textContent=inicio?'Não foi possível consultar os destaques agora. Acesse a coleção ou tente novamente.':'Não foi possível consultar o estoque agora. As fotos abaixo são o mostruário; consulte disponibilidade pelo contato.';}
+    }catch(erro){
+        console.error(erro);tentar.hidden=false;
+        aviso.textContent=window.navigator?.onLine===false?'Você está sem conexão. Confira sua internet e tente novamente.':'Não foi possível atualizar a disponibilidade agora. Tente novamente ou fale com a loja.';
+        mostra.querySelectorAll('.botao-compra').forEach(b=>b.disabled=true);
+        if(formFiltros)document.getElementById('resultadoFiltros').textContent='Resultados não atualizados. Tente novamente.';
+    }finally{mostra.setAttribute('aria-busy','false');}
     }
     renderizar();
     if(formFiltros){
@@ -89,3 +97,5 @@ document.addEventListener('DOMContentLoaded',async()=>{
     window.addEventListener('catalogo:atualizado',()=>renderizar(true));
     document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')renderizar(true);});
 });
+
+

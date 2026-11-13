@@ -44,8 +44,11 @@ Escolha período/status/categoria e clique em Gerar Relatório. A exportação �
 Preencha os dados comerciais apenas quando confirmados pelo dono. Preferências controlam alertas de estoque. E-mails automáticos dependem de provedor/remetente; não estão ativos. Exclusão geral permanece desativada.
 
 ## Publicação e pagamentos
-A versão atual está salva localmente, sem publicação nesta etapa. Os exemplos de `preview/arara/dados-exemplo.js` só aparecem em localhost. Antes de publicar com as roupas novas, cadastrar os produtos definitivos no painel.
+A prévia para aprovação está em https://dom-malta-previa-cliente.vercel.app/ e usa um pacote demonstrativo isolado. No código normal da loja, os exemplos de `preview/arara/dados-exemplo.js` só aparecem em localhost. Antes de publicar com as roupas novas, cadastrar os produtos definitivos no painel.
 Credenciais privadas são configuradas na Vercel, nunca no Git, ZIP, formulário público ou chat. Manter `PAGAMENTOS_REAIS_HABILITADOS=false` até conferir conta do proprietário, webhook, frete, catálogo e validação real de pagamento/estorno.
 
 ## Busca e filtros da Coleção
 Na página Coleção, use Buscar peça (nome ou categoria), Tamanho, Cor e Disponibilidade. Os filtros combinados exigem que tamanho/cor/disponibilidade existam na mesma variação. A busca ignora acentos e diferenças entre maiúsculas e minúsculas. Limpar filtros restaura todos os produtos. O mostruário fotográfico separado fica oculto enquanto há filtros, para não confundir fotos de apresentação com resultados de estoque. Na prévia pública, os valores continuam demonstrativos e compras desativadas.
+
+Guia resumido para treinamento: docs/GUIA-RAPIDO-PAINEL.md. Revisão de usabilidade: docs/REVISAO-USABILIDADE.md.
+

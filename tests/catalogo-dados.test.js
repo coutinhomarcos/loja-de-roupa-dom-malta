@@ -29,3 +29,8 @@ test('consulta paginada carrega todos os produtos sem aceitar resposta de erro c
   assert.equal(resultado.produtos.length,501);assert.equal(requisicoes.length,3);
   await assert.rejects(api.carregar({url:'https://loja.supabase.co',chavePublica:'publica'},async()=>({ok:false})),/catálogo/);
 });
+test('consulta do catálogo limita a espera da rede',async()=>{
+ let sinal;
+ await api.carregar({url:'https://loja.supabase.co',chavePublica:'publica'},async(url,opcoes)=>{sinal=opcoes.signal;return{ok:true,json:async()=>[]};});
+ assert.ok(sinal instanceof AbortSignal);assert.equal(sinal.aborted,false);
+});

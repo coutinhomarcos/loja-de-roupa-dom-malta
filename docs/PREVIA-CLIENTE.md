@@ -49,3 +49,10 @@ Atualização: busca por nome/categoria e filtros combinados por tamanho, cor e 
 - Navegação tradicional pode ter um breve intervalo de carregamento; a retomada automática depende das permissões de áudio do navegador.
 - Três testes de áudio passaram, incluindo restauração de tempo/faixa e pausa manual. Navegação com reprodução conferida no navegador.
 - Deployment: dpl_BAEL967QtGEeY4CiwSyEAG59qGfe.
+
+## Revisão de 13/11/2026 — entrega
+- Melhorias de carregamento, teclado/foco e recuperação do catálogo documentadas em docs/REVISAO-USABILIDADE.md.
+- Guia de treinamento: docs/GUIA-RAPIDO-PAINEL.md.
+- 55 testes Node passaram; 21 páginas com referências válidas.
+- Pacote público: 99 arquivos, 1.498.888 bytes. Sem publicação de documentos privados ou APIs financeiras.
+- Deployment: dpl_FbTtFkyJtHwRSxixBPz63i6Fc53d.

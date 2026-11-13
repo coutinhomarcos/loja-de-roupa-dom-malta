@@ -18,7 +18,7 @@
                 url.searchParams.set('select',select);url.searchParams.set('limit','500');url.searchParams.set('offset',String(offset));
                 url.searchParams.set('order',nome==='produtos'?'criado_em.desc,id.asc':'id.asc');
                 if(filtros)url.searchParams.set('ativo','eq.true');
-                const r=await fetcher(url.href,{headers:{apikey:cfg.chavePublica}});
+                const r=await fetcher(url.href,{headers:{apikey:cfg.chavePublica},signal:AbortSignal.timeout(12000)});
                 if(!r.ok)throw new Error('Não foi possível consultar o catálogo.');
                 const linhas=await r.json();if(!Array.isArray(linhas))throw new Error('Resposta inválida do catálogo.');
                 todos.push(...linhas);if(linhas.length<500)return todos;
@@ -58,3 +58,4 @@
     root.CatalogoLoja=api;
     root.addEventListener?.('storage',e=>{if(e.key==='domMaltaCatalogoAtualizado'){pendente=null;root.dispatchEvent(new Event('catalogo:atualizado'));}});
 })(typeof window!=='undefined'?window:globalThis);
+

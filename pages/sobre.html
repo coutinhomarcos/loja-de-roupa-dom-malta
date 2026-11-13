@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<a class="pular-conteudo" href="#conteudoPrincipal">Pular para o conteúdo</a>
 
     <!-- CABE ALHO -->
     <header class="cabecalho">
@@ -40,7 +41,7 @@
 
 
     <!-- SOBRE A DOM MALTA -->
-    <main class="pagina pagina-sobre">
+    <main id="conteudoPrincipal" tabindex="-1" class="pagina pagina-sobre">
 
         <div class="sobre-fundo"></div>
         <div class="sobre-filtro"></div>
@@ -95,7 +96,7 @@
 
 
 <div class="controle-musica" aria-label="Controles de m&#250;sica">
-    <audio class="musica-pagina" data-pasta="../audio/playlist/" preload="metadata"></audio>
+    <audio class="musica-pagina" data-pasta="../audio/playlist/" preload="none"></audio>
     <p class="faixa-atual" aria-live="polite"></p>
     <div class="botoes-musica">
         <button class="botao-musica" data-acao="pausar" type="button">&#9654; Iniciar m&#250;sica</button>

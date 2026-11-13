@@ -48,3 +48,4 @@ body #catalogoBanco .produto-imagem:has(.marca-catalogo) { height:auto; padding:
 @media(max-width:760px) {
   .carrinho-e-musica { display:flex; align-items:center; gap:6px; flex-shrink:0; }
 }
+@media(max-width:760px){body .musica-no-menu .botao-musica{min-width:44px;min-height:44px}body .menu a{min-height:44px}}

@@ -43,3 +43,8 @@ Salvo em 11/11/2026, a pedido do usuário, para continuar amanhã.
 - Próximos passos e lista exata de dados organizados em docs/PROXIMOS-PASSOS.md; pendências antigas identificadas como histórico.
 - Corrigido scripts/preparar-previa-cliente.js: manifesto explícito, somente runtime e fotos novas; documentos/env/SQL e sobras não são publicados. Imagens antigas/música reutilizam URLs publicadas.
 - Teste tests/previa-pacote.test.js passou; pacote real 99 arquivos / 1.495.670 bytes, 21 páginas válidas. Não foi necessária nova publicação do visual nem mudança no banco.
+
+## Usabilidade concluída em 13/11/2026
+- Revisão de desempenho/acessibilidade e estados de erro concluída; detalhes em docs/REVISAO-USABILIDADE.md.
+- Guia rápido de treinamento em docs/GUIA-RAPIDO-PAINEL.md.
+- 55 testes passaram. Prévia atualizada; produção oficial e pagamentos reais preservados/desativados.

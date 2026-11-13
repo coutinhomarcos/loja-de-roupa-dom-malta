@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/botoes.css">
 </head>
 <body>
+<a class="pular-conteudo" href="#conteudoPrincipal">Pular para o conteúdo</a>
   <header class="cabecalho">
     <div class="container cabecalho-conteudo">
       <a href="index.html" class="logo-menu" aria-label="DOM MALTA — Início"><strong>DOM MALTA</strong><span>MODA MASCULINA</span></a>
@@ -24,7 +25,7 @@
       </div>
     </div>
   </header>
-  <main>
+  <main id="conteudoPrincipal" tabindex="-1">
     <section class="vitrine-hero" aria-labelledby="tituloVitrine">
       <div class="container vitrine-apresentacao">
         <div><p class="sobretitulo">A COLEÇÃO EM PRIMEIRO PLANO</p><h1 id="tituloVitrine">Encontre sua próxima peça<span>.</span></h1></div>
@@ -43,10 +44,10 @@
     <section class="container contato-vitrine" aria-label="Atendimento da loja"><div><p class="sobretitulo">PODEMOS AJUDAR?</p><h2>Seu próximo look começa aqui.</h2><p>Consulte tamanhos, cores e disponibilidade com a loja.</p></div><div class="acoes-contato"><a class="botao botao-whatsapp" href="https://chat.whatsapp.com/HFbKQFnzVo51rlqutK48PI?mode=gi_t" target="_blank" rel="noopener noreferrer"><img src="images/whatsapp-icon.svg" alt="" width="20" height="20">WhatsApp</a><a class="botao botao-contorno" href="https://www.instagram.com/dom_malta/" target="_blank" rel="noopener noreferrer"><img src="images/instagram-icon.svg" alt="" width="20" height="20">Instagram</a></div></section>
   </main>
   <footer class="rodape-vitrine container"><a href="index.html" class="logo-menu"><strong>DOM MALTA</strong></a><p>© 2026 DOM MALTA</p><nav aria-label="Links do rodapé"><a href="pages/sobre.html">Sobre nós</a><a href="pages/contato.html">Contato</a><a href="admin/index.html" class="acesso-painel">Painel da loja</a></nav></footer>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script><script src="js/catalogo-dados.js"></script><script src="preview/arara/dados-exemplo.js"></script><script src="js/catalogo.js"></script><script src="js/carrinho.js"></script>
+  <script src="js/supabase-config.js"></script><script src="js/catalogo-dados.js"></script><script src="preview/arara/dados-exemplo.js"></script><script src="js/catalogo.js"></script><script src="js/carrinho.js"></script>
 <script src="js/redes.js"></script>
 <div class="controle-musica" aria-label="Controles de música">
-<audio class="musica-pagina" data-pasta="audio/playlist/" preload="metadata"></audio>
+<audio class="musica-pagina" data-pasta="audio/playlist/" preload="none"></audio>
 <p class="faixa-atual" aria-live="polite"></p>
 <div class="botoes-musica"><button class="botao-musica" data-acao="pausar" type="button">Iniciar música</button><button class="botao-musica" data-acao="silenciar" type="button" aria-pressed="false">Silenciar</button><button class="botao-musica" data-acao="proxima" type="button">Próxima música</button></div>
 </div><script src="js/playlist.js"></script><script src="js/musica.js"></script>
