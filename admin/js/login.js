@@ -1,12 +1,6 @@
 const form = document.getElementById('loginForm');
 const email = document.getElementById('email');
 const senha = document.getElementById('senha');
-document.querySelector('.forgot-password a, a[href="#"]')?.addEventListener('click',async event=>{
-    event.preventDefault();
-    if(!email.value.trim()||!email.reportValidity()){document.getElementById('mensagemBanco').textContent='Informe seu e-mail para recuperar o acesso.';return;}
-    try{await Banco.resultado(Banco.client.auth.resetPasswordForEmail(email.value.trim(),{redirectTo:location.origin+'/admin/pages/redefinir-senha.html'}));document.getElementById('mensagemBanco').textContent='Se o e-mail estiver cadastrado, você receberá um link de recuperação. Confira também o spam.';}
-    catch(erro){Banco.mensagem(erro);}
-});
 document.getElementById('togglePassword').addEventListener('click', () => {
     senha.type = senha.type === 'password' ? 'text' : 'password';
 });
@@ -25,3 +19,4 @@ form.addEventListener('submit', async event => {
     } catch (erro) { Banco.mensagem(erro); }
     finally { btn.disabled = false; }
 });
+

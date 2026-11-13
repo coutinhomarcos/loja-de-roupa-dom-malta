@@ -56,3 +56,9 @@ Atualização: busca por nome/categoria e filtros combinados por tamanho, cor e 
 - 55 testes Node passaram; 21 páginas com referências válidas.
 - Pacote público: 99 arquivos, 1.498.888 bytes. Sem publicação de documentos privados ou APIs financeiras.
 - Deployment: dpl_FbTtFkyJtHwRSxixBPz63i6Fc53d.
+
+## Recuperação de acesso do painel — 13/11/2026
+- Link Esqueci minha senha deixa de apontar para #; abre /admin/pages/recuperar-senha.html.
+- Página própria solicita e-mail e chama resetPasswordForEmail; não revela se o endereço existe. Não cria contas e não altera senha sem sessão validada pelo Supabase.
+- Destino solicitado ao provedor: /admin/pages/redefinir-senha.html no mesmo domínio. Esse endereço precisa estar autorizado em Authentication > URL Configuration do Supabase; a entrega na caixa de entrada e o redirecionamento completo dependem dessa configuração e do provedor de e-mail.
+- Dois testes passaram com serviço simulado; navegação do link conferida no navegador. Nenhum e-mail real foi enviado, nenhuma senha foi alterada.
