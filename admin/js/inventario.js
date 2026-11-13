@@ -1,5 +1,9 @@
 /* Funções comuns às telas de Produtos e Estoque. */
 window.Inventario = {
+    async limiteEstoque(){
+        const rows=await Banco.resultado(Banco.client.from('configuracoes_loja').select('limite_estoque').eq('id',1));
+        return Number(rows[0]?.limite_estoque)||5;
+    },
     notificar(){try{localStorage.setItem('domMaltaCatalogoAtualizado',String(Date.now()));}catch{/* O próximo carregamento sempre consulta o banco. */}},
     confirmar(texto){
         return new Promise(resolve=>{

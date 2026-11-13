@@ -1,0 +1,35 @@
+begin;
+select set_config('request.jwt.claim.sub',(select usuario_id::text from public.administradores limit 1),true);
+set local role authenticated;
+create temp table resultado_auditoria_estoque(caso text,resultado text);
+do $$
+declare p uuid; v uuid; venda uuid:=gen_random_uuid(); dados jsonb; n integer;
+begin
+ dados := '{"codigo":"TESTE-AUDITORIA-1311","nome":"TESTE AUDITORIA TEMPORARIO","categoria":"Camisas","custo":20,"preco":50}'::jsonb;
+ p:=public.cadastrar_produto_grade(dados,'[{"tamanho":"P","cor":"Preto","estoque":3},{"tamanho":"M","cor":"Azul","estoque":2}]');
+ if (select count(*) from public.produto_variacoes where produto_id=p)<>2 then raise exception 'Grade incorreta';end if;
+ if not exists(select 1 from public.transacoes where descricao='Compra inicial de estoque - TESTE AUDITORIA TEMPORARIO' and valor=100) then raise exception 'Despesa inicial incorreta';end if;
+ insert into resultado_auditoria_estoque values('cadastro atomico + grade + despesa 100','OK');
+ begin perform public.cadastrar_produto_grade(dados,'[{"tamanho":"G","cor":"Verde","estoque":1}]');raise exception 'NAO BLOQUEOU';exception when unique_violation then insert into resultado_auditoria_estoque values('codigo duplicado','BLOQUEADO');end;
+ select id into v from public.produto_variacoes where produto_id=p and tamanho='P';
+ dados:=dados||'{"tamanho":"P","cor":"Preto","estoque":5}'::jsonb;
+ perform public.editar_variacao(v,dados);
+ if (select estoque from public.produto_variacoes where id=v)<>5 then raise exception 'Edicao nao aplicada';end if;
+ insert into resultado_auditoria_estoque values('entrada de 3 para 5 unidades','OK');
+ update public.produto_variacoes set reservado=2 where id=v;
+ begin perform public.editar_variacao(v,dados||'{"estoque":1}');raise exception 'NAO BLOQUEOU';exception when check_violation then insert into resultado_auditoria_estoque values('reduzir fisico abaixo da reserva','BLOQUEADO');end;
+ begin perform public.registrar_venda_balcao(gen_random_uuid(),jsonb_build_array(jsonb_build_object('id',v,'qtd',4)),'Dinheiro');raise exception 'NAO BLOQUEOU';exception when raise_exception then if sqlerrm='NAO BLOQUEOU' then raise;end if;if sqlerrm not like 'Estoque insuficiente%' then raise;end if;insert into resultado_auditoria_estoque values('vender acima do disponivel','BLOQUEADO');end;
+ perform public.registrar_venda_balcao(venda,jsonb_build_array(jsonb_build_object('id',v,'qtd',2,'preco',0.01)),'Dinheiro');
+ if (select estoque from public.produto_variacoes where id=v)<>3 or (select total from public.vendas where id=venda)<>100 then raise exception 'Baixa ou preco incorreto';end if;
+ perform public.registrar_venda_balcao(venda,jsonb_build_array(jsonb_build_object('id',v,'qtd',2)),'Dinheiro');
+ if (select estoque from public.produto_variacoes where id=v)<>3 or (select count(*) from public.vendas where id=venda)<>1 then raise exception 'Duplicou venda';end if;
+ insert into resultado_auditoria_estoque values('baixa, preco calculado no banco e reenvio sem duplicar','OK');
+ update public.produtos set ativo=false where id=p;
+ begin perform public.registrar_venda_balcao(gen_random_uuid(),jsonb_build_array(jsonb_build_object('id',v,'qtd',1)),'Dinheiro');raise exception 'NAO BLOQUEOU';exception when raise_exception then if sqlerrm not like 'Estoque insuficiente%' then raise;end if;insert into resultado_auditoria_estoque values('venda de produto oculto','BLOQUEADO');end;
+ begin perform public.editar_variacao(v,dados||'{"estoque":-1}');raise exception 'NAO BLOQUEOU';exception when raise_exception then if sqlerrm<>'Dados invalidos' then raise;end if;insert into resultado_auditoria_estoque values('quantidade negativa','BLOQUEADO');end;
+ begin perform public.cadastrar_produto_grade(dados||'{"codigo":"TESTE-AUDITORIA-INVALIDO"}','[{"tamanho":"P","cor":"Preto","estoque":1},{"tamanho":"G","cor":"Azul","estoque":-1}]');raise exception 'NAO BLOQUEOU';exception when raise_exception then if sqlerrm<>'Tamanho, cor ou quantidade invalida' then raise;end if;end;
+ if exists(select 1 from public.produtos where codigo='TESTE-AUDITORIA-INVALIDO') then raise exception 'Cadastro parcial';end if;
+ insert into resultado_auditoria_estoque values('grade invalida desfaz cadastro parcial','OK');
+end $$;
+select * from resultado_auditoria_estoque;
+rollback;

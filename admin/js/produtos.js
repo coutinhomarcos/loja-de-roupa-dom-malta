@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
     if (!await adminPronto) return;
     let produtos=await Banco.produtos();
+    const limite=await Inventario.limiteEstoque();
     const tbody=document.getElementById('listaProdutos'), busca=document.getElementById('buscarProduto');
     const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
     function renderizar() {
         const termo=busca.value.toLocaleLowerCase('pt-BR'); tbody.replaceChildren();
         const filtrados=produtos.filter(p=>`${p.nome} ${p.codigo} ${p.categoria} ${p.tamanho} ${p.cor}`.toLocaleLowerCase('pt-BR').includes(termo));filtrados.forEach(p=>{
             const tr=document.createElement('tr');
-            tr.innerHTML=`<td>${Banco.esc(p.codigo)}</td><td>👕</td><td>${Banco.esc(p.nome)}${p.ativo ? '' : ' (oculto)'}</td><td>${Banco.esc(p.categoria)}</td><td>${Banco.esc(p.tamanho)}</td><td>${Banco.esc(p.cor)}</td><td>${Banco.moeda(p.preco)}</td><td><span class="stock ${p.disponivel<=5?'stock-danger':'stock-ok'}">${p.disponivel}</span></td><td><div class="actions"></div></td>`;
+            tr.innerHTML=`<td>${Banco.esc(p.codigo)}</td><td>👕</td><td>${Banco.esc(p.nome)}${p.ativo ? '' : ' (oculto)'}</td><td>${Banco.esc(p.categoria)}</td><td>${Banco.esc(p.tamanho)}</td><td>${Banco.esc(p.cor)}</td><td>${Banco.moeda(p.preco)}</td><td><span class="stock ${p.disponivel<=limite?'stock-danger':'stock-ok'}">${p.disponivel}</span></td><td><div class="actions"></div></td>`;
             const actions=tr.querySelector('.actions');
             const foto=document.createElement('button');foto.type='button';foto.className='action-button';foto.textContent='📷';foto.title='Adicionar ou trocar foto';foto.setAttribute('aria-label','Alterar foto de '+p.nome);foto.addEventListener('click',Banco.executar(async()=>{if(await editarFotoProduto(p)){produtos=await Banco.produtos();renderizar();}}));actions.append(foto);
             [['✎','Editar',Banco.executar(async()=>{if(await Inventario.editar(p)){produtos=await Banco.produtos();renderizar();}})],['◉','Visualizar',()=>Inventario.visualizar(p)]].forEach(([txt,label,fn])=>{
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', Banco.executar(async () => {
         });
         set('totalProdutos',new Set(produtos.map(p=>p.produto_id)).size);
         set('produtosEstoque',produtos.reduce((s,p)=>s+p.disponivel,0));
-        set('estoqueBaixo',produtos.filter(p=>p.disponivel<=5).length);
+        set('estoqueBaixo',produtos.filter(p=>p.disponivel>0&&p.disponivel<=limite).length);
         set('valorEstoque',Banco.moeda(produtos.reduce((s,p)=>s+p.preco*p.disponivel,0)));
         set('resumoProdutos',filtrados.length+' variações encontradas de '+produtos.length+'. Use a busca para filtrar.');
         const count=document.querySelector('.product-count');if(count)count.textContent=`${produtos.length} variações`;
